@@ -61,6 +61,6 @@ fclose(fid);
 
 % open your file for writing
 fid = fopen('pairwise_attributes.txt','wt');
-fprintf(fid,'#grain_i_ID\tgrain_j_ID\tangle\n');
+fprintf(fid,'#grain_i_ID\tgrain_j_ID\tmisOrientationAngle(deg)\n');
 fprintf(fid,'%d\t%d\t%e\n', transpose([ pairs mori.angle./degree ] ));
 fclose(fid);
