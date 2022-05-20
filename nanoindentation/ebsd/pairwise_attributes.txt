@@ -1,4 +1,4 @@
-#grain_i_ID	grain_j_ID	angle
+#grain_i_ID	grain_j_ID	misOrientationAngle(deg)
 1	100	4.509388e+01
 2	20	5.310811e+01
 3	5	3.643593e+01
