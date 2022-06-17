@@ -23,30 +23,38 @@ plot(big_grains,big_grains.meanOrientation,'micronbar','off', 'coordinates','on'
 lim = axis;
 % plot on top their ids
 text(big_grains,int2str(big_grains.id),'FontSize', 4);
+% add indenter
+fileName = [mpath filesep 'r_indenters.txt'];
+r_indenters = dlmread(fileName,'',1,0);
+%plot indenters
+text(r_indenters(:,1),r_indenters(:,2),'.','Color','red');
 saveas(h,'grainsBitmap/grains','png');
+%corresponding grain id
 
 %select the corresponding EBSD data
-fileName = [mpath filesep 'grain_labels_10mN.txt'];
-indentLabels = dlmread(fileName,'',1,0);
-
-for i = 1:size(indentLabels,1)
-	id = indentLabels(i,2);
+%fileName = [mpath filesep 'grain_labels_10mN.txt'];
+%indentLabels = dlmread(fileName,'',1,0);
+%for i = 1:size(indentLabels,1)
+%	id = indentLabels(i,2);
 % some function
-	ebsd_maxGrain = ebsd(grains(id));
+%	ebsd_maxGrain = ebsd(grains(id));
 	% plot it
-	h = figure;
-	plot(ebsd_maxGrain,'faceColor','white','micronbar','off','legend','off');
+%	h = figure;
+%	plot(ebsd_maxGrain,'faceColor','white','micronbar','off','legend','off');
 	% plot the grain boundary on top
-	hold on
-	plot(grains(id).boundary,'linewidth',1)
-	hold off
+%	hold on
+%	plot(grains(id).boundary,'linewidth',1)
+%	hold off
 	% center plot
-	xc=-3.630098e+01;yc=-5.368517e+01;
-    xlo=lim(1);xhi=lim(2);ylo=lim(3);yhi=lim(4);
-	axis(lim);
-	legend('off');
-	saveas(h,sprintf('grainsBitmap/grain_label%i',id),'png');
-end
+%	xc=-3.630098e+01;yc=-5.368517e+01;
+%   xlo=lim(1);xhi=lim(2);ylo=lim(3);yhi=lim(4);
+%	axis(lim);
+%	legend('off');
+%	saveas(h,sprintf('grainsBitmap/grain_label%i',id),'png');
+%end
+
+
+%plot indenter tip
 
 % misorientation
 pairs = grains.neighbors;
@@ -63,4 +71,20 @@ fclose(fid);
 fid = fopen('pairwise_attributes.txt','wt');
 fprintf(fid,'#grain_i_ID\tgrain_j_ID\tmisOrientationAngle(deg)\n');
 fprintf(fid,'%d\t%d\t%e\n', transpose([ pairs mori.angle./degree ] ));
+fclose(fid);
+
+% indenters and corresponding grains
+ids=[];lid=[];label=[];
+for i = 1:size(r_indenters,1)
+	ids(i) = grains(r_indenters(i,3),r_indenters(i,4)).id;
+	lid(i) = r_indenters(i,1);
+	label(i) = r_indenters(i,2)+1;
+end
+length(ids)
+length(r_indenters)
+%ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
+%length(ids)
+fid = fopen('indenter_grainID.txt','wt');
+fprintf(fid,'#loadID\tlabel\tgrainID\n');
+fprintf(fid,'%d\t%d\t%d\n', ([ lid; label; ids; ]));
 fclose(fid);
