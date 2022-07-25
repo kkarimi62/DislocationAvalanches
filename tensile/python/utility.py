@@ -1963,8 +1963,8 @@ def PltErr( xdata, ydata,
     if 'DrawFrame' in kwargs: 
         DrawFrame(ax, *kwargs['DrawFrame'],LOG_Y=LOGY,LOG_X=LOGX)
     #
-    if 'legend' in kwargs and kwargs['legend']:
-        plt.legend(frameon=False,fontsize=fontsize,loc=kwargs['loc'] if 'loc' in kwargs else 0)
+    if 'legend' in kwargs:# and kwargs['legend']:
+        plt.legend(**kwargs['legend']) #frameon=False,fontsize=fontsize,loc=kwargs['loc'] if 'loc' in kwargs else 0)
     if 'title' in kwargs: #Plot:
         plt.savefig(kwargs['title'],dpi=300 if not 'dpi' in kwargs else kwargs['dpi'],bbox_inches='tight', 
                     pad_inches=0.0)
