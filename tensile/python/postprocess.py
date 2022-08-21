@@ -7,7 +7,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser.set('test data directory','path',argv)
 	confParser.set('py library directory','path',os.getcwd()+'/../../../CrystalPlasticity/postprocess/')
 	#--- write
-	confParser.write(open('configuration.ini','w'))	
+	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
 
 	someFile = open( 'oarScript.sh', 'w' )
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 		print(' i = %s' % counter)
 		writPath = os.getcwd() + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
-		os.system( 'cp config.ini utility.py LammpsPostProcess2nd.py OvitosCna.py %s' % ( writPath ) ) #--- cp python module
+		os.system( 'cp config.ini %s' % ( writPath ) ) #--- cp python module
 		makeOAR( writPath, 1, 1, durtn, PYFIL, argv+"/Run%s"%counter) # --- make oar script
 		os.system( 'chmod +x oarScript.sh; mv oarScript.sh %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
