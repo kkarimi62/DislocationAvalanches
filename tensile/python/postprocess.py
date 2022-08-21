@@ -30,7 +30,7 @@ if __name__ == '__main__':
  							}['1'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
-	mem = '16gb'
+	mem = '8gb'
 	partition = ['parallel','cpu2019','bigmem','single'][3] 
 	argv = "%s"%(readPath) #--- don't change! 
 	PYFILdic = { 
