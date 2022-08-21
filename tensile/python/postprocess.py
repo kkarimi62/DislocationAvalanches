@@ -5,7 +5,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('test data directory','path',argv)
-	confParser.set('py library directory','path',os.getcwd()+'/../../../CrystalPlasticity/postprocess/')
+	confParser.set('py library directory','path',os.getcwd()+'/../../../CrystalPlasticity/machineLearning/')
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
