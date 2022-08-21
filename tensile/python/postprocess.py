@@ -22,7 +22,7 @@ if __name__ == '__main__':
 #
 	runs	 = [2]
 	jobname  = {
-				'1':'cantor/rate', 
+				'1':'cantor/rate2nd', 
 				}['1']
 	DeleteExistingFolder = False
 	readPath = os.getcwd() + {
