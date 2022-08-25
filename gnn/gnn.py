@@ -16,17 +16,16 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.set('test data files','test_data_file_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/attributesAndHardness.csv')
 	confParser.set('test data files','test_data_file_path2nd',os.getcwd()+'/../nanoindentation/avalancheAnalysis/pairwise_attributes.csv')
 	confParser.set('test data files','load_depth_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/grainAttributes/loadDepth')
-
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
-
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 #	print('EXEC_DIR=%s\nmodule load python/anaconda3-2019.10-tensorflowgpu'%( EXEC_DIR ),file=someFile)
 	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv '%( EXEC_DIR ),file=someFile)
 
-	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+#	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+	print('ipython %s'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
 if __name__ == '__main__':
@@ -43,8 +42,9 @@ if __name__ == '__main__':
 	partition = ['cpu2019','bigmem','parallel','single'][1]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
+		1:'gnnPolyCryst.py',
 		}
-	keyno = 0
+	keyno = 1
 #---
 #---
 	PYFIL = PYFILdic[ keyno ] 
