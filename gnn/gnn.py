@@ -1,6 +1,6 @@
 from backports import configparser
 
-def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
+def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	#--- parse conf. file
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 		print(' i = %s' % counter)
 		writPath = os.getcwd() + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
-		makeOAR( writPath, 1, 1, durtn, PYFIL, readPath+"/Run%s"%init) # --- make oar script
+		makeOAR( writPath, 1, 1, durtn, PYFIL) # --- make oar script
 		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
 						    --chdir %s -c %s -n %s %s/oarScript.sh'\
