@@ -34,13 +34,13 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'test',
+					1:'test2nd',
 				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
 	mem = '16gb'
-	partition = ['cpu2019','bigmem','parallel','single'][1]
+	partition = ['cpu2019','bigmem','parallel','single'][3]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
 		}
