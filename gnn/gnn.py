@@ -24,8 +24,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 #	print('EXEC_DIR=%s\nmodule load python/anaconda3-2019.10-tensorflowgpu'%( EXEC_DIR ),file=someFile)
 	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv '%( EXEC_DIR ),file=someFile)
 
-#	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
-	print('ipython %s'%(PYFIL), file=someFile)
+	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+#	print('ipython %s'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
 if __name__ == '__main__':
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'test6th',
+					1:'test7th',
 				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 		0:'gnnPolyCryst.ipynb',
 		1:'gnnPolyCryst.py',
 		}
-	keyno = 1
+	keyno = 0
 #---
 #---
 	PYFIL = PYFILdic[ keyno ] 
