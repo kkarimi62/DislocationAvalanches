@@ -18,7 +18,7 @@ if __name__ == '__main__':
 		string[ inums ] = "\t1:\'nproc%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
-		string[ inums ] = "\tconfParser.set(\'parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
+		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
 
 #		inums = lnums[ 2 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'parameters\',\'load\',\'%s\')\n"%(val)
