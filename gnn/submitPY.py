@@ -15,7 +15,7 @@ if __name__ == '__main__':
 		val = PHI[key]
 		#---	
 		inums = lnums[ 0 ] - 1
-		string[ inums ] = "\t1:\'test%s\',\n" % (key) #--- change job name
+		string[ inums ] = "\t1:\'nproc%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
 		string[ inums ] = "\tconfParser.set(\'parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
