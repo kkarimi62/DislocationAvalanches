@@ -16,7 +16,9 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
-	print('EXEC_DIR=%s\nmodule load python/anaconda3-2019.10-tensorflowgpu'%( EXEC_DIR ),file=someFile)
+#	print('EXEC_DIR=%s\nmodule load python/anaconda3-2019.10-tensorflowgpu'%( EXEC_DIR ),file=someFile)
+	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/cond    a.sh\nconda activate gnnEnv '%( EXEC_DIR ),file=someFile)
+
 	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
