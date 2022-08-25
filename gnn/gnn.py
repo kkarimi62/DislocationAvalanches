@@ -16,8 +16,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
-	print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
-#	print >> someFile, 'papermill --prepare-only %s/%s ./output.ipynb %s %s'%(EXEC_DIR,PYFIL,argv,argv2nd) #--- write notebook with a list of passed params
+	print('EXEC_DIR=%s\nmodule load python/anaconda3-2019.10-tensorflowgpu'%( EXEC_DIR ),file=someFile)
 	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
