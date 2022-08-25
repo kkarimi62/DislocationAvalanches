@@ -5,7 +5,10 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
+	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/../hs_implementation')
+	#
 	confParser.set('python libarary path','pyLibDir',os.getcwd()+'/../../HeaDef/postprocess')
+	#
 	confParser.set('test data files','test_data_file_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/attributesAndHardness.csv')
 	confParser.set('test data files','test_data_file_path2nd',os.getcwd()+'/../nanoindentation/avalancheAnalysis/pairwise_attributes.csv')
 	confParser.set('test data files','load_depth_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/grainAttributes/loadDepth')
