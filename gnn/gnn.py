@@ -26,7 +26,7 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'NiCoCrNatom100KTemp800RhoFluc',
+					1:'test',
 				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
