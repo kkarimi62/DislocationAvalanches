@@ -5,7 +5,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
-	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/../hs_implementation')
+	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
 	#
 	confParser.set('python libarary path','pyLibDir',os.getcwd()+'/../../HeaDef/postprocess')
 	#
