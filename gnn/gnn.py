@@ -6,7 +6,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','1000')
+	confParser.set('Parameters','num_training_iterations','8000')
 	confParser.set('Parameters','learning_rate','2.5e-03')
 	#
 	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
@@ -37,7 +37,7 @@ if __name__ == '__main__':
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
-	mem = '32gb'
+	mem = '16gb'
 	partition = ['cpu2019','bigmem','parallel','single'][1]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
