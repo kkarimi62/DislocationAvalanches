@@ -30,7 +30,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 if __name__ == '__main__':
 	import os
 #
-	nruns	 = range(3)
+	nruns	 = range(1)
 	jobname  = {
 					1:'test7th',
 				}[1]
