@@ -6,7 +6,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','100000')
+	confParser.set('Parameters','num_training_iterations','1000')
 	confParser.set('Parameters','learning_rate','2.5e-03')
 	#
 	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
@@ -30,7 +30,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 if __name__ == '__main__':
 	import os
 #
-	nruns	 = range(1)
+	nruns	 = range(3)
 	jobname  = {
 					1:'test7th',
 				}[1]
