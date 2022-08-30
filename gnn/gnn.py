@@ -6,8 +6,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','10000000')
-	confParser.set('Parameters','learning_rate','1.0e-04')
+	confParser.set('Parameters','num_training_iterations','100000')
+	confParser.set('Parameters','learning_rate','2.5e-03')
 	#
 	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
 	#
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'predictHardness',
+					1:'predictHardnessForcesAdded',
 				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
