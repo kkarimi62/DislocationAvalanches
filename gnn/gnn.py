@@ -32,11 +32,11 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'predictHardnessForcesAdded',
+					1:'predictHardnessForcesAddedLearningCurve',
 				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
-	durtn = '47:59:59'
+	durtn = '95:59:59'
 	mem = '8gb'
 	partition = ['cpu2019','bigmem','parallel','single'][0]
 	PYFILdic = { 
