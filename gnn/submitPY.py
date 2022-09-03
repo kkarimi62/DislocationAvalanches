@@ -3,7 +3,7 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 36,11 ]
+	lnums = [ 37, 11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
@@ -17,7 +17,8 @@ if __name__ == '__main__':
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
-	PHI=dict(zip(range(len(learning_rate)),learning_rate))
+#	PHI=dict(zip(range(len(learning_rate)),learning_rate))
+	PHI=dict(zip(range(len(attributes)),attributes))
 	nphi = len(PHI)
 	#---
 	count = 0
@@ -25,7 +26,7 @@ if __name__ == '__main__':
 		val = PHI[key]
 		#---	
 		inums = lnums[ 0 ] - 1
-		string[ inums ] = "\t1:\'validation%s\',\n" % (key) #--- change job name
+		string[ inums ] = "\t2:\'validation%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)

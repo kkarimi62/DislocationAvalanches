@@ -34,7 +34,8 @@ if __name__ == '__main__':
 	nruns	 = range(1)
 	jobname  = {
 					1:'predictHardnessForcesAddedLearningCurve',
-				}[1]
+					2:'predictHardnessForcesAddedValidation',
+				}[2]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '95:59:59'
