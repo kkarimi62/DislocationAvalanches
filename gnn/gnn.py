@@ -8,6 +8,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.set('Parameters','num_processing_steps_tr','3')
 	confParser.set('Parameters','num_training_iterations','100000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
+	confParser.set('Parameters','attributes','x y perimeter boundarySize numNeighbors')
 	#
 	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
 	#
