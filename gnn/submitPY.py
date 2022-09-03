@@ -3,12 +3,17 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 35,10 ]
+	lnums = [ 36,11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
 #	num_training_iterations=[10000,100000,1000000]
-	learning_rate = [1e-3,1e-4,1e-5]
+#	learning_rate = [1e-3,1e-4,1e-5]
+	attributes = ['x y', 
+				  'x y grainSize', 
+				  'x y perimeter', 
+                  'x y boundarySize', 
+                  'x y numNeighbors']
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
@@ -20,12 +25,13 @@ if __name__ == '__main__':
 		val = PHI[key]
 		#---	
 		inums = lnums[ 0 ] - 1
-		string[ inums ] = "\t1:\'learning_rate%s\',\n" % (key) #--- change job name
+		string[ inums ] = "\t1:\'validation%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_training_iterations\',\'%s\')\n"%(val)
-		string[ inums ] = "\tconfParser.set(\'Parameters\',\'learning_rate\',\'%s\')\n"%(val)
+#		string[ inums ] = "\tconfParser.set(\'Parameters\',\'learning_rate\',\'%s\')\n"%(val)
+		string[ inums ] = "\tconfParser.set(\'Parameters\',\'attributes\',\'%s\')\n"%(val)
 
 #		inums = lnums[ 2 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'parameters\',\'load\',\'%s\')\n"%(val)
