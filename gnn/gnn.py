@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	jobname  = {
 					1:'predictHardnessForcesAddedLearningCurve',
 					2:'predictHardnessForcesAddedValidation',
-				}[2]
+				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '167:59:59'
