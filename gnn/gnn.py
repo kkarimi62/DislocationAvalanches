@@ -33,7 +33,7 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'predictHardnessForcesAddedLearningCurve',
+					1:'predictHardnessForcesAddedLearningCurve2nd',
 					2:'predictHardnessForcesAddedValidation',
 				}[1]
 	DeleteExistingFolder = True
