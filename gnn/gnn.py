@@ -38,8 +38,8 @@ if __name__ == '__main__':
 				}[2]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
-	durtn = '95:59:59'
-	mem = '8gb'
+	durtn = '167:59:59'
+	mem = '10gb'
 	partition = ['cpu2019','bigmem','parallel','single'][0]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
