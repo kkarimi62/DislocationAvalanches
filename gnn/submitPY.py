@@ -13,7 +13,9 @@ if __name__ == '__main__':
 				  'x y grainSize', 
 				  'x y perimeter', 
                   'x y boundarySize', 
-                  'x y numNeighbors']
+                  'x y numNeighbors',
+				  'x y grainSize perimeter boundarySize numNeighbors'
+				]
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
