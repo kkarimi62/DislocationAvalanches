@@ -3,7 +3,7 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 39, 11 ]
+	lnums = [ 42, 11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
