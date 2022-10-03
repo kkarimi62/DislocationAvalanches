@@ -10,6 +10,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.set('Parameters','learning_rate','1.0e-03')
 	confParser.set('Parameters','attributes','x y grainSize perimeter boundarySize numNeighbors')
 	#
+	confParser.set('flags','learning_curve','True')
+	#
 	confParser.set('gnn library path','gnnLibDir',os.getcwd()+'/./hs_implementation')
 	#
 	confParser.set('python libarary path','pyLibDir',os.getcwd()+'/../../HeaDef/postprocess')
