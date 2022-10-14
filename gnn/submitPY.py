@@ -18,6 +18,7 @@ if __name__ == '__main__':
 #				  'x y grainSize perimeter boundarySize numNeighbors'
 #				]
 	attributes = []
+	s=['grainSize', 'perimeter', 'boundarySize', 'numNeighbors']
 	for i in [1,2,3,4]:
 		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
 
