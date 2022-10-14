@@ -2,6 +2,7 @@ if __name__ == '__main__':
 	import sys
 	import os
 	import numpy as np
+	from itertools import combinations
 	#---
 	lnums = [ 42, 11 ]
 	string=open('gnn.py').readlines() #--- python script
