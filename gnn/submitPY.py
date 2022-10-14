@@ -15,7 +15,7 @@ if __name__ == '__main__':
  #                 'x y boundarySize', 
   #                'x y numNeighbors',
 #				  'x y grainSize perimeter boundarySize numNeighbors'
-				]
+#				]
 	attributes = []
 	for i in [1,2,3,4]:
 		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
