@@ -9,13 +9,17 @@ if __name__ == '__main__':
 #	num_processing_steps_tr=range(1,10)
 #	num_training_iterations=[10000,100000,1000000]
 #	learning_rate = [1e-3,1e-4,1e-5]
-	attributes = ['x y', 
-				  'x y grainSize', 
-				  'x y perimeter', 
-                  'x y boundarySize', 
-                  'x y numNeighbors',
-				  'x y grainSize perimeter boundarySize numNeighbors'
+#	attributes = ['x y', 
+#				  'x y grainSize', 
+#				  'x y perimeter', 
+ #                 'x y boundarySize', 
+  #                'x y numNeighbors',
+#				  'x y grainSize perimeter boundarySize numNeighbors'
 				]
+	attributes = []
+	for i in [1,2,3,4]:
+		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
+
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
