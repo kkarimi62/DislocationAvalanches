@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	s=['grainSize', 'perimeter', 'boundarySize', 'numNeighbors']
 	for i in [1,2,3,4]:
 		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
-
+	print(attributes)
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
