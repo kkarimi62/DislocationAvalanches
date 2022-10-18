@@ -38,7 +38,7 @@ if __name__ == '__main__':
 #
 	nruns	 = range(1)
 	jobname  = {
-					1:'hardness',
+					1:'hardness_best_train',
 					2:'validation',
 				}[1]
 	DeleteExistingFolder = True
