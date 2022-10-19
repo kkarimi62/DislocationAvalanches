@@ -40,7 +40,7 @@ if __name__ == '__main__':
 	nruns	 = range(1)
 	jobname  = {
 					1:'hardness_best_train',
-					2:'model_validation',
+					2:'model_validation62',
 				}[2]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
