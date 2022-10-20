@@ -1,0 +1,8 @@
+[NbConvertApp] Converting notebook /home/kamran.karimi1/Project/git/DislocationAvalanches/gnn/hardness_best_train/Run0/gnnPolyCryst.ipynb to html
+[NbConvertApp] Executing notebook with kernel: python3
+2022-10-20 04:39:03.598990: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 AVX512F FMA
+2022-10-20 04:39:03.618192: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2300000000 Hz
+2022-10-20 04:39:03.618337: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55a8e972b220 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-10-20 04:39:03.618353: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+[NbConvertApp] Writing 3755071 bytes to /home/kamran.karimi1/Project/git/DislocationAvalanches/gnn/hardness_best_train/Run0/gnnPolyCryst.html
+ls: cannot access 'output.html': No such file or directory
