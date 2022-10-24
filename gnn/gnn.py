@@ -6,7 +6,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','40000')
+	confParser.set('Parameters','num_training_iterations','100000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
 	confParser.set('Parameters','attributes','x y grainSize perimeter boundarySize numNeighbors')
 	confParser.set('Parameters','train_size_learning','1.0')
