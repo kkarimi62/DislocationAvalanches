@@ -4,7 +4,7 @@ if __name__ == '__main__':
 	import numpy as np
 	from itertools import combinations
 	#---
-	lnums = [ 43, 12 ]
+	lnums = [ 43, 11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
@@ -17,19 +17,19 @@ if __name__ == '__main__':
   #                'x y numNeighbors',
 #				  'x y grainSize perimeter boundarySize numNeighbors'
 #				]
-#	attributes = []
-#	s=['x','y','grainSize', 'perimeter', 'boundarySize', 'numNeighbors']
-#	for i in [1,2,3,4,5,6]:
-##		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
-#		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
+	attributes = []
+	s=['x','y','grainSize', 'perimeter', 'boundarySize', 'numNeighbors']
+	for i in [1,2,3,4,5,6]:
+#		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
+		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
 #	print(attributes)
-	train_size_learning=np.arange(0.1,1.1,0.1)
+#	train_size_learning=np.arange(0.1,1.1,0.1)
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
 #	PHI=dict(zip(range(len(learning_rate)),learning_rate))
-#	PHI=dict(zip(range(len(attributes)),attributes))
-	PHI=dict(zip(range(len(train_size_learning)),train_size_learning))
+	PHI=dict(zip(range(len(attributes)),attributes))
+#	PHI=dict(zip(range(len(train_size_learning)),train_size_learning))
 	nphi = len(PHI)
 	#---
 	count = 0
@@ -37,14 +37,14 @@ if __name__ == '__main__':
 		val = PHI[key]
 		#---	
 		inums = lnums[ 0 ] - 1
-		string[ inums ] = "\t2:\'learning_curve%s\',\n" % (key) #--- change job name
+		string[ inums ] = "\t2:\'model_validation%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_training_iterations\',\'%s\')\n"%(val)
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'learning_rate\',\'%s\')\n"%(val)
-#		string[ inums ] = "\tconfParser.set(\'Parameters\',\'attributes\',\'%s\')\n"%(val)
-		string[ inums ] = "\tconfParser.set(\'Parameters\',\'train_size_learning\',\'%s\')\n"%(val)
+		string[ inums ] = "\tconfParser.set(\'Parameters\',\'attributes\',\'%s\')\n"%(val)
+#		string[ inums ] = "\tconfParser.set(\'Parameters\',\'train_size_learning\',\'%s\')\n"%(val)
 
 #		inums = lnums[ 2 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'parameters\',\'load\',\'%s\')\n"%(val)
