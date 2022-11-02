@@ -62,8 +62,8 @@ mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrienta
 
 
 % length of the common boundary between grain i & j
-seg_length = [];
-for ipair = 1:size(pairs,1):
+seg_length=[];
+for ipair = 1:size(pairs,1)
 	grain_i = pairs(ipair,1);
 	grain_j = pairs(ipair,2);
 	assert(grain_i < grain_j);
