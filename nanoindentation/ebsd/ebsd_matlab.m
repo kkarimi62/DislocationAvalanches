@@ -63,8 +63,8 @@ mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrienta
 %---- print attributes
 % open your file for writing
 fid = fopen('attributes.txt','wt');
-fprintf(fid,'#grainID\tx\ty\tgrainSize\tperimeter\tboundarySize\tnumNeighbors\n');
-fprintf(fid,'%d\t%e\t%e\t%d\t%e\t%d\t%d\n', transpose([grains.id grains.centroid grains.grainSize grains.perimeter grains.boundarySize grains.numNeighbors]));
+fprintf(fid,'#grainID\tx\ty\tarea\tperimeter\tsubBoundaryLength\tdiameter\tequivalentPerimeter\tshapeFactor\tisBoundary\tsphericity\thasHole\tisInclusion\tnumNeighbors\n');
+fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %e %d %d %d\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.sphericity grains.hasHole grains.isInclusion grains.numNeighbors]));
 fclose(fid);
 
 % open your file for writing
