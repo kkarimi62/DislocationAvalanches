@@ -112,7 +112,3 @@ for ii = 1:size(A,1)
 end
 fclose(fid)
 
-
-fprintf(fid,ebsd.grainId);
-fclose(fid);
-
