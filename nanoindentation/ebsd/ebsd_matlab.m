@@ -83,7 +83,7 @@ fclose(fid);
 % edge attributes
 fid = fopen('pairwise_attributes.txt','wt');
 fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micron)\n');
-fprintf(fid,'%d %d %e %e\n', transpose([ pairs; mori.angle./degree; transpose(seg_length)] ));
+fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree transpose(seg_length)] ));
 fclose(fid);
 
 % indenters and corresponding grains
