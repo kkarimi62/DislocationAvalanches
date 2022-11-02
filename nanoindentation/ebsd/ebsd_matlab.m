@@ -60,6 +60,7 @@ saveas(h,'grainsBitmap/grains','png');
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
+grains.boundary
 %---- print attributes
 % open your file for writing
 fid = fopen('attributes.txt','wt');
