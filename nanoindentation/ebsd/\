@@ -2,7 +2,7 @@
 
 % set path & file name
 mpath='/home/kamran.karimi1/Project/git/DislocationAvalanches/nanoindentation/ebsd';
-fileName = [mpath filesep 'input/stal_310_s_indenty_wszystkie.ang'];
+fileName = [mpath filesep 'stal_310_s_indenty_wszystkie.ang'];
 
 
 % load file
@@ -24,7 +24,7 @@ lim = axis;
 % plot on top their ids
 text(big_grains,int2str(big_grains.id),'FontSize', 4);
 % add indenter
-fileName = [mpath filesep 'input/r_indenters.txt'];
+fileName = [mpath filesep 'r_indenters.txt'];
 r_indenters = dlmread(fileName,'',1,0);
 %plot indenters
 text(r_indenters(:,1),r_indenters(:,2),'.','Color','red');
@@ -60,30 +60,17 @@ saveas(h,'grainsBitmap/grains','png');
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
-
-% length of the common boundary between grain i & j
-seg_length=[];
-for ipair = 1:size(pairs,1)
-	grain_i = pairs(ipair,1);
-	grain_j = pairs(ipair,2);
-	assert(grain_i < grain_j);
-	filtr = grains(grain_i).boundary.grainId(:,2) == grain_j;
-	sizee = grains(grain_i).boundary.segLength;
-	size_filtr = sizee(filtr);
-	seg_length(ipair) = sum(size_filtr);
-end
-
 %---- print attributes
 % open your file for writing
-fid = fopen('output/attributes.txt','wt');
-fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors\n');
+fid = fopen('attributes.txt','wt');
+fprintf(fid,'#grainID\tx\ty\tarea\tperimeter\tsubBoundaryLength\tdiameter\tequivalentPerimeter\tshapeFactor\tisBoundary\tsphericity\thasHole\tisInclusion\tnumNeighbors\n');
 fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors]));
 fclose(fid);
 
-% edge attributes
-fid = fopen('output/pairwise_attributes.txt','wt');
-fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micron)\n');
-fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree transpose(seg_length)] ));
+% open your file for writing
+fid = fopen('pairwise_attributes.txt','wt');
+fprintf(fid,'#grain_i_ID\tgrain_j_ID\tmisOrientationAngle(deg)\n');
+fprintf(fid,'%d\t%d\t%e\n', transpose([ pairs mori.angle./degree ] ));
 fclose(fid);
 
 % indenters and corresponding grains
@@ -97,7 +84,7 @@ length(ids)
 length(r_indenters)
 %ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
 %length(ids)
-fid = fopen('output/indenter_grainID.txt','wt');
-fprintf(fid,'#loadID label grainID\n');
-fprintf(fid,'%d %d %d\n', ([ lid; label; ids; ]));
+fid = fopen('indenter_grainID.txt','wt');
+fprintf(fid,'#loadID\tlabel\tgrainID\n');
+fprintf(fid,'%d\t%d\t%d\n', ([ lid; label; ids; ]));
 fclose(fid);
