@@ -101,3 +101,17 @@ fid = fopen('output/indenter_grainID.txt','wt');
 fprintf(fid,'#loadID label grainID\n');
 fprintf(fid,'%d %d %d\n', ([ lid; label; ids; ]));
 fclose(fid);
+
+% pixel-based ebsd id
+ebsd = ebsd.gridify;
+fid = fopen('output/id_matrix.txt','wt');
+for ii = 1:size(A,1)
+    fprintf(fid,'%d\t',A(ii,:));
+    fprintf(fid,'\n');
+end
+fclose(fid)
+
+
+fprintf(fid,ebsd.grainId);
+fclose(fid);
+
