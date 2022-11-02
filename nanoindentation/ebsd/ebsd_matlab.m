@@ -63,14 +63,14 @@ mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrienta
 %---- print attributes
 % open your file for writing
 fid = fopen('attributes.txt','wt');
-fprintf(fid,'#grainID\tx\ty\tarea\tperimeter\tsubBoundaryLength\tdiameter\tequivalentPerimeter\tshapeFactor\tisBoundary\tsphericity\thasHole\tisInclusion\tnumNeighbors\n');
+fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors\n');
 fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors]));
 fclose(fid);
 
 % open your file for writing
 fid = fopen('pairwise_attributes.txt','wt');
-fprintf(fid,'#grain_i_ID\tgrain_j_ID\tmisOrientationAngle(deg)\n');
-fprintf(fid,'%d\t%d\t%e\n', transpose([ pairs mori.angle./degree ] ));
+fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg)\n');
+fprintf(fid,'%d %d %e\n', transpose([ pairs mori.angle./degree ] ));
 fclose(fid);
 
 % indenters and corresponding grains
@@ -85,6 +85,6 @@ length(r_indenters)
 %ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
 %length(ids)
 fid = fopen('indenter_grainID.txt','wt');
-fprintf(fid,'#loadID\tlabel\tgrainID\n');
-fprintf(fid,'%d\t%d\t%d\n', ([ lid; label; ids; ]));
+fprintf(fid,'#loadID label grainID\n');
+fprintf(fid,'%d %d %d\n', ([ lid; label; ids; ]));
 fclose(fid);
