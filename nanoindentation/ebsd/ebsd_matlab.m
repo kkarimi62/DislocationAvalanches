@@ -60,7 +60,19 @@ saveas(h,'grainsBitmap/grains','png');
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
-grains.shapeFactor
+
+% length of the common boundary between grain i & j
+seg_length = [];
+for ipair = 1:size(pairs,1):
+	grain_i = pairs(ipair,1);
+	grain_j = pairs(ipair,2);
+	assert(grain_i < grain_j);
+	filtr = grains(grain_i).boundary.grainId(:,2) == grain_j;
+	sizee = grains(grain_i).boundary.segLength;
+	size_filtr = sizee(filtr);
+	seg_length(ipair) = sum(size_filtr);
+end
+
 %---- print attributes
 % open your file for writing
 fid = fopen('attributes.txt','wt');
@@ -70,8 +82,8 @@ fclose(fid);
 
 % open your file for writing
 fid = fopen('pairwise_attributes.txt','wt');
-fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg)\n');
-fprintf(fid,'%d %d %e\n', transpose([ pairs mori.angle./degree ] ));
+fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micron)\n');
+fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree seg_length] ));
 fclose(fid);
 
 % indenters and corresponding grains
