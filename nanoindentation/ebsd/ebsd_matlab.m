@@ -104,6 +104,7 @@ fclose(fid);
 
 % pixel-based ebsd id
 ebsd = ebsd.gridify;
+A = ebsd.grainId;
 fid = fopen('output/id_matrix.txt','wt');
 for ii = 1:size(A,1)
     fprintf(fid,'%d\t',A(ii,:));
