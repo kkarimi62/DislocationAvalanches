@@ -8,11 +8,12 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.set('Parameters','num_processing_steps_tr','3')
 	confParser.set('Parameters','num_training_iterations','100000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
-	confParser.set('Parameters','attributes','x y grainSize perimeter boundarySize numNeighbors')
+	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors') 
 	confParser.set('Parameters','train_size_learning','1.0')
+	confParser.set('Parameters','stopping_criterion','1')
 	#
-	confParser.set('flags','train_test','False')
-	confParser.set('flags','learning_curve','True')
+	confParser.set('flags','train_test','True')
+	confParser.set('flags','learning_curve','False')
 	confParser.set('flags','validation_curve','False')
 	confParser.set('flags','remote_machine','True')
 	#
@@ -20,9 +21,10 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	#
 	confParser.set('python libarary path','pyLibDir',os.getcwd()+'/../../HeaDef/postprocess')
 	#
-	confParser.set('test data files','test_data_file_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/attributesAndHardness.csv')
-	confParser.set('test data files','test_data_file_path2nd',os.getcwd()+'/../nanoindentation/avalancheAnalysis/pairwise_attributes.csv')
-	confParser.set('test data files','load_depth_path',os.getcwd()+'/../nanoindentation/avalancheAnalysis/grainAttributes/loadDepth')
+	confParser.set('test data files','ebsd_path',os.getcwd()+'/../nanoindentation/ebsd/output')
+	confParser.set('test data files','test_data_file_path',os.getcwd()+'/../nanoindentation/ebsd/output/attributes.txt')
+	confParser.set('test data files','test_data_file_path2nd',os.getcwd()+'/../nanoindentation/ebsd/output/pairwise_attributes.txt')
+	confParser.set('test data files','load_depth_path',os.getcwd()+'/../nanoindentation/loadCurves')
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
