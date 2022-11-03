@@ -4,7 +4,7 @@ if __name__ == '__main__':
 	import numpy as np
 	from itertools import combinations
 	#---
-	lnums = [ 45, 12 ]
+	lnums = [ 45, 11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
@@ -17,13 +17,13 @@ if __name__ == '__main__':
   #                'x y numNeighbors',
 #				  'x y grainSize perimeter boundarySize numNeighbors'
 #				]
-#	attributes = []
-#	s=['x','y','grainSize', 'perimeter', 'boundarySize', 'numNeighbors']
-#	for i in [1,2,3,4,5,6]:
-##		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
-#		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
+	attributes = []
+	s=['x',    'y',    'area',    'perimeter',    'subBoundaryLength'  ,'diameter',    'equivalentPerimeter',    'shapeFactor',    'isBoundary',  'hasHole',    'isInclusion',    'numNeighbors'] 
+	for i in range(1,len(s)+1):
+#		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
+		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
 #	print(attributes)
-	train_size_learning=np.arange(0.1,1.1,0.1)
+#	train_size_learning=np.arange(0.1,1.1,0.1)
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
