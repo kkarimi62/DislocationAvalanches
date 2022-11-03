@@ -18,12 +18,13 @@ if __name__ == '__main__':
 #				  'x y grainSize perimeter boundarySize numNeighbors'
 #				]
 	attributes = []
-	s=['x',    'y',    'area',    'perimeter',    'subBoundaryLength'  ,'diameter',    'equivalentPerimeter',    'shapeFactor',    'isBoundary',  'hasHole',    'isInclusion',    'numNeighbors'] 
-	for i in range(1,len(s)+1):
-#		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
-		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
-#	print(attributes)
+	s=['area',    'perimeter',    'subBoundaryLength'  ,'diameter',    'equivalentPerimeter',    'shapeFactor',    'isBoundary',  'hasHole',    'isInclusion',    'numNeighbors'] 
+	for i in [1,2,4,8,12]: #range(1,len(s)+1):
+		attributes +=list(map(lambda x:'x y '+' '.join(x),combinations(s, i)))
+#		attributes +=list(map(lambda x:' '.join(x),combinations(s, i)))
+#	print(len(attributes))
 #	train_size_learning=np.arange(0.1,1.1,0.1)
+#	exit()
 
 #	PHI=dict(zip(range(len(num_processing_steps_tr)),num_processing_steps_tr))
 #	PHI=dict(zip(range(len(num_training_iterations)),num_training_iterations))
