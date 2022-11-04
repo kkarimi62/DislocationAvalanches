@@ -40,6 +40,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 #
 if __name__ == '__main__':
 	import os
+	import numpy as np
 #
 	nruns	 = range(10)
 	jobname  = {
