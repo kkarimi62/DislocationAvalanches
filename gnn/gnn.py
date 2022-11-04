@@ -6,15 +6,15 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','100000')
+	confParser.set('Parameters','num_training_iterations','20000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
 	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors') 
 	confParser.set('Parameters','train_size_learning','1.0')
 	confParser.set('Parameters','stopping_criterion','1')
 	confParser.set('Parameters','n_cross_val','5')
 	#
-	confParser.set('flags','train_test','True')
-	confParser.set('flags','learning_curve','False')
+	confParser.set('flags','train_test','False')
+	confParser.set('flags','learning_curve','True')
 	confParser.set('flags','validation_curve','False')
 	confParser.set('flags','remote_machine','True')
 	#
@@ -40,11 +40,11 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 if __name__ == '__main__':
 	import os
 #
-	nruns	 = range(8)
+	nruns	 = range(1)
 	jobname  = {
 					1:'hardness_best_train',
 					2:'learning_curve', #'model_validation', #'learning_curve',
-				}[1]
+				}[2]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
