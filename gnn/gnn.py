@@ -52,7 +52,7 @@ if __name__ == '__main__':
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '2:59:59'
 	mem = '10gb'
-	partition = ['cpu2019','bigmem','parallel','single'][1]
+	partition = ['cpu2019','bigmem','parallel','single'][3]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
 		1:'gnnPolyCryst.py',
