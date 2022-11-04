@@ -6,13 +6,14 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','20000')
+	confParser.set('Parameters','num_training_iterations','100000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
 	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors') 
 	confParser.set('Parameters','train_size_learning','1.0')
 	confParser.set('Parameters','stopping_criterion','1')
-	confParser.set('Parameters','n_cross_val','5')
+	confParser.set('Parameters','n_cross_val','4')
 	confParser.set('Parameters','seed','%s'%seed)
+	confParser.set('Parameters','split_type','0')
 	#
 	confParser.set('flags','train_test','False')
 	confParser.set('flags','learning_curve','True')
