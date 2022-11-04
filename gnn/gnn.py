@@ -1,6 +1,6 @@
 from backports import configparser
 
-def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
+def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	#--- parse conf. file
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
@@ -12,9 +12,10 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 	confParser.set('Parameters','train_size_learning','1.0')
 	confParser.set('Parameters','stopping_criterion','1')
 	confParser.set('Parameters','n_cross_val','5')
+	confParser.set('Parameters','seed','%s'%seed)
 	#
-	confParser.set('flags','train_test','False')
-	confParser.set('flags','learning_curve','True')
+	confParser.set('flags','train_test','True')
+	confParser.set('flags','learning_curve','False')
 	confParser.set('flags','validation_curve','False')
 	confParser.set('flags','remote_machine','True')
 	#
@@ -40,11 +41,11 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL):
 if __name__ == '__main__':
 	import os
 #
-	nruns	 = range(1)
+	nruns	 = range(10)
 	jobname  = {
 					1:'hardness_best_train',
 					2:'learning_curve', #'model_validation', #'learning_curve',
-				}[2]
+				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
@@ -69,7 +70,8 @@ if __name__ == '__main__':
 		print(' i = %s' % counter)
 		writPath = os.getcwd() + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
-		makeOAR( writPath, 1, 1, durtn, PYFIL) # --- make oar script
+		seed = np.random.randint(100,1000)
+		makeOAR( writPath, 1, 1, durtn, PYFIL,seed) # --- make oar script
 		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
 						    --chdir %s -c %s -n %s %s/oarScript.sh'\
