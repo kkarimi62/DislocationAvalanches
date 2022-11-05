@@ -13,7 +13,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	confParser.set('Parameters','stopping_criterion','1')
 	confParser.set('Parameters','n_cross_val','4')
 	confParser.set('Parameters','seed','%s'%seed)
-	confParser.set('Parameters','split_type','0')
+	confParser.set('Parameters','split_type','1')
 	#
 	confParser.set('flags','train_test','False')
 	confParser.set('flags','learning_curve','True')

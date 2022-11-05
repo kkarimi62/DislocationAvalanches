@@ -38,7 +38,7 @@ if __name__ == '__main__':
 		val = PHI[key]
 		#---	
 		inums = lnums[ 0 ] - 1
-		string[ inums ] = "\t2:\'learning_curve%s\',\n" % (key) #--- change job name
+		string[ inums ] = "\t2:\'learning_curve_structured%s\',\n" % (key) #--- change job name
 		#---	densities
 		inums = lnums[ 1 ] - 1
 #		string[ inums ] = "\tconfParser.set(\'Parameters\',\'num_processing_steps_tr\',\'%s\')\n"%(val)
