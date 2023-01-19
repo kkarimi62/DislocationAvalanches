@@ -31,7 +31,7 @@ if __name__ == '__main__':
 				}['1']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
-								'1':'/../testdata/aedata/cantor/rate/rate2',
+								'1':'/../testdata/aedata/cantor/rateT900K/rate2',
  							}['1'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
