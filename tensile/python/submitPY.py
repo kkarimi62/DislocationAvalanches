@@ -8,7 +8,7 @@ if __name__ == '__main__':
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 #	string=open('postproc.py').readlines() #--- python script
 	#---
-	PHI  = dict(zip(range(2),[1,2,3,4]))
+	PHI  = dict(zip(range(4),[1,2,3,4]))
 #	PHI  = dict(zip(range(11),np.arange(1000,1440,40)))
 #		{ 
 #             '0':'FeNi',
