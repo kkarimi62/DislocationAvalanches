@@ -28,11 +28,13 @@ if __name__ == '__main__':
 	nThreads = 1
 	jobname  = {
 				'1':'tensileCantor_tensile900_rate2', 
-				}['1']
+				'2':'tensileCantorT300KRateE3', 
+				}['2']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate2',
- 							}['1'] #--- source
+								'2':'/../testdata/aedata/cantor/temperaturesRateE3/temp300',
+ 							}['2'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
 	mem = '32gb'
