@@ -3,8 +3,8 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 30, 35 ]
-#	lnums = [ 31, 36 ]
+#	lnums = [ 30, 35 ]
+	lnums = [ 31, 36 ]
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	#---
 #	PHI  = dict(zip(range(4),[1,2,3,4]))
