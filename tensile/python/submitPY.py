@@ -25,12 +25,12 @@ if __name__ == '__main__':
 	for key in PHI:
 			#---	
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s\',\n" % (int(PHI[key])) #--- change job name
-#				string[ inums ] = "\t\'2\':\'tensileCantorT%sKRateE3\',\n" % (int(PHI[key])) #--- change job name
+#				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s\',\n" % (int(PHI[key])) #--- change job name
+				string[ inums ] = "\t\'2\':\'tensileCantorT%sKRateE8\',\n" % (int(PHI[key])) #--- change job name
 		#---	densities
 				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-#				string[ inums ] = "\t\'2\':\'/../testdata/aedata/cantor/temperaturesRateE3/temp%s\',\n"%(int(PHI[key]))
+#				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
+				string[ inums ] = "\t\'2\':\'/../testdata/aedata/cantor/temperaturesRateE8/temp%s\',\n"%(int(PHI[key]))
 		#
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python3 junk%s.py'%count )
