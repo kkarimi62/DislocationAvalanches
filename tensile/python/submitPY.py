@@ -25,7 +25,8 @@ if __name__ == '__main__':
 	for key in PHI:
 			#---	
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s_highResolution\',\n" % (int(PHI[key])) #--- change job name
+				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s\',\n" % (int(PHI[key])) #--- change job name
+#				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s_highResolution\',\n" % (int(PHI[key])) #--- change job name
 #				string[ inums ] = "\t\'2\':\'tensileCantorT%sKRateE8_highResolution\',\n" % (int(PHI[key])) #--- change job name
 		#---	densities
 				inums = lnums[ 1 ] - 1
