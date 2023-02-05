@@ -3,11 +3,13 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 30, 35 ]
-#	lnums = [ 31, 36 ]
+	lnums = [ 31, 36, 7 ]
+#	lnums = [ 32, 37 ]
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	#---
 	PHI  = dict(zip(range(4),[1,2,3,4]))
+	kernel_width = dict(zip(range(4),[71,31,21,101]))
+
 #	PHI  = dict(zip(range(6),[5,300,600,700,800,900]))
 #		{ 
 #             '0':'FeNi',
@@ -31,7 +33,9 @@ if __name__ == '__main__':
 		#---	densities
 				inums = lnums[ 1 ] - 1
 				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-#				string[ inums ] = "\t\'2\':\'/../testdata/aedata/cantor/temperaturesRateE8/temp%s\',\n"%(int(PHI[key]))
+
+				inums = lnums[ 2 ] - 1
+				string[ inums ] = "\tconfParser.set(\'avalanche statistics\',\'kernel_width\',%s),\n"%(int(kernel_width[key]))
 		#
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python3 junk%s.py'%count )
