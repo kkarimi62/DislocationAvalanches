@@ -30,10 +30,11 @@ if __name__ == '__main__':
 	jobname  = {
 				'1':'tensileCantor_tensile900_rate2', 
 				'2':'tensileCantorT300KRateE8', 
-				}['1']
+				'3':'tensileCantor_tensile900_rate4/kernel0', 
+				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
-								'1':'/../testdata/aedata/cantor/rateT900K/rate2',
+								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
  							}['1'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
