@@ -30,7 +30,7 @@ if __name__ == '__main__':
 	jobname  = {
 				'1':'tensileCantor_tensile900_rate2', 
 				'2':'tensileCantorT300KRateE8', 
-				'3':'tensileCantor_tensile900_rate4/kernel0', 
+				'3':'tensileCantor_tensile900_rate4_kernels/kernel0', 
 				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
