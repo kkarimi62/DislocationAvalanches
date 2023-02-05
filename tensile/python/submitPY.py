@@ -35,7 +35,7 @@ if __name__ == '__main__':
 				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
 
 				inums = lnums[ 2 ] - 1
-				string[ inums ] = "\tconfParser.set(\'avalanche statistics\',\'kernel_width\',%s),\n"%(int(kernel_width[key]))
+				string[ inums ] = "\tconfParser.set(\'avalanche statistics\',\'kernel_width\',\'%s\'),\n"%(int(kernel_width[key]))
 		#
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python3 junk%s.py'%count )
