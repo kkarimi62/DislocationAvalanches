@@ -8,7 +8,8 @@ if __name__ == '__main__':
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	#---
 	PHI  = dict(zip(range(4),[1,2,3,4]))
-	kernel_width = dict(zip(range(4),[21,21,21,61]))
+#	kernel_width = dict(zip(range(4),[21,21,21,61]))
+	kernel_width = dict(zip(range(4),[10**4,10**4,10**4,10**4]))
 
 #	PHI  = dict(zip(range(6),[5,300,600,700,800,900]))
 #		{ 
