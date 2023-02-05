@@ -8,8 +8,7 @@ if __name__ == '__main__':
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	#---
 #	PHI  = dict(zip(range(4),[1,2,3,4]))
-#	PHI  = dict(zip(range(5),[300,600,700,800,900]))
-	PHI  = dict(zip(range(1),[5]))
+	PHI  = dict(zip(range(6),[5,300,600,700,800,900]))
 #		{ 
 #             '0':'FeNi',
 #            '1':'CoNiFe',
@@ -27,7 +26,7 @@ if __name__ == '__main__':
 			#---	
 				inums = lnums[ 0 ] - 1
 #				string[ inums ] = "\t\'1\':\'tensileCantor_tensile900_rate%s\',\n" % (int(PHI[key])) #--- change job name
-				string[ inums ] = "\t\'2\':\'tensileCantorT%sKRateE8\',\n" % (int(PHI[key])) #--- change job name
+				string[ inums ] = "\t\'2\':\'tensileCantorT%sKRateE8_highResolution\',\n" % (int(PHI[key])) #--- change job name
 		#---	densities
 				inums = lnums[ 1 ] - 1
 #				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
