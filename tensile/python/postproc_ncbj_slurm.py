@@ -31,7 +31,7 @@ if __name__ == '__main__':
 				'1':'tensileCantor_tensile900_rate4_highResolution', 
 				'2':'tensileCantorT300KRateE8', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1', 
-				}['1']
+				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
