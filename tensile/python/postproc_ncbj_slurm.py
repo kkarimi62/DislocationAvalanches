@@ -28,11 +28,11 @@ if __name__ == '__main__':
 	nNode    = 1
 	nThreads = 1
 	jobname  = {
-				'1':'tensileCantor_tensile900_rate2', 
+				'1':'tensileCantor_tensile900_rate1_highResolution', 
 				'2':'tensileCantorT300KRateE8', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1', 
-				}['3']
-	DeleteExistingFolder = False
+				}['1']
+	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
