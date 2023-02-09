@@ -4,7 +4,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
-	confParser.set('avalanche statistics','kernel_width','100000')
+	confParser.set('avalanche statistics','kernel_width','100')
 	confParser.set('test data directory','path',argv)
 	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
 	#--- write
@@ -24,19 +24,21 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(1)
+	runs	 = range(8)
 	nNode    = 1
 	nThreads = 1
 	jobname  = {
 				'1':'tensileCantor_tensile900_rate4_highResolution', 
 				'2':'tensileCantorT300KRateE8', 
-				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1', 
-				}['3']
+				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
+				'4':'CantorNatom10KTemp300K'
+				}['4']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
- 							}['1'] #--- source
+								'3':'/../simulations/CantorNatom10KTemp300K',
+ 							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
 	mem = '32gb'
