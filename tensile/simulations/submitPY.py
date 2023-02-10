@@ -25,7 +25,6 @@ if __name__ == '__main__':
 			#---
 				inums = lnums[ 2 ] - 1
 				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_%s.dat -var DumpFile dumpSheared.xyz\',\n"%(int(PHI[iphi]),int(PHI[iphi]))
-				string[ inums ] = 
 				#---
 
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
