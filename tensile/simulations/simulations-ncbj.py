@@ -125,6 +125,7 @@ if __name__ == '__main__':
 		os.system( 'rm jobID.txt' )
 		# --- loop for submitting multiple jobs
 #		counter = 0
+		path=os.getcwd() + '/%s' % ( jobname)
 		for irun in nruns:
 			counter = irun
 			Variable = SetVariables()
@@ -133,7 +134,6 @@ if __name__ == '__main__':
 			writPath = os.getcwd() + '/%s/Run%s' % ( jobname, irun ) # --- curr. dir
 			os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
 			if irun == 0: #--- cp to directory
-				path=os.getcwd() + '/%s' % ( jobname)
 				os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 			#---
 			for script,indx in zip(Pipeline,range(100)):
