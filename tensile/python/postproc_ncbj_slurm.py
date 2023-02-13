@@ -31,14 +31,14 @@ if __name__ == '__main__':
 				'1':'tensileCantor_tensile900_rate4_highResolution', 
 				'2':'tensileCantorT300KRateE8', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
-				'4':'CantorNatom10KTemp300K'
+				'4':'CantorNatom10KTemp600K'
 				}['4']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
-								'4':'/../simulations/CantorNatom10KTemp300K',
+								'4':'/../simulations/CantorNatom10KTemp600K',
  							}['4'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '00:59:59'
