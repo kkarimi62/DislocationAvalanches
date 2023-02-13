@@ -41,7 +41,7 @@ if __name__ == '__main__':
 								'4':'/../simulations/CantorNatom10KTemp300K',
  							}['4'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
-	durtn = '23:59:59'
+	durtn = '00:59:59'
 	mem = '32gb'
 	partition = ['INTEL_PHI','INTEL_HASWELL'][1] 
 	argv = "%s"%(readPath) #--- don't change! 
