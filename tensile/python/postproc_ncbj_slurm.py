@@ -38,7 +38,7 @@ if __name__ == '__main__':
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
-								'4':'/../simulations/CantorNatom10KTemp600K',
+								'4':'/../simulations/CantorNatom10KTemp600KRate1e8',
  							}['4'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '00:59:59'
