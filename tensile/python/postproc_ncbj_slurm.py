@@ -24,22 +24,22 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(24)
+	runs	 = range(8)
 	nNode    = 1
 	nThreads = 1
 	jobname  = {
 				'1':'tensileCantor_tensile900_rate4_highResolution', 
-				'2':'tensileCantorT300KRateE8', 
+				'2':'CantorNatom50KTemp300K', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
 				'4':'CantorNatom10KTemp600K'
-				}['4']
+				}['2']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
 								'4':'/../simulations/CantorNatom10KTemp600KRate1e8',
- 							}['4'] #--- source
+ 							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '00:59:59'
 	mem = '32gb'
