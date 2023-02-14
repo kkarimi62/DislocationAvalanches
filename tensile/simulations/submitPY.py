@@ -3,33 +3,39 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 30, 86   ]
+	lnums = [ 30, 90, 86   ]
 #	string=open('simulations-ncbj.py').readlines() #--- python script
 	string=open('simulations.py').readlines() #--- python script
 	#---
-#	PHI  = dict(zip(range(4),[600,700,800,900]))
-	PHI  = dict(zip(range(3),[0.5e-4,4e-4,8e-4]))
-	nphi = len(PHI)
+	Temps  = {
+				0:300,
+#				1:600,
+#				2:700,
+#				3:800,
+#				4:900
+			}
+	Rates  = {
+				0:0.5e-4,
+#				1:1e-4,
+				2:4e-4,
+				3:8e-4
+			}
 	#---
-	#---
-	#--- 
 	count = 0
-	keyss= list(PHI.keys())
-	keyss.sort()
-	for iphi in keyss:
+	for keys_t in Temps:
+		temp = Temps[keys_t]
+		for keys_r in Rates:
 			#---
-			temp = 300 #int(PHI[iphi])
-			rate = PHI[iphi]
-			rate_id = iphi
+				rate = Rates[keys_r]
 			#---	densities
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t3:\'CantorNatom10KTemp%sKRate%s\',\n"%(temp,rate_id) #--- change job name
+				string[ inums ] = "\t3:\'CantorNatom10KTemp%sKMultipleRates\/Rate%s\',\n"%(temp,keys_r) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var P 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(int(PHI[iphi]),int(PHI[iphi]))
+				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var P 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
 			#---
 				inums = lnums[ 2 ] - 1
-				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_%s.dat -var DumpFile dumpSheared.xyz\',\n"%(int(PHI[iphi]),int(PHI[iphi]))
+				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot %s -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_%s.dat -var DumpFile dumpSheared.xyz\',\n"%(temp, rate, temp)
 				#---
 
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
