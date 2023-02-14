@@ -11,7 +11,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 #	cutoff = 1.0 / rho ** (1.0/3.0)
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
 		if execc == 'lmp': #_mpi' or EXEC == 'lmp_serial':
-			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/lmp_mpi < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
@@ -111,7 +111,7 @@ if __name__ == '__main__':
 				  }[0]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
-		EXEC = list(map(lambda x:np.array(['lmp_g++_openmpi','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
+		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
 		EXEC_lmp = ['lmp_mpi','lmp_serial'][0]
