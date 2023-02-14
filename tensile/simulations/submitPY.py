@@ -29,7 +29,7 @@ if __name__ == '__main__':
 				rate = Rates[keys_r]
 			#---	densities
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t3:\'CantorNatom10KTemp%sKMultipleRates\/Rate%s\',\n"%(temp,keys_r) #--- change job name
+				string[ inums ] = "\t3:\'CantorNatom10KTemp%sKMultipleRates/Rate%s\',\n"%(temp,keys_r) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
 				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var P 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,temp)
