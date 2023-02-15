@@ -119,7 +119,7 @@ if __name__ == '__main__':
 		DeleteExistingFolder = True
 		if DeleteExistingFolder:
 			print('rm %s'%jobname)
-			os.system( 'rm -rf %s' % jobname ) #--- rm existing
+			os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
 		os.system( 'rm jobID.txt' )
 		# --- loop for submitting multiple jobs
 #		counter = 0
