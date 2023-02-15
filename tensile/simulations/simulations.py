@@ -123,6 +123,7 @@ if __name__ == '__main__':
 		# --- loop for submitting multiple jobs
 #		counter = 0
 		path=os.getcwd() + '/%s' % ( jobname)
+		os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 		for irun in nruns:
 			counter = irun
 			Variable = SetVariables()
@@ -130,8 +131,6 @@ if __name__ == '__main__':
 			print ' i = %s' % irun
 			writPath = os.getcwd() + '/%s/Run%s' % ( jobname, irun ) # --- curr. dir
 			os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
-			if irun == 0: #--- cp to directory
-				os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 			#---
 			for script,indx in zip(Pipeline,range(100)):
 	#			os.system( 'cp %s/%s %s/lmpScript%s.txt' %( SCRPT_DIR, script, writPath, indx) ) #--- lammps script: periodic x, pxx, vy, load
@@ -146,7 +145,11 @@ if __name__ == '__main__':
 								--chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
 						   % ( partition, mem, durtn, jobname, counter, jobname, counter, jobname, counter \
 						       , writPath, nThreads, nNode, writPath ) ) # --- runs oarScript.sh! 
+			print( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
+								--chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
+						   % ( partition, mem, durtn, jobname, counter, jobname, counter, jobname, counter \
+						       , writPath, nThreads, nNode, writPath ) ) # --- runs oarScript.sh! 
 #			counter += 1
-											 
+									 
 		
 		os.system( 'mv jobID.txt %s' % ( os.getcwd() + '/%s' % ( jobname ) ) )
