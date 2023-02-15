@@ -33,7 +33,7 @@ if __name__ == '__main__':
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
 				'4':'CantorNatom10KTemp600K'
 				}['4']
-	DeleteExistingFolder = True
+	DeleteExistingFolder = False
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
