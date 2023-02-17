@@ -4,8 +4,9 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
+	confParser.set('avalanche statistics','kernel_width','100')
 	confParser.set('test data directory','path',argv)
-	confParser.set('py library directory','path',os.getcwd()+'/../../../CrystalPlasticity/machineLearning/')
+	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
@@ -13,21 +14,23 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
-#	print >> someFile, 'papermill --prepare-only %s/%s ./output.ipynb %s %s'%(EXEC_DIR,PYFIL,argv,argv2nd) #--- write notebook with a list of passed params
-	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+	if convert_to_py:
+		print('ipython3 py_script.py\n',file=someFile)
+	else:	 
+		print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
 if __name__ == '__main__':
 	import os
 #
-	runs	 = [2]
+	runs	 = range(24)
 	jobname  = {
-				'1':'cantor/rate2nd', 
-				}['1']
+				'3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
+				}['3']
 	DeleteExistingFolder = False
 	readPath = os.getcwd() + {
-								'1':'/../testdata/aedata/cantor/rate',
- 							}['1'] #--- source
+								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
+ 							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
 	mem = '8gb'
@@ -37,10 +40,14 @@ if __name__ == '__main__':
 		1:'avalancheAnalysis.ipynb',
 		}
 	keyno = 1
+	convert_to_py = True
 #---
 #---
 	PYFIL = PYFILdic[ keyno ] 
 	#--- update argV
+	if convert_to_py:
+		os.system('jupyter nbconvert --to script %s --output py_script\n'%PYFIL)
+		PYFIL = 'py_script.py'
 	#---
 	if DeleteExistingFolder:
 		os.system( 'rm -rf %s' % jobname ) # --- rm existing
@@ -54,7 +61,7 @@ if __name__ == '__main__':
 		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
 						    --chdir %s -c %s -n %s %s/oarScript.sh'\
-						   % ( partition, mem, durtn, jobname[:4], counter, jobname[:4], counter, jobname[:4], counter \
+						   % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \
 						       , writPath, 1, 1, writPath ) ) # --- runs oarScript.sh!
 											 
 
