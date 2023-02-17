@@ -14,8 +14,10 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
-#	print >> someFile, 'papermill --prepare-only %s/%s ./output.ipynb %s %s'%(EXEC_DIR,PYFIL,argv,argv2nd) #--- write notebook with a list of passed params
-	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+	if convert_to_py:
+		print('ipython3 py_script.py\n',file=someFile)
+	else:	 
+		print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
 if __name__ == '__main__':
@@ -38,10 +40,14 @@ if __name__ == '__main__':
 		1:'avalancheAnalysis.ipynb',
 		}
 	keyno = 1
+	convert_to_py = True
 #---
 #---
 	PYFIL = PYFILdic[ keyno ] 
 	#--- update argV
+	if convert_to_py:
+		os.system('jupyter nbconvert --to script %s --output py_script\n'%PYFIL)
+		PYFIL = 'py_script.py'
 	#---
 	if DeleteExistingFolder:
 		os.system( 'rm -rf %s' % jobname ) # --- rm existing
