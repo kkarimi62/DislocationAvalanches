@@ -4,8 +4,9 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
+	confParser.set('avalanche statistics','kernel_width','100')
 	confParser.set('test data directory','path',argv)
-	confParser.set('py library directory','path',os.getcwd()+'/../../../CrystalPlasticity/machineLearning/')
+	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
@@ -20,14 +21,14 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = [2]
+	runs	 = range(24)
 	jobname  = {
-				'1':'cantor/rate2nd', 
-				}['1']
+				'3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
+				}['3']
 	DeleteExistingFolder = False
 	readPath = os.getcwd() + {
-								'1':'/../testdata/aedata/cantor/rate',
- 							}['1'] #--- source
+								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
+ 							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
 	mem = '8gb'
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
 						    --chdir %s -c %s -n %s %s/oarScript.sh'\
-						   % ( partition, mem, durtn, jobname[:4], counter, jobname[:4], counter, jobname[:4], counter \
+						   % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \
 						       , writPath, 1, 1, writPath ) ) # --- runs oarScript.sh!
 											 
 
