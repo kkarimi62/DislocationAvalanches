@@ -4,7 +4,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser = configparser.ConfigParser()
 	confParser.read('config.ini')
 	#--- set parameters
-	confParser.set('avalanche statistics','kernel_width','200')
+	confParser.set('avalanche statistics','kernel_width','25')
 	confParser.set('test data directory','path',argv)
 	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
 	#--- write
@@ -25,11 +25,11 @@ if __name__ == '__main__':
 #
 	runs	 = range(24)
 	jobname  = {
-				'3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
+				'3':'CantorNatom10KTemp300KMultipleRates/Rate2', 
 				}['3']
 	DeleteExistingFolder = False
 	readPath = os.getcwd() + {
-								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
+								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate2',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
