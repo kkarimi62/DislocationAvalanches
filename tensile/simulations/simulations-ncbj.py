@@ -24,7 +24,7 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(8) #24)
+		nruns	 = range(24)
 		#
 		nThreads = 8 #16
 		nNode	 = 1
@@ -119,7 +119,7 @@ if __name__ == '__main__':
 		mem = '22gb'
 		partition = ['INTEL_PHI'][0]
 		#--
-		DeleteExistingFolder = False
+		DeleteExistingFolder = True
 		if DeleteExistingFolder:
 			os.system( 'rm -rf %s' % jobname ) #--- rm existing
 		os.system( 'rm jobID.txt' )
