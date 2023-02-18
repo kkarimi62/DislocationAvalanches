@@ -45,7 +45,7 @@ if __name__ == '__main__':
 		#---	densities
 				inums = lnums[ 1 ] - 1
 #				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-				string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(key_r)
+				string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
 
 #				inums = lnums[ 1 ] - 1
 #				string[ inums ] = "\tconfParser.set(\'avalanche statistics\',\'kernel_width\',\'%s\'),\n"%(int(PHI[key]))
