@@ -122,7 +122,6 @@ if __name__ == '__main__':
 			os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
 		os.system( 'rm jobID.txt' )
 		# --- loop for submitting multiple jobs
-#		counter = 0
 		path=os.getcwd() + '/%s' % ( jobname)
 		os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 		for irun in nruns:

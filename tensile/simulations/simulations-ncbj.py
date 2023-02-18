@@ -121,20 +121,19 @@ if __name__ == '__main__':
 		#--
 		DeleteExistingFolder = True
 		if DeleteExistingFolder:
-			os.system( 'rm -rf %s' % jobname ) #--- rm existing
+			print('rm %s'%jobname)
+			os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
 		os.system( 'rm jobID.txt' )
 		# --- loop for submitting multiple jobs
-#		counter = 0
 		path=os.getcwd() + '/%s' % ( jobname)
+		os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 		for irun in nruns:
 			counter = irun
 			Variable = SetVariables()
 			Variables = list(map(lambda x:Variable[x], indices))
-			print ' i = %s' % irun
 			writPath = os.getcwd() + '/%s/Run%s' % ( jobname, irun ) # --- curr. dir
+			print ' create %s' % writPath
 			os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
-			if irun == 0: #--- cp to directory
-				os.system( 'ln -s %s/%s %s' % ( EXEC_DIR, EXEC_lmp, path ) ) # --- create folder & mv oar script & cp executable
 			#---
 			for script,indx in zip(Pipeline,range(100)):
 	#			os.system( 'cp %s/%s %s/lmpScript%s.txt' %( SCRPT_DIR, script, writPath, indx) ) #--- lammps script: periodic x, pxx, vy, load
