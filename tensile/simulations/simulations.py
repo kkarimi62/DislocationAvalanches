@@ -116,7 +116,7 @@ if __name__ == '__main__':
 		mem = '8gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][2]
 		#--
-		DeleteExistingFolder = True
+		DeleteExistingFolder = False
 		if DeleteExistingFolder:
 			print('rm %s'%jobname)
 			os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
