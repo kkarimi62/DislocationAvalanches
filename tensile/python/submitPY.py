@@ -41,7 +41,7 @@ if __name__ == '__main__':
 				rate = Rates[keys_r]
 			#---	densities
 				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n" % (key_r)) #--- change job name
+				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(key_r) #--- change job name
 		#---	densities
 				inums = lnums[ 1 ] - 1
 #				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
