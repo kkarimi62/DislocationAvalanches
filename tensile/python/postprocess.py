@@ -23,7 +23,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(24)
+	runs	 = range(144)
 	jobname  = {
 				'3':'CantorNatom10KTemp300KMultipleRates/Rate5', 
 				}['3']
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate5',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
-	durtn = '23:59:59'
+	durtn = '00:59:59'
 	mem = '8gb'
 	partition = ['parallel','cpu2019','bigmem','single'][3] 
 	argv = "%s"%(readPath) #--- don't change! 
