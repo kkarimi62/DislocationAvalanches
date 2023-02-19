@@ -18,5 +18,5 @@ variable varEzz	 equal	v_varTime*${GammaDot}
 variable ntherm  equal	ceil(${Nstep}/${nthermo})
 variable varn	 equal	v_ntherm
 variable varOutpt equal ${OUT_PATH}
-fix extra all print ${varn} "${varStep} ${varTime} ${varEzz} ${varTemp} ${varPe} ${varPxx} ${varPyy} ${varSzz} ${varVol}" screen no title "step time ezz temp pe pxx pyy szz vol" file ${varOutpt}/thermo.txt
+fix extra all print ${varn} "${varStep} ${varTime} ${varEzz} ${varTemp} ${varPe} ${varPxx} ${varPyy} ${varSzz} ${varVol}" screen no title "step time ezz temp pe pxx pyy szz vol" file thermo.txt
 
