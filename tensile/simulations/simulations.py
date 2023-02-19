@@ -8,7 +8,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	#--- run python script 
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
 		if execc == 'lmp': #_mpi' or EXEC == 'lmp_serial':
-			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH %s -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
@@ -56,7 +56,7 @@ if __name__ == '__main__':
 		SCRATCH = True
 		OUT_PATH = '.'
 		if SCRATCH:
-			OUT_PATH = '/scratch/${SLURM_JOB_ID}'
+			OUT_PATH = '/scratch/$SLURM_JOB_ID'
 		#--- py script must have a key of type str!
 		LmpScript = {	                0:'in.PrepTemp0',
 						1:'relax.in', 
