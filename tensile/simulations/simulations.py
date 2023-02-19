@@ -21,13 +21,13 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(144)
+		nruns	 = [0] #range(60)
 		#
 		nThreads = 4 #8
 		nNode	 = 1
 		#
 		jobname  = {
-					3:'CantorNatom10KTemp300KMultipleRates/Rate3', 
+					3:'CantorNatom10KTemp300KMultipleRates/test', 
 				   }[3]
 		sourcePath = os.getcwd() +\
 					{	
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 		#
 		SCRPT_DIR = os.getcwd()+'/lmpScripts' 
 		#
-		SCRATCH = False
+		SCRATCH = True
 		OUT_PATH = '.'
 		if SCRATCH:
 			OUT_PATH = '/scratch/${SLURM_JOB_ID}'
