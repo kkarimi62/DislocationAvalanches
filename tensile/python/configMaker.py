@@ -1,3 +1,5 @@
+import os
+import sys
 from backports import configparser
 confParser = configparser.ConfigParser()
 confParser.read('config.ini')
