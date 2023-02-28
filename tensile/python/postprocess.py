@@ -7,6 +7,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	confParser.set('avalanche statistics','kernel_width','100')
 	confParser.set('test data directory','path',argv)
 	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
+	confParser.set('dislocation analysis','outputPath',outputPath)
 	#--- write
 	confParser.write(open('config.ini','w'))	
 	#--- set environment variables
@@ -23,7 +24,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(144) #144) #60) #44) #: #24)
+	runs	 = range(44) #144) #60) #44) #: #24)
 	jobname  = {
 				'3':'CantorNatom10KTemp300KMultipleRates/Rate5', 
 				}['3']
@@ -41,8 +42,13 @@ if __name__ == '__main__':
 		}
 	keyno = 1
 	convert_to_py = True
-#---
-#---
+	SCRATCH = True
+	#
+	outputPath = '.'
+	if SCRATCH:
+		outputPath = '/scratch/$SLURM_JOB_ID'
+	#---
+	#---
 	PYFIL = PYFILdic[ keyno ] 
 	#--- update argV
 	if convert_to_py:
