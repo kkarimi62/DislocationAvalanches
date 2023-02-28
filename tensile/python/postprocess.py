@@ -1,6 +1,6 @@
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	#--- parse conf. file
-	# edit configMaker.py
+	#-- edit configMaker.py !!!
 
 	#--- set environment variables
 
@@ -17,13 +17,13 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(44) #144) #60) #44) #: #24)
+	runs	 = range(1) #144) #60) #44) #: #24)
 	jobname  = {
-				'3':'CantorNatom10KTemp300KMultipleRates/Rate5', 
+				'3':'CantorNatom10KTemp300KMultipleRates/Rate3', 
 				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
-								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate5',
+								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '00:59:59'
