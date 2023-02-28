@@ -30,7 +30,7 @@ if __name__ == '__main__':
 	durtn = '00:59:59'
 	mem = '8gb'
 	partition = ['parallel','cpu2019','bigmem','single'][3] 
-	argv = "%s %s"%(readPath,py_library_directory) #--- don't change! 
+	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
 	PYFILdic = { 
 		1:'avalancheAnalysis.ipynb',
 		}
