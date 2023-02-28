@@ -13,4 +13,4 @@ if __name__ == '__main__':
 		writPath = os.getcwd() + '/%s/Run%s/dislocations' % ( jobname, counter ) # --- curr. dir
 		os.system('mkdir -p %s'%writPath)
 		for file_name in [ 'dislocations/structureCnaTypeFraction.txt' ]:
-			os.system( 'ln -s /scratch/%s/%s %s/' % ( id_job, file_name, writPath ) )
+			os.system( 'cp /scratch/%s/%s %s/' % ( id_job, file_name, writPath ) )
