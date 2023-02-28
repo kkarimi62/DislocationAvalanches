@@ -1,22 +1,15 @@
-from backports import configparser
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	#--- parse conf. file
-	confParser = configparser.ConfigParser()
-	confParser.read('config.ini')
-	#--- set parameters
-	confParser.set('avalanche statistics','kernel_width','100')
-	confParser.set('test data directory','path',argv)
-	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
-	confParser.set('dislocation analysis','outputPath',outputPath)
-	#--- write
-	confParser.write(open('config.ini','w'))	
+	# edit configMaker.py
+
 	#--- set environment variables
 
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
+	print('python3 configMaker.py %s\n'%outputPath,file=someFile)
 	if convert_to_py:
-		print('ipython3 py_script.py\n',file=someFile)
+		print('ipython3 %s py_script.py\n'%outputPath,file=someFile)
 	else:	 
 		print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 	someFile.close()										  
@@ -65,7 +58,7 @@ if __name__ == '__main__':
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
 #		os.system( 'cp config.ini %s' % ( writPath ) ) #--- cp python module
 		makeOAR( writPath, 1, 1, durtn, PYFIL, argv+"/Run%s"%counter) # --- make oar script
-		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
+		os.system( 'chmod +x oarScript.sh; cp configMaker.py oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
 						    --chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
 						   % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \

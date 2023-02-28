@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[34]:
+# In[247]:
 
 
 import configparser
@@ -12,7 +12,7 @@ parser.read('config.ini')
 
 # # libs & formatting 
 
-# In[35]:
+# In[248]:
 
 
 import sys
@@ -141,7 +141,7 @@ if not eval(parser['flags']['RemoteMachine']):
 # # Avalanche statistics
 # ## class Statistics
 
-# In[112]:
+# In[152]:
 
 
 class Statistics:
@@ -654,7 +654,7 @@ stats = main()
 
 # ## class Temperature
 
-# In[37]:
+# In[174]:
 
 
 class Temperature:
@@ -684,12 +684,15 @@ class Temperature:
                     rescale=False,alpha=1.0,
                     mylegends='',
                     powerlaw=False, prefact=1.0,
+                    markersizes=np.array([10,10,10,12,12,12,10])*8,
+                    transparency=0.1,
+                    addPoints = [],
                     **kwargs):
         self.ax = utl.PltErr(None,
                         None,
                         attrs={'fmt':'-.r'},Plot=False)
 
-        symbols=Symbols(markersizes=np.array([10,10,10,12,12,12,10])*8)
+        symbols=Symbols(markersizes=markersizes)
         legends = Legends()
         legends.Set(bbox_to_anchor=kwargs['bbox_to_anchor'] if 'bbox_to_anchor' in kwargs
                     else (1.0,0.5,0.5,0.5)
@@ -710,11 +713,21 @@ class Temperature:
             ydata = ydata*shift_factor**count if shift else ydata
 
             self.ax.scatter(xdata,ydata,
-                        **symbols.GetAttrsScatter(count=count%7,label='%s'%text,fmt='.',alpha=0.1),
+                        **symbols.GetAttrsScatter(count=count%7,label='%s'%text,fmt='.',alpha=transparency),
                        )
+        #--- add points
+        for points in addPoints:
+            utl.PltErr([points[0]],
+                       [points[1]],
+                       attrs={'fmt':'.','ms':10,'color':'red'},
+                       ax=self.ax,
+                       Plot=False,
+                      )
+            
         #
         attrs = {} if mylegends == '' else {'legend':legends.Get()}
-        Xdata.sort()
+        if powerlaw:
+            Xdata.sort()
         utl.PltErr(Xdata if powerlaw else None,
                    prefact/Xdata**alpha if powerlaw else None,
                    ax=self.ax,
@@ -735,7 +748,9 @@ class Temperature:
         symbols=utl.Symbols()
         legends = Legends()
         legends.Set(bbox_to_anchor=kwargs['bbox_to_anchor'] if 'bbox_to_anchor' in kwargs
-                    else (1.0,0.5,0.5,0.5)
+                    else (1.0,0.5,0.5,0.5),
+                    labelspacing=kwargs['labelspacing'] if 'labelspacing' in kwargs
+                    else 0.0
                    )
         for temp, count in zip(self.temps,range(len(self.temps))): 
             text = mylegends[count] if not mylegends == '' else ' '
@@ -995,7 +1010,7 @@ main()
 
 # ### size pdf
 
-# In[28]:
+# In[171]:
 
 
 def main():
@@ -1052,15 +1067,15 @@ def main():
 #         pass
     
      #--- plot
-    temp.PlotPdf(shift=True,shift_factor=10,
-                 rescale=False,alpha=1.1,
-                 powerlaw=True, prefact=4e-3,
+    temp.PlotPdf(shift=True,shift_factor=0.1,
+                 rescale=False,alpha=1.5,
+                 powerlaw=True, prefact=1e0,
                  **{
                   'attrs':{'fmt':'-.r'},
                   'xscale':'log',
                   'yscale':'log',
                    'xlim':(1e-2,10),
-                    'ylim':(1e-3,1e4),
+                    'ylim':(1e-7,1e1),
 #                    'ylim':(1e-3,4e4),
                     'ndecade_y':1,'ndecade_x':1,
                     'nevery':1,
@@ -1296,7 +1311,7 @@ main()
 
 # ### duration
 
-# In[5]:
+# In[183]:
 
 
 def main():
@@ -1340,7 +1355,7 @@ def main():
 
     #--- plot legends
     temp.PlotPdf(
-                     mylegends=[r'$5\times 10^{7}$',r'$8\times 10^{8}$',r'$8\times10^{9}$',r'$8\times10^{10}$'],
+                     mylegends=[r'$10^{8}$',r'$10^{9}$',r'$10^{10}$',r'$10^{11}$'],
 #                     mylegends=[r'$300$',r'$600$',r'$700$',r'$800$',r'$900$'],
                  **{
                    'xlim':(1e-7,1e-5),
@@ -1349,7 +1364,8 @@ def main():
 #                   'title':'png/legend_T300-900K.png',
         'bbox_to_anchor':(.5,0.35,0.5,0.5),
 #        'bbox_to_anchor':(.35,0.35,0.5,0.5),
-                     'DrawFrame':(-0.5,-0.06,-0.3,-0.1,0.1),
+        'labelspacing':.4,
+        'DrawFrame':(-0.64,-0.06,-0.3,-0.1,0.1),
 
     })
 
@@ -1357,15 +1373,16 @@ main()
 
 
 # # Dislocation analysis
+# ## class Defects
 
-# In[106]:
+# In[243]:
 
 
 class Defects(Statistics):
     '''
     performs dislocation and phase analysis of input crystals
     '''
-    StructureType=[0.0,1.0,2.0,3.0,4.0,5.0] #--- hard coded
+    StructureType=[0.0,1.0,2.0,3.0,4.0,5.0] #--- hard coded based on ovito's structure types
     
     def __init__(self,path,verbose=False):
         Statistics.__init__(self,path,verbose)
@@ -1373,7 +1390,7 @@ class Defects(Statistics):
             print('calss Defects constructor call')
 
         
-    def CrysPhase(self,fp):
+    def CrysPhase(self,fp,output_path):
         '''
         dump phase information
         
@@ -1381,12 +1398,18 @@ class Defects(Statistics):
         if self.verbose:
             print('dxa analysis ...')
 
-        get_ipython().system('mkdir -p dislocations/mydislocations')
+        os.system('mkdir -p %s/dislocations/mydislocations'%output_path)
         #--- run ovitos
         input_file='%s/%s'%(self.path,fp)
+#        pdb.set_trace()
+#        print('output_path=',output_path)
         nevery = int(parser['dislocation analysis']['nevery'])
         os.system('ovitos %s/OvitosCna.py %s mydislocations %s 5'%                  (parser['py library directory']['path'],input_file,nevery))
-        get_ipython().system('mv mydislocations.* dislocations/mydislocations')
+        get_ipython().system('mv mydislocations.*  $output_path/dislocations/mydislocations')
+        
+        #--- cna analysis (dxa gives no bcc!)
+        os.system('ovitos %s/OvitosCna.py %s %s/dislocations/mydislocations/cna_output.xyz %s 0'%                  (parser['py library directory']['path'],input_file,output_path,nevery))
+
 
     def ParseDump(self,fp,ncount=sys.maxsize):
         if self.verbose:
@@ -1400,14 +1423,16 @@ class Defects(Statistics):
             print('times:%s'%keys)
             display(self.lmpData.coord_atoms_broken[keys[0]])
 
-    def Density(self,fout):
+    def Density(self,fout,header):
+        if self.verbose:
+            print('write in:',fout)
         keys = list(self.lmpData.coord_atoms_broken.keys())
         keys.sort()
         ratios = np.c_[list(map(lambda x:Defects.phaseDensity(self.lmpData.coord_atoms_broken[x]),keys))]
         strains = self.strains = Defects.Strain(self.lmpData)
         #--- write
         with open(fout,'w') as fp:
-            np.savetxt(fp,np.c_[keys,strains,ratios],header='itime ezz other fcc hcp bcc cubicDiamond hexDiamond')
+            np.savetxt(fp,np.c_[keys,strains,ratios],header=header)
 
     def BinaryMatrix(self):
         '''
@@ -1492,7 +1517,12 @@ class Defects(Statistics):
 #        print('strain=',L0,dl,dl/L0)
         return L/L0-1 #epsilon*np.array(keys)
 
-        
+
+# ## main function
+
+# In[254]:
+
+
 def main():
     if not eval(parser['dislocation analysis']['dislocationAnalysis']):
         return
@@ -1506,14 +1536,25 @@ def main():
                      verbose=True)
 
     #--- dislocation analysis
-    defect.CrysPhase(fp=parser['dislocation analysis']['input_file'])
+    output_path = parser['dislocation analysis']['outputPath']
+    defect.CrysPhase(fp=parser['dislocation analysis']['input_file'],
+                    output_path=output_path
+                    )
 
     #--- parse dump file
-    defect.ParseDump(fp='./dislocations/mydislocations/mydislocations.xyz')
+    defect.ParseDump(fp='%s/dislocations/mydislocations/mydislocations.xyz'%                     output_path)
 
     #--- hcp density
-    defect.Density(fout='dislocations/structureTypeFraction.txt')
+    defect.Density(fout='%s/dislocations/structureTypeFraction.txt'%output_path,
+                  header='itime ezz other fcc hcp bcc cubicDiamond hexDiamond')
 
+#     #--- redo for cna data
+    Defects.StructureType = [0.0,1.0,2.0,3.0,4.0]
+    defect.ParseDump(fp='%s/dislocations/mydislocations/cna_output.xyz'%output_path)
+    defect.Density(fout='%s/dislocations/structureCnaTypeFraction.txt'%output_path,
+                  header='itime ezz other fcc hcp bcc ico')
+
+    
     #--- write binary density matrix
 #    defect.BinaryMatrix()
         
@@ -1522,7 +1563,7 @@ main()
 
 # ## class MyPrint
 
-# In[10]:
+# In[195]:
 
 
 class MyPrint(Temperature):
@@ -1597,7 +1638,7 @@ class MyPrint(Temperature):
 
 # ### hcp ratio
 
-# In[12]:
+# In[253]:
 
 
 def main():
@@ -1618,42 +1659,52 @@ def main():
     myprint.Parse( 
 #                ['dislocations/structureTypeFraction.txt'],
 #                list(map(lambda x:'tensileCantor_tensile900_rate%s/Run%s/dislocations/structureTypeFraction.txt'%(x[0],x[1]),
-                list(map(lambda x:'CantorNatom10KTemp300KMultipleRates/Rate%s/Run%s/dislocations/structureTypeFraction.txt'%(x[0],x[1]),
-                         myprint.temps_runs ))
+    list(map(lambda x:'CantorNatom10KTemp300KMultipleRates/Rate%s/Run%s/dislocations/structureCnaTypeFraction.txt'%(x[0],x[1]),
+     myprint.temps_runs ))
               )
 
     myprint.EnsAverage()
     
-    #--- plot
+    #--- plot "other"
     myprint.Plot(col_x=1,col_y=2,
                  **{
                     'xscale':'log',
                      'xlim':(1e-2,1),
-#                    'ylim':(-0.05,1),
-                    'nevery':1,
+                    'ylim':(-0.05,1),
+                    'nevery':20,
 #                   'title':'png/rho_other_T900K_E1-4.png',
                    'title':'png/rho_other_T300-900K.png',
     })
 
+    
 #     myprint.Plot(col_x=1,col_y=3,
-#                  mylegends=[r'$5\times 10^{7}$',r'$1\times 10^{8}$',r'$4\times10^{8}$',r'$8\times10^{8}$'],
 #                  **{
 #                     'xlim':(0.0,0.1),
 #                    'title':'png/rho_fcc_T900K_E1-4.png',
 #                     'bbox_to_anchor':(0.5,0.5,0.5,0.5)}
 #                 )
-#
+
+    #--- plot "hcp"
     myprint.Plot(col_x=1,col_y=4,
-#                   mylegends=[r'$5\times 10^{7}$',r'$1\times 10^{8}$',r'$4\times10^{8}$',r'$8\times10^{8}$'],
-                     mylegends=[r'$300$',r'$600$',r'$700$',r'$800$',r'$900$'],
                  **{
                     'xscale':'log',
                      'xlim':(1e-2,1),
-                    'nevery':1,
+                    'nevery':20,
                    'title':'png/rho_hcp_T300-900K.png',
                      'bbox_to_anchor':(0.05,0.4,0.5,0.5)}
     )
-#    pdb.set_trace()
+
+    #--- plot "bcc"
+    myprint.Plot(col_x=1,col_y=5,
+                 **{
+                    'xscale':'log',
+                     'xlim':(1e-2,1),
+                    'nevery':20,
+                   'title':'png/rho_bcc_T300-900K.png',
+                     'bbox_to_anchor':(0.05,0.4,0.5,0.5)}
+    )
+
+    
 #
 #     myprint.Plot(col_x=1,col_y=5,**{
 #                     'xlim':(0.0,0.1),
@@ -2174,40 +2225,7 @@ main()
 # main()
 
 
-# In[33]:
-
-
-# r=-np.array([1,1,1])
-# ez=np.array([0,0,1])
-# ex=np.array([1,0,0])
-# rz=np.dot(r,ez)*ez
-# rp=r-rz
-# ep=rp/np.dot(rp,rp)**0.5
-# rzz=np.dot(r,ez)
-# rpp=np.dot(r,ep)
-# print('rpp=',rpp)
-# print('rzz=',rzz)
-# polar_angle = 180.0*np.arctan2(rpp,rzz)/np.pi
-# print(polar_angle)
-# azimuth_angle = 180.0*np.arctan2(rp[1],rp[0])/np.pi
-# print(azimuth_angle)
-
-
-# In[29]:
-
-
-# n=-np.array([-1,1])
-# 180*np.arctan2(n[1],n[0])/np.pi
-
-
-# In[15]:
-
-
-# acos=np.dot(r,ez)/np.dot(r,r)**0.5
-# 180.0*np.arccos(acos)/np.pi
-
-
-# In[115]:
+# In[252]:
 
 
 class Fractal(Statistics):
@@ -2223,13 +2241,14 @@ class Fractal(Statistics):
     def Parse(self,fp):
         self.lmpData = lp.ReadDumpFile('%s'%(fp)) #,verbose=self.verbose)
         self.lmpData.GetCords(ncount=sys.maxsize)
-        self.timesteps = list(self.lmpData.coord_atoms_broken.keys())
+        self.timesteps = np.array(list(self.lmpData.coord_atoms_broken.keys()))
         self.timesteps.sort()
         
         #--- dislocation files
-        flist=os.listdir('dislocations/mydislocations')
+        flist=os.listdir('%s/dislocations/mydislocations'%                        parser['dislocation analysis']['outputPath'])
         flist.remove('mydislocations.xyz')
-        self.frameNumber = list(map(lambda x:int(x[x.find('.')+1:]),flist))
+        flist.remove('cna_output.xyz')
+        self.frameNumber = np.array(list(map(lambda x:int(x[x.find('.')+1:]),flist)))
         self.frameNumber.sort()
 
     def SizeDistribution(self,fout):
@@ -2239,9 +2258,10 @@ class Fractal(Statistics):
         
         #--- analysis of clusters
         data = list(map(lambda x:
-                             self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],x[1])['ps'],
+                             self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],
+                                                  lp.Box(BoxBounds=self.lmpData.BoxBounds[x[0]],AddMissing=np.array([0,0,0])),
+                                                  x[1])['ps'],
                              zip(self.timesteps,self.frameNumber)))
-#        pdb.set_trace()
         strains = Defects.Strain(self.lmpData) 
         #--- write
         Fractal.PrintMultipleTimeSteps(fout,self.timesteps,data,strains)        
@@ -2249,7 +2269,9 @@ class Fractal(Statistics):
         
     def SizeDistributionTotal(self,fout):
         s = np.concatenate(list(map(lambda x:
-                                    self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],x[1])['s'],
+                                    self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],
+                                                         lp.Box(BoxBounds=self.lmpData.BoxBounds[x[0]],AddMissing=np.array([0,0,0])),
+                                                         x[1])['s'],
                                     zip(self.timesteps,self.frameNumber))))
         #--- size distribution                    
         self.SizeDist(sizes=s,
@@ -2259,7 +2281,19 @@ class Fractal(Statistics):
                                                eval(parser['cluster analysis']['shi']),
                                                nbin_per_decade=6),
         )
-    
+
+    def ClusterOrientation(self,fout):
+#        pdb.set_trace()
+        s = np.concatenate(list(map(lambda x:
+                                    self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],
+                                                         lp.Box(BoxBounds=self.lmpData.BoxBounds[x[0]],AddMissing=np.array([0,0,0])),
+                                                         x[1])['angle'],
+                                    zip(self.timesteps,self.frameNumber))))
+        theta = list(map(lambda x:x.real,s))
+        phi   = list(map(lambda x:x.imag,s))
+        with open(fout,'w') as fp:
+            np.savetxt(fp,np.c_[theta, phi],header='theta phi')
+
 
     def Plot(self,mask,xlin,ylin,zlin):
         #--- print in ovito
@@ -2273,9 +2307,63 @@ class Fractal(Statistics):
         sfile=open('dislocations/map.xyz','w')
         utl.PrintOvito( cordc, sfile, 'atoms', attr_list=['x','y','z','mass'] )
 
+    def GetAccumulatedSize(self,stats,fout):
+        '''
+        returns scatter data of stress drop and cluster size
+        '''
+        
+        
+        
+        #--- total size per frame
+        sum_size = list(map(lambda x:
+                    self.ClusterAnalysis(self.lmpData.coord_atoms_broken[x[0]],
+                                        lp.Box(BoxBounds=self.lmpData.BoxBounds[x[0]],AddMissing=np.array([0,0,0])),
+                                         x[1])['sum_size'],
+                    zip(self.timesteps,self.frameNumber)))
+        
+        #--- energy
+        timesteps = stats.loadTimeSeries.step
+        #--- assert frames analyzed by dxa are present within the stress timeseries
+        new_timesteps = list(map(lambda x:timesteps[timesteps>=x].iloc[0],self.timesteps))
+        EnergyDrop = utl.FilterDataFrame(stats.loadTimeSeries, key='step', val=new_timesteps)['pe']
+
+        #--- write
+        with open(fout,'w') as fp:
+            np.savetxt(fp,np.c_[sum_size,EnergyDrop],header='clusterSize EnergyDrop')
+
+    @staticmethod
+    def RadiusOfGyration(df_clusters,dataFrame,ldim):
+        filtr = df_clusters.clusterType == 2 #--- hcp clusters
+        cluster_ids = df_clusters[filtr].clusterID
+
+        for cluster_id in cluster_ids:
+            filtr = dataFrame.Cluster == cluster_id
+            filtrd_frame = dataFrame[filtr]
+            #--- unwrap coords
+            ref_point = filtrd_frame.iloc[0][['x','y','z']]
+            xyz_relative = (np.c_[filtrd_frame[['x','y','z']]].T-np.c_[ref_point]).T
+            #--- x, y, z dimensions
+#            ldim = [lx, ly, lz]
+            for idim in range(3):
+                filtr = xyz_relative[:,idim] >= 0.5 * ldim[idim]
+                xyz_relative[:,idim][filtr] -= ldim[idim]
+
+                filtr = xyz_relative[:,idim] < -0.5 * ldim[idim]
+                xyz_relative[:,idim][filtr] += ldim[idim]
+                
+                #--- print
+                clusterID=cluster_id;
+                sfile=open('dislocations/junk%s.xyz'%cluster_id,'w');
+                utl.PrintOvito( filtrd_frame, sfile, 'itime 0', attr_list=['x','y','z'] );
+                sfile=open('dislocations/junk%s.xyz'%cluster_id,'a');
+                utl.PrintOvito( pd.DataFrame(np.c_[xyz_relative],columns='x y z'.split()), sfile, 'itime 1', attr_list=['x','y','z'] );
 
         
-    def ClusterAnalysis(self,dataFrame,frame_number):
+    
+    
+    def ClusterAnalysis(self,dataFrame,
+                        box,
+                        frame_number):
         '''
         returns fractal dimension df
         '''
@@ -2298,14 +2386,24 @@ class Fractal(Statistics):
         if 0 in cluster_ids:
             cluster_ids.remove(0) 
 
+        #--- radius of gyration
+#        pdb.set_trace()
+
+        Fractal.RadiusOfGyration(df_clusters,
+                                 dataFrame,
+                                 box.CellVector.diagonal()
+                                )
+        
+        
+        
+
         #--- read orientations from dislocation files
         ncluster = df_clusters.shape[0] 
-        
         if self.verbose:
             print('frame=%s, ncluster=%s'%(frame_number,ncluster))
             display(df_clusters)
         if ncluster > 0:
-            orientation = Fractal.ReadDislocationFile('dislocations/mydislocations/mydislocations.%s'%frame_number,
+            orientation = Fractal.ReadDislocationFile('%s/dislocations/mydislocations/mydislocations.%s'%                                                      (parser['dislocation analysis']['outputPath'],frame_number),
                                                      ncluster,
                                                       #verbose=self.verbose
                                                      )
@@ -2315,36 +2413,29 @@ class Fractal(Statistics):
             #--- include orientation info
             df_clusters = pd.DataFrame(np.c_[df_clusters,orientation_reformatted],
                                        columns = list(df_clusters.keys())+'nx ny nz'.split())        
-        
-        
+                
+
         #--- store in a dictionary and return
         sizeDist=[]
         s = []
+        angle = []
+        sum_size = 0
         if ncluster > 0:
             #--- assign outputs
             filtr = df_clusters.clusterType == 2 #--- hcp
             if np.sum(filtr) != 0:
-                s=df_clusters[filtr].Size
+                #--- angles
+                angle = list(map(lambda x:Fractal.GetPolarAzimuthalAngles(x), 
+                                        np.c_[df_clusters[filtr][['nx','ny','nz']]]))+\
+                        list(map(lambda x:Fractal.GetPolarAzimuthalAngles(x), 
+                                                -np.c_[df_clusters[filtr][['nx','ny','nz']]]))
+                #--- size
+                s = df_clusters[filtr].Size
+                sum_size = s.sum()
                 sizeDist = np.c_[utl.GetPDF(s, n_per_decade=6, linscale=None )] #--- size distribution
-        return {'ps':sizeDist,'s':s}
+        return {'ps':sizeDist,'s':s,'angle':angle,'sum_size':sum_size}
 
-    def GetAccumulatedSize(self,df_avl,fout):
-        '''
-        returns scatter data of stress drop and cluster size
-        '''
-        #--- filter data based on avalanche duration
-        timestep_lohi = np.c_[df_avl[['ti','tf']]]
-        filtr = np.c_[list(map(lambda x:self.Filtr(timestep_lo=x[0],timestep_hi=x[1]),timestep_lohi))]
-        
-        #--- integrate
-        accumulatedClusterSize = list(map(lambda x:self.Integrate(x),filtr))
 
-        EnergyDrop = df_avl['size']
-#        vol=1.0 #--- need volume in the timeseries!!!
-#        EnergyDrop = vol*stressDrop
-        with open(fout,'w') as fp:
-            np.savetxt(fp,np.c_[accumulatedClusterSize,EnergyDrop],header='clusterSize EnergyDrop')
-        
     def Filtr(self,**kwargs):
         '''
         filter dataset based on timesteps, strains ...
@@ -2377,6 +2468,17 @@ class Fractal(Statistics):
 
     def GetTimeStep(self):
         return list(map(lambda x:x['timestep'],self.data))
+
+    @staticmethod
+    def GetPolarAzimuthalAngles(r):
+        ez=np.array([0,0,1])
+        ex=np.array([1,0,0])
+        rz=np.dot(r,ez)*ez
+        rp=r-rz
+        rzz=np.dot(r,ez)/np.dot(r,r)**0.5
+        polar_angle = 180.0*np.arccos(rzz)/np.pi
+        azimuth_angle = 180.0*np.arctan2(rp[1],rp[0])/np.pi
+        return azimuth_angle + polar_angle *1j
 
     @staticmethod
     def Reshape(d):
@@ -2450,7 +2552,7 @@ class Fractal(Statistics):
         return orientation
                 
 
-def main():
+def main(stats):
     if not eval(parser['cluster analysis']['clusterAnalysis']):
         return
     
@@ -2461,43 +2563,26 @@ def main():
                      )
     
     #--- parse data
-    fractal.Parse('./dislocations/mydislocations/mydislocations.xyz')
+    fractal.Parse('%s/dislocations/mydislocations/mydislocations.xyz'%                  parser['dislocation analysis']['outputPath'])
 
     
     #--- size distributions
 #    fractal.SizeDistribution(fout='./dislocations/ps/clusterSizePdf') #--- each timestep
-    fractal.SizeDistributionTotal(fout='dislocations/clusterSizePdfTotal.txt') #--- total
+    fractal.SizeDistributionTotal(fout='%s/dislocations/ps/clusterSizePdfTotal.txt'%                                  parser['dislocation analysis']['outputPath']) #--- total
     
+    #--- orientation
+    fractal.ClusterOrientation(fout='%s/dislocations/ps/clusterOrientationTotal.txt'%                               parser['dislocation analysis']['outputPath'])
     
     #-----------------------------------------
     #--- cluster size vs. energy drops:
     #--- please do the dislocation analysis 
     #--- with high frequency (i.e. nevery=2)
     #-----------------------------------------
-    #--- call constructor
-#     stats = Statistics(path = parser['test data directory']['path'],
-#                        verbose=True)
+#    fractal.GetAccumulatedSize(stats, 
+#                               fout='./dislocations/ps/clusterSizeEnergyDrop.txt' )
 
-#     #--- parse dump file
-#     stats.ParseDump(fp=parser['dislocation analysis']['input_file'])
-    
-#     #--- parse timeseries
-# #    stats.ParseTimeSeries(fp='thermo.txt',
-# #                         cols=['strain','szz'], #--- comment for different rates
-# #                        )
-#     #--- stress timeseries
-#     stats.GetStressDump()
 
-#     #--- get avalanches
-#     stats.Avalanche(
-#                     stats.dmpStrs, value='virial',
-
-#                    )
-
-#     #--- accumulated size vs. energy drop
-#     fractal.GetAccumulatedSize( stats.df_avl, fout='./dislocations/ps/clusterSizeEnergyDrop.txt' )
-    
-main()
+main(stats)
 
 
 # ## Print
@@ -2668,7 +2753,7 @@ main()
 
 # * total
 
-# In[44]:
+# In[57]:
 
 
 def main():
@@ -2680,8 +2765,8 @@ def main():
     temp = Temperature(
 #       [4,1,2,3],1,
 #       [300,600,700,800,900],1,
-        [0,3,4,5],[24,44,60,17],
-         verbose = True,
+        [0,3,4,5],[24,44,60,144],
+#         verbose = True,
                      )
     #--- parse data
     temp.Parse( 
@@ -2692,32 +2777,32 @@ def main():
               )
     temp.EnsAverage()
 
-#     #--- plot
-    print('single realizations')
-    temp.PlotPdf(shift=True,**{
+     #--- plot
+    temp.PlotPdf(shift=True,shift_factor=0.1,
+                 rescale=False,alpha=2,
+                 powerlaw=True, prefact=1e3,
+                 **{
+                  'attrs':{'fmt':'-.r'},
                   'xscale':'log',
                   'yscale':'log',
-#                   'xlim':(1e-10,1e-3),
-#                    'ylim':(1e-5,1e-1),
-                    'ndecade_y':2,
-                   'title':'png/pdf_rg_T900K_E1-4.png',
+#                   'xlim':(1e-2,10),
+                    'ylim':(4e-11,2),
+#                    'ylim':(1e-3,4e4),
+                    'ndecade_y':2,'ndecade_x':1,
+                    'nevery':1,
 #                   'title':'png/pdf_s_T300-900K.png',
-        'bbox_to_anchor':(0.01,0.3,0.5,0.5)
+                   'title':'png/pdf_cluster_size_E1-4.png',
+#                   'title':'png/pdf_s_E4_kernels.png',
+        'bbox_to_anchor':(-0.16,-0.07,0.5,0.5),
+    
     })
-
 
 main()
 
 
-# In[130]:
+# ### slip planes
 
-
-get_ipython().system('python3 --version')
-
-
-# ### energy drop and size
-
-# In[ ]:
+# In[121]:
 
 
 def main():
@@ -2728,38 +2813,149 @@ def main():
     #--- temp object
     temp = Temperature(
 #       [4,1,2,3],1,
-       [3],1,
 #       [300,600,700,800,900],1,
-#       [0],1,
+#       [300,600,700,800,900],24,
+#       [0,1,2,3,4,5],24,
+#        [0,3,4,5],[24,44,60,144],
+#        [0],[24],
+        [5],[144],
+#         verbose = True,
+                     )
+    #
+    #--- parse data
+    temp.Parse( 
+#                ['dislocations/clusterOrientationTotal.txt']
+#                list(map(lambda x:'tensileCantor_tensile900_rate%s/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'tensileCantor_tensile900_rate%s_highResolution/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'tensileCantorT%sKRateE8/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'CantorNatom10KTemp%sK/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+                list(map(lambda x:'CantorNatom10KTemp300KMultipleRates/Rate%s/Run%s/dislocations/clusterOrientationTotal.txt'%(x[0],x[1]),
+                         temp.temps_runs ))
+              )
+
+    temp.Concatenate()
+    
+#     #--- plot
+    temp.PlotScatter(shift=False, shift_factor=10,
+                    rescale=False,alpha=-1.0,
+                    powerlaw=False, prefact=2e-4,
+                    markersizes = [.1],
+                    transparency=0.04,
+                    addPoints=np.array([[45,54.7],[-135,125.3],
+                                        [-135,54.7],[45,125.3],
+                                        [135,54.7],[-45,125.3],
+                                        [-45,54.7],[135,125.3],
+                                        [0,90],[90,90],[-90,90],[180,90],[-180,90]
+                                       ]),
+                     **{
+                  'attrs':{'fmt':'-.r'},
+#                  'xscale':'log',
+#                  'yscale':'log',
+                   'xlim':(-180,180),
+                    'ylim':(0,180),
+                    'ndecade_y':1,
+                   'title':'png/scatter_orientation_E4.png',
+#                   'title':'png/scatter_st_T300-900K.png',
+        'bbox_to_anchor':(0.52,0.02,0.5,0.5)
+    })
+main()
+
+
+# In[99]:
+
+
+def main():
+    if eval(parser['flags']['RemoteMachine']):
+        return
+    
+    get_ipython().system('mkdir png')
+    #--- temp object
+    temp = Temperature(
+#       [4,1,2,3],1,
+#       [300,600,700,800,900],1,
+#       [300,600,700,800,900],24,
+#       [0,1,2,3,4,5],24,
+#        [0,3,4,5],[24,44,60,144],
+        [5],[144],
+#         verbose = True,
+                     )
+    #
+    #--- parse data
+    temp.Parse( 
+#                ['dislocations/clusterOrientationTotal.txt']
+#                list(map(lambda x:'tensileCantor_tensile900_rate%s/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'tensileCantor_tensile900_rate%s_highResolution/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'tensileCantorT%sKRateE8/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+#                list(map(lambda x:'CantorNatom10KTemp%sK/Run%s/avlStats/scatter_st.txt'%(x[0],x[1]),
+                list(map(lambda x:'CantorNatom10KTemp300KMultipleRates/Rate%s/Run%s/dislocations/clusterOrientationTotal.txt'%(x[0],x[1]),
+                         temp.temps_runs ))
+              )
+
+    temp.Concatenate()
+    
+#     #--- plot
+    temp.PlotScatter(shift=False, shift_factor=10,
+                    rescale=False,alpha=-1.0,
+                    powerlaw=False, prefact=2e-4,
+                    markersizes = [.1],
+                     **{
+                  'attrs':{'fmt':'-.r'},
+#                  'xscale':'log',
+#                  'yscale':'log',
+#                   'xlim':(8e-6,2e-3),
+#                    'ylim':(1e-3,1e4),
+                    'ndecade_y':1,
+                   'title':'png/scatter_st_E1-4.png',
+#                   'title':'png/scatter_st_T300-900K.png',
+        'bbox_to_anchor':(0.52,0.02,0.5,0.5)
+    })
+main()
+
+
+# ### energy drop and size
+
+# In[140]:
+
+
+def main():
+    if eval(parser['flags']['RemoteMachine']):
+        return
+    
+    get_ipython().system('mkdir png')
+    #--- temp object
+    temp = Temperature(
+#       [4,1,2,3],1,
+#       [3],1,
+#       [300,600,700,800,900],1,
+       [0],[24],
          verbose = True,
                      )
     #
     #--- parse data
     temp.Parse( 
 #                ['avlStats/scatter_st.txt']
-                list(map(lambda x:'tensileCantor_tensile900_rate%s/Run%s/dislocations/ps/clusterSizeEnergyDrop.txt'%(x[0],x[1]),
+                list(map(lambda x:'CantorNatom10KTemp300KMultipleRates/Rate%s/Run%s/dislocations/ps/clusterSizeEnergyDrop.txt'%(x[0],x[1]),
 #                list(map(lambda x:'tensileCantorT%sKRateE8/Run%s/dislocations/ps/clusterSizeEnergyDrop.txt'%(x[0],x[1]),
                          temp.temps_runs ))
               )
-    data=temp.data[0][:,0]
-    print(data[~np.isnan(data)])
+    temp.Concatenate()
     
-    #--- plot
-    temp.PlotScatter(shift=True,
-#                     mylegends=[r'$5\times 10^{7}$',r'$1\times 10^{8}$',r'$4\times10^{8}$',r'$8\times10^{8}$'],
-#                     mylegends=[r'$300$',r'$600$',r'$700$',r'$800$',r'$900$'],
+#     #--- plot
+    temp.PlotScatter(shift=False, shift_factor=10,
+                    rescale=False,alpha=-1.0,
+                    powerlaw=False, prefact=2e-4,
+#                    markersizes = [10],
                      **{
-                  'xscale':'log',
-                  'yscale':'log',
+                  'attrs':{'fmt':'-.r'},
+#                  'xscale':'log',
+#                  'yscale':'log',
 #                   'xlim':(8e-6,2e-3),
-#                    'ylim':(1e-15,1e19),
-                    'ndecade_y':4,
+#                    'ylim':(1e-3,1e4),
+                    'ndecade_y':1,
                    'title':'png/scatter_st_E1-4.png',
 #                   'title':'png/scatter_st_T300-900K.png',
         'bbox_to_anchor':(0.52,0.02,0.5,0.5)
     })
-
-
 main()
 
 
