@@ -57,6 +57,7 @@ if __name__ == '__main__':
 	#---
 	if DeleteExistingFolder:
 		os.system( 'rm -rf %s' % jobname ) # --- rm existing
+	os.system( 'rm jobID.txt' )
 	# --- loop for submitting multiple jobs
 	for counter in runs:
 		print(' i = %s' % counter)
@@ -66,8 +67,9 @@ if __name__ == '__main__':
 		makeOAR( writPath, 1, 1, durtn, PYFIL, argv+"/Run%s"%counter) # --- make oar script
 		os.system( 'chmod +x oarScript.sh; cp oarScript.sh config.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
 		os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
-						    --chdir %s -c %s -n %s %s/oarScript.sh'\
+						    --chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
 						   % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \
 						       , writPath, 1, 1, writPath ) ) # --- runs oarScript.sh!
 											 
+	os.system( 'mv jobID.txt %s' % ( os.getcwd() + '/%s' % ( jobname ) ) )
 
