@@ -26,10 +26,11 @@ if __name__ == '__main__':
 								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
+	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
 	durtn = '00:59:59'
 	mem = '8gb'
 	partition = ['parallel','cpu2019','bigmem','single'][3] 
-	argv = "%s"%(readPath) #--- don't change! 
+	argv = "%s %s"%(readPath,py_library_directory) #--- don't change! 
 	PYFILdic = { 
 		1:'avalancheAnalysis.ipynb',
 		}
