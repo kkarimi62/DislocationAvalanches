@@ -48,7 +48,7 @@ if __name__ == '__main__':
 			#---	densities
 					inums = lnums[ 0 ] - 1
 	#				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
-					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels\',\n"%(keys_r) #--- change job name
+					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels/kernel%s\',\n"%(keys_r,keys_k) #--- change job name
 	#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---	densities
 					inums = lnums[ 1 ] - 1
