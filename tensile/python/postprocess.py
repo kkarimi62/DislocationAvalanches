@@ -27,7 +27,7 @@ if __name__ == '__main__':
 	EXEC_DIR = '.'     #--- path for executable file
 	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
 	durtn = '23:59:59'
-	mem = '16gb'
+	mem = '12gb'
 	partition = ['parallel','cpu2019','bigmem','single'][3] 
 	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
 	PYFILdic = { 
