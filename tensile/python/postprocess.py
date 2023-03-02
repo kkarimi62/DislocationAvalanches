@@ -1,5 +1,4 @@
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
-	#--- parse conf. file
 	#-- edit configMaker.py !!!
 
 	#--- set environment variables
