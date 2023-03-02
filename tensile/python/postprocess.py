@@ -1,12 +1,12 @@
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	#-- edit configMaker.py !!!
-
+	kernel_width = 100
 	#--- set environment variables
 
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
-	print('python3 configMaker.py %s %s\n'%(argv,outputPath),file=someFile)
+	print('python3 configMaker.py %s %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
 	if convert_to_py:
 		print('ipython3 py_script.py\n',file=someFile)
 	else:	 

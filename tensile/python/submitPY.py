@@ -4,11 +4,16 @@ if __name__ == '__main__':
 	import numpy as np
 	#---
 #	lnums = [ 34, 41 ]
-	lnums = [ 21, 25 ]
+	lnums = [ 21, 25, 3 ]
 #	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	string=open('postprocess.py').readlines() #--- python script
 	#---
-#	PHI  = dict(zip(range(5),[10**1,10**2,10**3,10**4,10**5]))
+	kernel_widths  = { 
+						0:1,
+						1:10**1,
+						2:10**2,
+						3:10**3,
+					}
 #	PHI  = dict(zip(range(4),[1,2,3,4]))
 #	kernel_width = dict(zip(range(4),[21,21,21,61]))
 #	kernel_width = dict(zip(range(4),[10**4,10**4,10**4,10**4]))
@@ -38,20 +43,23 @@ if __name__ == '__main__':
 		for keys_r in Rates:
 			#---
 				rate = Rates[keys_r]
+				for keys_k in kernel_widths:
+					kernel_width = kernel_widths[keys_k]
 			#---	densities
-				inums = lnums[ 0 ] - 1
-				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
-#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
-		#---	densities
-				inums = lnums[ 1 ] - 1
-#				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-				string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
-#				string[ inums ] = "\t\'4\':\'/../simulations/CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp)
+					inums = lnums[ 0 ] - 1
+	#				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
+					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels\',\n"%(keys_r) #--- change job name
+	#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
+			#---	densities
+					inums = lnums[ 1 ] - 1
+	#				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
+					string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
+	#				string[ inums ] = "\t\'4\':\'/../simulations/CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp)
 
-#				inums = lnums[ 1 ] - 1
-#				string[ inums ] = "\tconfParser.set(\'avalanche statistics\',\'kernel_width\',\'%s\'),\n"%(int(PHI[key]))
-		#
-				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
-				os.system( 'python3 junk%s.py'%count )
-				os.system( 'rm junk%s.py'%count )
-				count += 1
+					inums = lnums[ 2 ] - 1
+					string[ inums ] = "\tkernel_width=%s,\n"%(int(kernel_width))
+			#
+					sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
+					os.system( 'python3 junk%s.py'%count )
+					os.system( 'rm junk%s.py'%count )
+					count += 1
