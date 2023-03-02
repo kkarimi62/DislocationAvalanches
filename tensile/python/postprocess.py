@@ -35,7 +35,7 @@ if __name__ == '__main__':
 		}
 	keyno = 1
 	convert_to_py = True
-	SCRATCH = True
+	SCRATCH = False #True
 	#
 	outputPath = '.'
 	if SCRATCH:
