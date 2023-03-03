@@ -10,9 +10,9 @@ if __name__ == '__main__':
 	#---
 	kernel_widths  = { 
 #						0:1,
-#						1:10**1,
-						2:10**2,
-#						3:10**3,
+#						1:10,
+						2:100,
+#						3:1000,
 					}
 #	PHI  = dict(zip(range(4),[1,2,3,4]))
 #	kernel_width = dict(zip(range(4),[21,21,21,61]))
@@ -58,6 +58,7 @@ if __name__ == '__main__':
 
 					inums = lnums[ 2 ] - 1
 					string[ inums ] = "\tkernel_width=%s,\n"%(int(kernel_width))
+					print(string[ inums ])
 			#
 					sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 					os.system( 'python3 junk%s.py'%count )
