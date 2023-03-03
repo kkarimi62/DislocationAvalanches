@@ -57,8 +57,7 @@ if __name__ == '__main__':
 	#				string[ inums ] = "\t\'4\':\'/../simulations/CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp)
 
 					inums = lnums[ 2 ] - 1
-					string[ inums ] = "\tkernel_width=%s,\n"%(int(kernel_width))
-					print(string[ inums ])
+					string[ inums ] = "\tkernel_width=%s\n"%(int(kernel_width))
 			#
 					sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 					os.system( 'python3 junk%s.py'%count )
