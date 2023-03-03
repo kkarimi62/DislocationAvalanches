@@ -26,16 +26,16 @@ if __name__ == '__main__':
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
-	durtn = ['00:59:59','23:59:59'][1]
-	mem = ['8gb','64gb'][1]
-	partition = ['parallel','cpu2019','bigmem','single'][2] 
+	durtn = ['00:59:59','23:59:59'][0]
+	mem = ['8gb','64gb'][0]
+	partition = ['parallel','cpu2019','bigmem','single'][3] 
 	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
 	PYFILdic = { 
 		1:'avalancheAnalysis.ipynb',
 		}
 	keyno = 1
 	convert_to_py = True
-	SCRATCH = True
+	SCRATCH = False #True
 	#
 	outputPath = '.'
 	if SCRATCH:
