@@ -18,24 +18,24 @@ if __name__ == '__main__':
 #
 	runs	 = range(24) #144) #60) #44) #: #24)
 	jobname  = {
-				'3':'CantorNatom10KTemp300KMultipleRates/Rate3', 
+				'3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
 				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
-								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
+								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
-	durtn = ['00:59:59','23:59:59'][0]
-	mem = ['8gb','16gb'][0]
-	partition = ['parallel','cpu2019','bigmem','single'][3] 
+	durtn = ['00:59:59','23:59:59'][1]
+	mem = ['8gb','64gb'][1]
+	partition = ['parallel','cpu2019','bigmem','single'][2] 
 	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
 	PYFILdic = { 
 		1:'avalancheAnalysis.ipynb',
 		}
 	keyno = 1
 	convert_to_py = True
-	SCRATCH = False #True
+	SCRATCH = True
 	#
 	outputPath = '.'
 	if SCRATCH:

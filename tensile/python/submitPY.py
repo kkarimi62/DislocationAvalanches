@@ -9,10 +9,10 @@ if __name__ == '__main__':
 	string=open('postprocess.py').readlines() #--- python script
 	#---
 	kernel_widths  = { 
-						0:1,
-						1:10**1,
+#						0:1,
+#						1:10**1,
 						2:10**2,
-						3:10**3,
+#						3:10**3,
 					}
 #	PHI  = dict(zip(range(4),[1,2,3,4]))
 #	kernel_width = dict(zip(range(4),[21,21,21,61]))
@@ -47,8 +47,8 @@ if __name__ == '__main__':
 					kernel_width = kernel_widths[keys_k]
 			#---	densities
 					inums = lnums[ 0 ] - 1
-	#				string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
-					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels/kernel%s\',\n"%(keys_r,keys_k) #--- change job name
+					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
+#					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels/kernel%s\',\n"%(keys_r,keys_k) #--- change job name
 	#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---	densities
 					inums = lnums[ 1 ] - 1
