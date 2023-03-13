@@ -11,8 +11,9 @@ if __name__ == '__main__':
 	kernel_widths  = { 
 #						0:1,
 #						1:10,
-						2:100,
+#						2:100,
 #						3:1000,
+						4:50,
 					}
 
 	Temps  = {
@@ -26,11 +27,11 @@ if __name__ == '__main__':
 #				7:1600,
 			}
 	Rates  = {
-#				0:0.5e-4,
+				0:0.5e-4,
 #				1:1e-4,
 #				2:4e-4,
 #				3:8e-4,
-				4:8e-3,
+#				4:8e-3,
 #				5:8e-2,
 			}
 	#---
@@ -44,14 +45,14 @@ if __name__ == '__main__':
 					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
+					string[ inums ] = "\t\'3\':\'NiNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
 #					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels/kernel%s\',\n"%(keys_r,keys_k) #--- change job name
 	#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
 	#				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-					string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
+					string[ inums ] = "\t\'3\':\'/../simulations/NiNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
 	#				string[ inums ] = "\t\'4\':\'/../simulations/CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp)
 
 					inums = lnums[ 2 ] - 1
