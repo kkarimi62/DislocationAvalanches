@@ -1,6 +1,6 @@
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	#-- edit configMaker.py !!!
-	kernel_width = 50
+	kernel_width = 100
 	#--- set environment variables
 
 	someFile = open( 'oarScript.sh', 'w' )
@@ -16,7 +16,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(24) #144) #60) #44) #: #24)
+	runs	 = range(60) #144) #60) #44) #: #24)
 	jobname  = {
 				'3':'NiNatom10KTemp300KMultipleRates/Rate0', 
 				}['3']
