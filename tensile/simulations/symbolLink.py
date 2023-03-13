@@ -4,9 +4,9 @@ if __name__ == '__main__':
 	import os
 	import sys
 	#--- 
-	jobname  = 'CantorNatom10KTemp300KMultipleRates/Rate4'
-	job_id = 18054125
-	N = 60
+	jobname  = 'NiNatom10KTemp300KMultipleRates/Rate0'
+	job_id = 18401659 
+	N = 24
 	#---
 	job_ids = [ job_id + i for i in xrange( N ) ]
 	for id_job, counter in zip( job_ids, xrange( sys.maxint ) ):
