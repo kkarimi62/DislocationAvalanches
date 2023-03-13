@@ -40,7 +40,7 @@ if __name__ == '__main__':
 #				string[ inums ] = "\t3:\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---
 				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var  P 0.0 -var seed %s -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\',\n"%(temp,np.random.randint(10000,99999),temp)
+				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var  P 0.0 -var seed \%s -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_%s.dat\'\%(np.random.randint(10000,99999)),\n"%(temp,temp)
 			#---
 				inums = lnums[ 2 ] - 1
 				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot %s -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_%s.dat -var DumpFile dumpSheared.xyz\',\n"%(temp, rate, temp)
