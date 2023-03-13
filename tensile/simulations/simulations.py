@@ -21,14 +21,14 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(144)
+		nruns	 = range(60)
 		#
 		nThreads = 4 #8
 		nNode	 = 1
 		#
 		jobname  = {
 					3:'CantorNatom10KTemp300KMultipleRates/test', 
-					4:'NiNatom10KTemp300KMultipleRates/test', 
+					4:'NiNatom10KTemp300KMultipleRates/Rate0', 
 				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
@@ -88,8 +88,8 @@ if __name__ == '__main__':
 					4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
 					5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 10000 -var ntype 5 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
 					51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
-					7:' -var buff 0.0 -var T 300.0 -var P 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat',
-					71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat',
+					7:' -var buff 0.0 -var T 300.0 -var P 0.0 -var seed %s -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData Equilibrated_300.dat'%(np.random.randint(10000,99999)),
+					71:' -var buff 0.0 -var T 0.1 -var P 0.0 -var seed %s -var nevery 100 -var ParseData 1 -var DataFile swapped_600.dat -var DumpFile dumpThermalized2.xyz -var WriteData Equilibrated_0.dat'%(np.random.randint(10000,99999)),
 					8:' -var buff 0.0 -var T 300.0 -var sigm 1.0 -var sigmdt 0.0001 -var ndump 100 -var ParseData 1 -var DataFile Equilibrated_0.dat -var DumpFile dumpSheared.xyz',
 					9:' -var natoms 1000 -var cutoff 3.52 -var ParseData 1',
 					10:' -var ParseData 1 -var DataFile swapped_600.dat',

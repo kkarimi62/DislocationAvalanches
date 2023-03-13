@@ -27,7 +27,7 @@ run	0
 variable tmp equal press
 variable p0 equal ${tmp}
 
-velocity                  all       create     $T     97364  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
+velocity                  all       create     $T     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
  
 #thermo                    100
 #thermo_style              custom    step temp etotal pe press vol
