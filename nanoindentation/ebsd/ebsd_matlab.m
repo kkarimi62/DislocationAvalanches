@@ -83,7 +83,7 @@ fclose(fid);
 % open your file for writing
 fid = fopen('output/EulerAngles.txt','wt');
 fprintf(fid,'#phi1 Phi phi2\n');
-fprintf(fid,'%d %e %e %e\n', transpose([ebsd.orientations.phi1, ebsd.orientations.Phi, ebsd.orientations.phi2 ]));
+fprintf(fid,'%e %e %e\n', transpose([ebsd.orientations.phi1, ebsd.orientations.Phi, ebsd.orientations.phi2 ]));
 fclose(fid);
 
 % edge attributes
