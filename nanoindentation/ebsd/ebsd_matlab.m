@@ -80,6 +80,12 @@ fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPe
 fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors]));
 fclose(fid);
 
+% open your file for writing
+fid = fopen('output/EulerAngles.txt','wt');
+fprintf(fid,'#phi1 Phi phi2\n');
+fprintf(fid,'%d %e %e %e\n', transpose([ebsd.orientations.phi1, ebsd.orientations.Phi, ebsd.orientations.phi2 ]));
+fclose(fid);
+
 % edge attributes
 fid = fopen('output/pairwise_attributes.txt','wt');
 fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micron)\n');
