@@ -83,8 +83,15 @@ fclose(fid);
 % open your file for writing
 fid = fopen('output/EulerAngles.txt','wt');
 fprintf(fid,'#phi1 Phi phi2\n');
-fprintf(fid,'%e %e %e\n', transpose([ebsd.orientations.phi1, ebsd.orientations.Phi, ebsd.orientations.phi2 ]));
+fprintf(fid,'%e %e %e\n', transpose([ebsd.orientations.phi1./degree, ebsd.orientations.Phi./degree, ebsd.orientations.phi2./degree ]));
 fclose(fid);
+
+% misorientation
+fid = fopen('output/misOrientationAngle.txt','wt');
+fprintf(fid,'#grain_i_ID grain_j_ID phi1 Phi phi2\n');
+fprintf(fid,'%d %d %e %e %e\n', transpose([ pairs mori.phi1./degree mori.Phi./degree mori.phi2./degree] ));
+fclose(fid);
+
 
 % edge attributes
 fid = fopen('output/pairwise_attributes.txt','wt');
