@@ -88,8 +88,8 @@ fclose(fid);
 
 % misorientation
 fid = fopen('output/misOrientationAngle.txt','wt');
-fprintf(fid,'#grain_i_ID grain_j_ID phi1 Phi phi2\n');
-fprintf(fid,'%d %d %e %e %e\n', transpose([ pairs mori.phi1./degree mori.Phi./degree mori.phi2./degree] ));
+fprintf(fid,'#grain_i_ID grain_j_ID phi1 Phi phi2 angle\n');
+fprintf(fid,'%d %d %e %e %e\n', transpose([ pairs mori.phi1./degree mori.Phi./degree mori.phi2./degree mori.angle./degree] ));
 fclose(fid);
 
 
