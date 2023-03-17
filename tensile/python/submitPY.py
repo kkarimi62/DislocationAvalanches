@@ -39,6 +39,9 @@ if __name__ == '__main__':
 				4:60,
 				5:144,
 			}
+
+	alloy = 'Ni'
+	
 	#---
 	count = 0
 	for keys_t in Temps:
@@ -51,15 +54,11 @@ if __name__ == '__main__':
 					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
-#					string[ inums ] = "\t\'3\':\'CantorNatom10KTemp300KMultipleRates/Rate%s_kernels/kernel%s\',\n"%(keys_r,keys_k) #--- change job name
-	#				string[ inums ] = "\t\'4\':\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
+					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
-	#				string[ inums ] = "\t\'1\':\'/../testdata/aedata/cantor/rateT900K/rate%s\',\n"%(int(PHI[key]))
-					string[ inums ] = "\t\'3\':\'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r)
-	#				string[ inums ] = "\t\'4\':\'/../simulations/CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp)
+					string[ inums ] = "\t\'3\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
 					inums = lnums[ 2 ] - 1
 					string[ inums ] = "\tkernel_width=%s\n"%(int(kernel_width))

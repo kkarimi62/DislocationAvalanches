@@ -17,7 +17,7 @@ if __name__ == '__main__':
 				4:60,
 				5:144,
 			}
-	alloy = 'Cantor'
+	alloy = 'Ni'
 
 
 	#---
