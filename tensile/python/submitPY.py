@@ -9,10 +9,10 @@ if __name__ == '__main__':
 	string=open('postprocess.py').readlines() #--- python script
 	#---
 	kernel_widths  = { 
-						0:10,
+#						0:10,
 						1:13,
-						2:16,
-						3:20,
+#						2:16,
+#						3:20,
 					}
 
 	Temps  = {
@@ -26,17 +26,17 @@ if __name__ == '__main__':
 #				7:1600,
 			}
 	Rates  = {
-#				0:0.5e-4,
+				0:0.5e-4,
 				3:8e-4,
-#				4:8e-3,
-#				5:8e-2,
+				4:8e-3,
+				5:8e-2,
 			}
 
 	nruns  = {
-#				0:24,
+				0:24,
 				3:44,
-#				4:60,
-#				5:144,
+				4:60,
+				5:144,
 			}
 
 	alloy = 'Ni'
@@ -53,8 +53,8 @@ if __name__ == '__main__':
 					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
