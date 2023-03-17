@@ -37,4 +37,4 @@ if __name__ == '__main__':
 			for file_name in [ 'dislocations/structureCnaTypeFraction.txt' ]:
 				os.system( 'cp /scratch/%s/%s %s/' % ( id_job, file_name, writPath ) )
 
-		os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/Run*/dislocations/structureCnaTypeFraction.txt;git commit -m 'updates';git push"%(alloy,keys_r))
+		os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/Run*/dislocations/structureCnaTypeFraction.txt;git commit -m \'updates\';git push"%(alloy,keys_r))
