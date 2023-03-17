@@ -9,10 +9,10 @@ if __name__ == '__main__':
 	string=open('postprocess.py').readlines() #--- python script
 	#---
 	kernel_widths  = { 
-						0:1,
-						1:10,
-						2:20,
-						3:40,
+						0:10,
+						1:13,
+						2:16,
+						3:20,
 					}
 
 	Temps  = {
