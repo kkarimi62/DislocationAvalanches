@@ -6,16 +6,16 @@ if __name__ == '__main__':
 	#--- 
 	Rates  = {
 				0:0.5e-4,
-#				3:8e-4,
-#				4:8e-3,
-#				5:8e-2,
+				3:8e-4,
+				4:8e-3,
+				5:8e-2,
 			}
 
 	nruns  = {
 				0:24,
-#				3:44,
-#				4:60,
-#				5:144,
+				3:44,
+				4:60,
+				5:144,
 			}
 	alloy = 'Ni'
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 	folder = ['dislocations','avlStats'][1]
 
 	files = [['structureCnaTypeFraction.txt'],
-			 ['scatter_st.txt','pdf_s.txt']
+			 ['scatter_st.txt','pdf_s.txt','mse_w.txt']
 			][1]
 
 	#---
