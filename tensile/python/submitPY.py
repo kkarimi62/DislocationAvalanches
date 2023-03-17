@@ -9,10 +9,10 @@ if __name__ == '__main__':
 	string=open('postprocess.py').readlines() #--- python script
 	#---
 	kernel_widths  = { 
-						0:1,
-						1:10,
+#						0:1,
+#						1:10,
 						2:100,
-						3:1000,
+#						3:1000,
 					}
 
 	Temps  = {
@@ -53,8 +53,8 @@ if __name__ == '__main__':
 					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
