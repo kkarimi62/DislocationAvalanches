@@ -9,10 +9,10 @@ if __name__ == '__main__':
 	string=open('postprocess.py').readlines() #--- python script
 	#---
 	kernel_widths  = { 
-#						0:10,
-						1:13,
-#						2:16,
-#						3:20,
+						0:10,
+						3:10,
+						4:30,
+						5:30,
 					}
 
 	Temps  = {
@@ -49,7 +49,8 @@ if __name__ == '__main__':
 			#---
 				rate = Rates[keys_r]
 				nrun = nruns[ keys_r ]
-				for keys_k in kernel_widths:
+				kernel_width = kernel_widths[keys_r]
+				if 1: #for keys_k in kernel_widths:
 					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
