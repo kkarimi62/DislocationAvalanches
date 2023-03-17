@@ -24,7 +24,7 @@ if __name__ == '__main__':
 	folder = ['dislocations','avlStats'][1]
 
 	files = [['structureCnaTypeFraction.txt'],
-			 ['scatter_st','pdf_s.txt']
+			 ['scatter_st.txt','pdf_s.txt']
 			][1]
 
 	#---
