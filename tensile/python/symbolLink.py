@@ -19,6 +19,11 @@ if __name__ == '__main__':
 			}
 	alloy = 'Ni'
 
+	folder = ['dislocations','avlStats'][1]
+
+	files = [['structureCnaTypeFraction.txt'],
+			 ['scatter_st','pdf_s.txt']
+			][1]
 
 	#---
 	for keys_r in Rates:
@@ -31,10 +36,14 @@ if __name__ == '__main__':
 		job_ids = [ job_id + i for i in xrange( N ) ]
 		for id_job, counter in zip( job_ids, xrange( sys.maxint ) ):
 
-			writPath = os.getcwd() + '/%s/Run%s/dislocations' % ( jobname, counter ) # --- curr. dir
+			writPath = os.getcwd() + '/%s/Run%s/%s' % ( jobname, counter, folder ) # --- curr. dir
 			os.system('mkdir -p %s'%writPath)
 
-			for file_name in [ 'dislocations/structureCnaTypeFraction.txt' ]:
-				os.system( 'cp /scratch/%s/%s %s/' % ( id_job, file_name, writPath ) )
+			for file_name in files:
+				item = '%s/%s'%(folder,file_name)
+				os.system( 'cp /scratch/%s/%s %s/' % ( id_job, item, writPath ) )
 
-		os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/Run*/dislocations/structureCnaTypeFraction.txt;git commit -m \'updates\';git push"%(alloy,keys_r))
+		for file_name in files:
+			item = '%s/%s'%(folder,file_name)
+			os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/Run*/%s"%(alloy,keys_r,item))
+	os.system("git commit -m \'updates\';git push")
