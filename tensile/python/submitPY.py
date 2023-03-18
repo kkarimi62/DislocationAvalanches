@@ -35,16 +35,16 @@ if __name__ == '__main__':
 
 	Rates  = {
 				0:0.5e-4,
-				3:8e-4,
-				4:8e-3,
-				5:8e-2,
+#				3:8e-4,
+#				4:8e-3,
+#				5:8e-2,
 			}
 
 	nruns  = {
 				0:24,
-				3:44,
-				4:60,
-				5:144,
+#				3:44,
+#				4:60,
+#				5:144,
 			}
 
 	fixed_kernel_widths  = { 
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 						5:40,#30,
 					}
 
-	alloy = 'Cantor'
+	alloy = 'Ni'
 	
 	#---
 	count = 0
@@ -64,13 +64,13 @@ if __name__ == '__main__':
 			#---
 				rate = Rates[keys_r]
 				nrun = nruns[ keys_r ]
-				kernel_width = fixed_kernel_widths[keys_r]
-				if 1: #for keys_k in kernel_widths:
-#					kernel_width = kernel_widths[keys_k]
+#				kernel_width = fixed_kernel_widths[keys_r]
+				for keys_k in kernel_widths:
+					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
