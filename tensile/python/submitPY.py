@@ -8,12 +8,6 @@ if __name__ == '__main__':
 #	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 	string=open('postprocess.py').readlines() #--- python script
 	#---
-	kernel_widths  = { 
-						0:30, #13,
-						3:30,#13,
-						4:100,#30,
-						5:30,#30,
-					}
 
 	Temps  = {
 				0:300,
@@ -25,19 +19,40 @@ if __name__ == '__main__':
 #				6:1400,
 #				7:1600,
 			}
+
+	kernel_widths  = { 
+						0:10,
+						1:20,
+						2:30,
+						3:40,
+						4:50,
+						5:60,
+						7:70,
+						8:80,
+						9:90,
+						10:100,
+					}
+
 	Rates  = {
 				0:0.5e-4,
-				3:8e-4,
-				4:8e-3,
-				5:8e-2,
+#				3:8e-4,
+#				4:8e-3,
+#				5:8e-2,
 			}
 
 	nruns  = {
 				0:24,
-				3:44,
-				4:60,
-				5:144,
+#				3:44,
+#				4:60,
+#				5:144,
 			}
+
+#	fixed_kernel_widths  = { 
+#						0:30, #13,
+#						3:30,#13,
+#						4:100,#30,
+#						5:30,#30,
+#					}
 
 	alloy = 'Cantor'
 	
@@ -49,13 +64,13 @@ if __name__ == '__main__':
 			#---
 				rate = Rates[keys_r]
 				nrun = nruns[ keys_r ]
-				kernel_width = kernel_widths[keys_r]
-				if 1: #for keys_k in kernel_widths:
-#					kernel_width = kernel_widths[keys_k]
+#				kernel_width = fixed_kernel_widths[keys_r]
+				for keys_k in kernel_widths:
+					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+#					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
