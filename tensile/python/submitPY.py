@@ -78,7 +78,7 @@ if __name__ == '__main__':
 				nrun = nruns[ keys_r ]
 				kernel_width = fixed_kernel_widths[keys_r]
 				if 1: #for keys_k in kernel_widths:
-					kernel_width = kernel_widths[keys_k]
+#					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
 					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
