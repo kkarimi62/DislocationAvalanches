@@ -41,11 +41,12 @@ if __name__ == '__main__':
 
 	copy_from_scratch = True
 
-	folder = ['dislocations','avlStats'][1]
+	folder = ['dislocations','avlStats', 'dislocations/ps'][2]
 
 	files = [['structureCnaTypeFraction.txt'],
-			 ['pdf_s.txt','scatter_st.txt']
-			][1]
+			 ['pdf_s.txt','scatter_st.txt'],
+			 ['clusterSizePdfTotal.txt'],
+			][2]
 
 	#---
 	for keys_r in Rates:
