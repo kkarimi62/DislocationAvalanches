@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
 	files = [['structureCnaTypeFraction.txt'],
 			 ['pdf_s.txt','scatter_st.txt'],
-			 ['clusterSizePdfTotal.txt','scatterRgSize.txt','clusterSizeEnergyDrop.txt'],
+			 ['clusterSizePdfTotal.txt','scatterRgSize.txt','clusterSizeEnergyDrop.txt','clusterOrientationTotal.txt'],
 			][2]
 
 	#---
