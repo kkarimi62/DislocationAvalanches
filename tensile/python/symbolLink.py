@@ -55,7 +55,7 @@ if __name__ == '__main__':
 		kernel_width = fixed_kernel_widths[keys_r]
 
 		if 1: #for keys_k in kernel_widths:
-			kernel_width = kernel_widths[keys_k]
+#			kernel_width = kernel_widths[keys_k]
 
 			jobname  = '%sNatom10KTemp300KMultipleRates/Rate%s'%(alloy,keys_r)
 #			jobname  = '%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s'%(alloy,keys_r,keys_k)
