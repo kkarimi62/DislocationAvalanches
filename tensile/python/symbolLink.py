@@ -19,34 +19,35 @@ if __name__ == '__main__':
 	#--- 
 	Rates  = {
 				0:0.5e-4,
-				3:8e-4,
-				4:8e-3,
-				5:8e-2,
+#				3:8e-4,
+#				4:8e-3,
+#				5:8e-2,
 			}
 
 	nruns  = {
 				0:24,
-				3:44,
-				4:60,
-				5:144,
+#				3:44,
+#				4:60,
+#				5:144,
 			}
 
 	fixed_kernel_widths  = { 
 						0:70,
-						3:70,
-						4:70,
-						5:40,
+#						3:70,
+#						4:70,
+#						5:40,
 					}
 	alloy = 'Cantor'
 
 	copy_from_scratch = True
 
-	folder = ['dislocations','avlStats', 'dislocations/ps'][2]
+	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][3]
 
 	files = [['structureCnaTypeFraction.txt'],
 			 ['pdf_s.txt','scatter_st.txt'],
 			 ['clusterSizePdfTotal.txt','scatterRgSize.txt','clusterSizeEnergyDrop.txt','clusterOrientationTotal.txt'],
-			][2]
+			 ['avalancheSize_structureTypeFraction.txt'],
+			][3]
 
 	#---
 	for keys_r in Rates:
