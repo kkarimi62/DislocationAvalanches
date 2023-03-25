@@ -39,7 +39,7 @@ if __name__ == '__main__':
 					}
 	alloy = 'Cantor'
 
-	copy_from_scratch = True
+	copy_from_scratch = False
 
 	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][3]
 
