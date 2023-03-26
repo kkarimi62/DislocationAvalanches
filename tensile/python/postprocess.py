@@ -35,11 +35,7 @@ if __name__ == '__main__':
 		}
 	keyno = 1
 	convert_to_py = True
-	SCRATCH = True
-	#
-	outputPath = '.'
-	if SCRATCH:
-		outputPath = '/scratch/$SLURM_JOB_ID'
+	outputPath = ['.','/scratch/$SLURM_JOB_ID'][0]
 	#---
 	#---
 	PYFIL = PYFILdic[ keyno ] 
