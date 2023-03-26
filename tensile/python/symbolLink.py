@@ -18,26 +18,26 @@ if __name__ == '__main__':
 #					}
 	#--- 
 	Rates  = {
-#				0:0.5e-4,
-#				3:8e-4,
+				0:0.5e-4,
+				3:8e-4,
 				4:8e-3,
 				5:8e-2,
 			}
 
 	nruns  = {
-#				0:24,
-#				3:44,
+				0:24,
+				3:44,
 				4:60,
 				5:144,
 			}
 
 	fixed_kernel_widths  = { 
-#						0:70,
-#						3:70,
+						0:70,
+						3:70,
 						4:70,
 						5:40,
 					}
-	alloy = 'Cantor'
+	alloy = 'Ni'
 
 	copy_from_scratch = False
 
