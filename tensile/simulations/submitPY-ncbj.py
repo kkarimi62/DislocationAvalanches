@@ -52,7 +52,7 @@ if __name__ == '__main__':
 				#---
 			#
 				inums = lnums[ 3 ] - 1
-				string[ inums ] = "\truns = range(%s)\n"%(nrun)
+				string[ inums ] = "\t\truns = range(%s)\n"%(nrun)
 
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python junk%s.py'%count )
