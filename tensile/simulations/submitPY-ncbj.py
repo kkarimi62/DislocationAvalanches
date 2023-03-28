@@ -3,7 +3,7 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 33, 93, 89   ]
+	lnums = [ 33, 93, 89, 27   ]
 	string=open('simulations-ncbj.py').readlines() #--- python script
 	#---
 	Temps  = {
@@ -18,12 +18,18 @@ if __name__ == '__main__':
 			}
 	Rates  = {
 				0:0.5e-4,
-#				1:1e-4,
-#				2:4e-4,
-#				3:8e-4,
-#				4:8e-3,
+				3:8e-4,
+				4:8e-3,
 #				5:8e-2,
 			}
+
+	nruns  = {
+				0:24,
+				3:44,
+				4:60,
+#				5:144,
+			}
+
 
 	alloy = 'Ni'
 	#---
@@ -33,6 +39,7 @@ if __name__ == '__main__':
 		for keys_r in Rates:
 			#---
 				rate = Rates[keys_r]
+				nrun = nruns[ keys_r ]
 			#---	densities
 				inums = lnums[ 0 ] - 1
 				string[ inums ] = "\t4:\'%sNatom10KTemp%sKMultipleRates/Rate%s\',\n"%(alloy,temp,keys_r) #--- change job name
@@ -43,6 +50,9 @@ if __name__ == '__main__':
 				inums = lnums[ 2 ] - 1
 				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot %s -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_%s.dat -var DumpFile dumpSheared.xyz\',\n"%(temp, rate, temp)
 				#---
+			#
+				inums = lnums[ 3 ] - 1
+				string[ inums ] = "\truns = range(%s)\n"%(nrun)
 
 				sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
 				os.system( 'python junk%s.py'%count )
