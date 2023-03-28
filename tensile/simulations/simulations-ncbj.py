@@ -26,12 +26,12 @@ if __name__ == '__main__':
 
 		nruns	 = range(24)
 		#
-		nThreads = 8 #16
+		nThreads = 4 #16
 		nNode	 = 1
 		#
 		jobname  = {
-					3:'CantorNatom50KMultipleTemp/Temp300K', 
-				   }[3]
+					4:'NiNatom10KTemp300KMultipleRates/Rate0', 
+				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
 						0:'/junk',
@@ -116,7 +116,7 @@ if __name__ == '__main__':
 		#
 		EXEC_lmp = ['lmp_g++_openmpi'][0]
 		durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
-		mem = '22gb'
+		mem = '16gb'
 		partition = ['INTEL_PHI'][0]
 		#--
 		DeleteExistingFolder = True
