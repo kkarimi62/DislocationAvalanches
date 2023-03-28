@@ -26,7 +26,7 @@ if __name__ == '__main__':
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
-	durtn = ['00:59:59','07:59:59'][1]
+	durtn = ['00:59:59','23:59:59'][1]
 	mem = ['8gb','128gb'][1]
 	partition = ['parallel','cpu2019','bigmem','single'][2] 
 	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
