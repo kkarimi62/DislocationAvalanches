@@ -41,6 +41,8 @@ if __name__ == '__main__':
 
 	copy_from_scratch = False
 
+	absoluteOutputPath = [os.getcwd(),'/tmp'][1] #--- directory where py scripts are copied to.
+
 	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][2]
 
 	files = [['structureCnaTypeFraction.txt'],
@@ -76,6 +78,6 @@ if __name__ == '__main__':
 
 			for file_name in files:
 				item = '%s/%s'%(folder,file_name)
-				os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/Run*/%s"%(alloy,keys_r,item))
-#				os.system("git add %sNatom10KTemp300KMultipleRates/Rate%s/kernel%s/Run*/%s"%(alloy,keys_r,keys_k,item))
+				os.system("git add %s/%sNatom10KTemp300KMultipleRates/Rate%s/Run*/%s"%(absoluteOutputPath,alloy,keys_r,item))
+#				os.system("git add %s/%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s/Run*/%s"%(absoluteOutputPath,alloy,keys_r,keys_k,item))
 	os.system("git commit -m \'updates\';git push")
