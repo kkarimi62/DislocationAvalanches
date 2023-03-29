@@ -35,7 +35,7 @@ if __name__ == '__main__':
 		}
 	keyno = 1
 	convert_to_py = True
-	absoluteOutputPath = [os.getcwd(),'/tmp'][1] #--- directory where py scripts are copied to.
+	absoluteOutputPath = [os.getcwd(),'/tmp'][0] #--- directory where py scripts are copied to.
 	outputPath = ['.','/scratch/$SLURM_JOB_ID'][0] #--- outputs will be in this directory
 	#---
 	#---
