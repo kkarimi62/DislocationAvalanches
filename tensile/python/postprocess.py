@@ -35,7 +35,7 @@ if __name__ == '__main__':
 		}
 	keyno = 1
 	convert_to_py = True
-	absoluteOutputPath = [os.getcwd(),'/tmp'][0] #--- directory where py scripts are copied to.
+	absoluteOutputPath = [os.getcwd(),'/tmp'][1] #--- directory where py scripts are copied to.
 	outputPath = ['.','/scratch/$SLURM_JOB_ID'][0] #--- outputs will be in this directory
 	#---
 	#---
@@ -50,7 +50,6 @@ if __name__ == '__main__':
 	os.system( 'rm jobID.txt' )
 	# --- loop for submitting multiple jobs
 	for counter in runs:
-#		print(' i = %s' % counter)
 		writPath = absoluteOutputPath + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
 		makeOAR( writPath, 1, 1, durtn, PYFIL, argv+"/Run%s"%counter) # --- make oar script
