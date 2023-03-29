@@ -46,7 +46,7 @@ if __name__ == '__main__':
 		PYFIL = 'py_script.py'
 	#---
 	if DeleteExistingFolder:
-		os.system( 'rm -rf %s' % jobname ) # --- rm existing
+		os.system( 'rm -rf %s/%s' % (absoluteOutputPath, jobname) ) # --- rm existing
 	os.system( 'rm jobID.txt' )
 	# --- loop for submitting multiple jobs
 	for counter in runs:
