@@ -50,7 +50,7 @@ if __name__ == '__main__':
 	os.system( 'rm jobID.txt' )
 	# --- loop for submitting multiple jobs
 	for counter in runs:
-		print(' i = %s' % counter)
+#		print(' i = %s' % counter)
 		writPath = absoluteOutputPath + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
 		os.system( 'mkdir -p %s' % ( writPath ) ) # --- create folder
 		makeOAR( writPath, 1, 1, durtn, PYFIL, argv+"/Run%s"%counter) # --- make oar script
