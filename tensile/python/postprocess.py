@@ -59,6 +59,6 @@ if __name__ == '__main__':
 						    --chdir %s -c %s -n %s %s/oarScript.sh >> jobID.txt'\
 						   % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \
 						       , writPath, 1, 1, writPath ) ) # --- runs oarScript.sh!
-											 
+		print(writPath)										 
 	os.system( 'mv jobID.txt %s' % ( os.getcwd() + '/%s' % ( jobname ) ) )
 
