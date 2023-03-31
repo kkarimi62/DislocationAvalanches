@@ -44,6 +44,7 @@ if __name__ == '__main__':
 		}
 	keyno = 0
 	convert_to_py = True
+	outputPath = '.'
 #---
 #---
 	PYFIL = PYFILdic[ keyno ]
