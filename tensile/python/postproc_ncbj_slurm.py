@@ -1,19 +1,13 @@
 from backports import configparser
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 	#--- parse conf. file
-	confParser = configparser.ConfigParser()
-	confParser.read('config.ini')
-	#--- set parameters
-	confParser.set('avalanche statistics','kernel_width','100')
-	confParser.set('test data directory','path',argv)
-	confParser.set('py library directory','path',os.getcwd()+'/../../../HeaDef/postprocess')
-	#--- write
-	confParser.write(open('config.ini','w'))	
+	kernel_width = 100
 	#--- set environment variables
 
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\n source /mnt/opt/spack-0.17/share/spack/setup-env.sh\n\nspack load python@3.8.12%%gcc@8.3.0\n\n'%( EXEC_DIR ),file=someFile)
+	print('python3 configMaker.py %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
 	if convert_to_py:
 		print('ipython3 py_script.py\n',file=someFile)
 		 
@@ -32,16 +26,16 @@ if __name__ == '__main__':
 				'2':'CantorNatom50KTemp300K', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
 				'4':'CantorNatom10KMultipleTemp/Temp1200K'
-				}['4']
+				}['3']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
 								'4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
- 							}['4'] #--- source
+ 							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
-	durtn = '00:59:59'
+	durtn = '23:59:59'
 	mem = '32gb'
 	partition = ['INTEL_PHI','INTEL_HASWELL'][1] 
 	argv = "%s"%(readPath) #--- don't change! 

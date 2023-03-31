@@ -3,10 +3,10 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-#	lnums = [ 34, 41 ]
-	lnums = [ 21, 25, 3, 19 ]
-#	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-	string=open('postprocess.py').readlines() #--- python script
+#	string=open('postprocess.py').readlines() #--- python script
+#	lnums = [ 21, 25, 3, 19 ]
+	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
+	lnums = [ 27,34,4,21 ]
 	#---
 
 	Temps  = {
@@ -47,26 +47,26 @@ if __name__ == '__main__':
 
 	Rates  = {
 #				0:0.5e-4,
-#				3:8e-4,
-				4:8e-3,
+				3:8e-4,
+#				4:8e-3,
 #				5:8e-2,
 			}
 
 	nruns  = {
 #				0:24,
-#				3:44,
-				4:60,
+				3:44,
+#				4:60,
 #				5:144,
 			}
 
 	fixed_kernel_widths  = { 
-#						0:70,
-#						3:70,
-						4:70,
-#						5:40,
+#						0:13,#70,
+						3:13,#70,
+#						4:70,#70,
+#						5:30,#40,
 					}
 
-	alloy = 'Cantor'
+	alloy = 'Ni'
 	
 	#---
 	count = 0
