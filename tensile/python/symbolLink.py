@@ -19,37 +19,37 @@ if __name__ == '__main__':
 	#--- 
 	Rates  = {
 #				0:0.5e-4,
-#				3:8e-4,
-				4:8e-3,
+				3:8e-4,
+#				4:8e-3,
 #				5:8e-2,
 			}
 
 	nruns  = {
 #				0:24,
-#				3:44,
-				4:60,
+				3:44,
+#				4:60,
 #				5:144,
 			}
 
 	fixed_kernel_widths  = { 
 #						0:70,
-#						3:70,
-						4:70,
+						3:70,
+#						4:70,
 #						5:40,
 					}
-	alloy = 'Cantor'
+	alloy = 'Ni'
 
-	copy_from_scratch = True
+	copy_from_scratch = False
 
 	absoluteOutputPath = [os.getcwd(),'/tmp'][0] #--- directory where py scripts are copied to.
 
-	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][2]
+	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][3]
 
 	files = [['structureCnaTypeFraction.txt'],
 			 ['pdf_s.txt','scatter_st.txt'],
 			 ['clusterSizePdfTotal.txt','scatterRgSize.txt','clusterSizeEnergyDrop.txt','clusterOrientationTotal.txt'],
 			 ['avalancheSize_structureTypeFraction.txt'],
-			][2]
+			][3]
 
 	#---
 	for keys_r in Rates:
