@@ -35,7 +35,10 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	print('#!/bin/bash\n',file=someFile)
 	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv '%( EXEC_DIR ),file=someFile)
 
-	print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
+	if convert_to_py:
+		print('ipython3 py_script.py\n',file=someFile)
+	else:	 
+		print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
 #	print('ipython %s'%(PYFIL), file=someFile)
 	someFile.close()										  
 #
@@ -55,13 +58,16 @@ if __name__ == '__main__':
 	partition = ['cpu2019','bigmem','parallel','single'][1]
 	PYFILdic = { 
 		0:'gnnPolyCryst.ipynb',
-		1:'gnnPolyCryst.py',
 		}
 	keyno = 0
+	convert_to_py = True
 #---
 #---
 	PYFIL = PYFILdic[ keyno ] 
 	#--- update argV
+	if convert_to_py:
+		os.system('jupyter nbconvert --to script %s --output py_script\n'%PYFIL)
+		PYFIL = 'py_script.py'
 	#---
 	if DeleteExistingFolder:
 		os.system( 'rm -rf %s' % jobname ) # --- rm existing
