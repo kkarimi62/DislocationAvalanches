@@ -45,9 +45,9 @@ if __name__ == '__main__':
 	##
 	nruns	 = range(1)
 	jobname  = {
-					1:'hardness_best_train',
+					1:'learning_rate',
 					2:'model_validation', #'learning_curve',
-				}[2]
+				}[1]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'
