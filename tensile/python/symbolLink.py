@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
 	copy_from_scratch = False
 
-	absoluteOutputPath = [os.getcwd(),'/tmp'][1] #--- directory where py scripts are copied to.
+	absoluteOutputPath = [os.getcwd(),'/tmp'][0] #--- directory where py scripts are copied to.
 
 	folder = ['dislocations','avlStats', 'dislocations/ps','crltns'][2]
 
