@@ -57,6 +57,7 @@ if __name__ == '__main__':
 		print('rm %s'%jobname)
 		os.system( 'rm -rf %s' % jobname ) # --- rm existing
 	# --- loop for submitting multiple jobs
+	os.system( 'rm jobID.txt' )
 	for counter in runs:
 		print(' i = %s' % counter)
 		writPath = os.getcwd() + '/%s/Run%s' % ( jobname, counter ) # --- curr. dir
@@ -68,4 +69,5 @@ if __name__ == '__main__':
                                  --chdir %s --ntasks-per-node=%s --nodes=%s %s/oarScript.sh >> jobID.txt'\
                             % ( partition, mem, durtn, jobname.split('/')[0], counter, jobname.split('/')[0], counter, jobname.split('/')[0], counter \
                                 , writPath, nThreads, nNode, writPath ) ) # --- runs oarScript.sh! 
+	os.system( 'mv jobID.txt %s' % ( os.getcwd() + '/%s' % ( jobname ) ) )
 
