@@ -6,8 +6,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	confParser.read('config.ini')
 	#--- set parameters
 	confParser.set('Parameters','num_processing_steps_tr','3')
-	confParser.set('Parameters','num_training_iterations','1000000')
-	confParser.set('Parameters','learning_rate','1.0e-04')
+	confParser.set('Parameters','num_training_iterations','100000')
+	confParser.set('Parameters','learning_rate','1.0e-03')
 	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors') 
 	confParser.set('Parameters','train_size_learning','1.0')
 	confParser.set('Parameters','stopping_criterion','1')
@@ -33,7 +33,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	#--- set environment variables
 	someFile = open( 'oarScript.sh', 'w' )
 	print('#!/bin/bash\n',file=someFile)
-	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv '%( EXEC_DIR ),file=someFile)
+	print('EXEC_DIR=%s\nmodule load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv2nd '%( EXEC_DIR ),file=someFile)
 
 	if convert_to_py:
 		print('ipython3 py_script.py\n',file=someFile)
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 	##
 	nruns	 = range(1)
 	jobname  = {
-					1:'learning_rate2nd',
+					1:'learning_rate',
 					2:'model_validation', #'learning_curve',
 				}[1]
 	DeleteExistingFolder = True
