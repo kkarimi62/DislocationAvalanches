@@ -24,13 +24,13 @@ if __name__ == '__main__':
 		import os
 		import numpy as np
 
-		nruns	 = range(24)
+		nruns	 = range(144)
 		#
 		nThreads = 4 #16
 		nNode	 = 1
 		#
 		jobname  = {
-					4:'NiNatom10KTemp300KMultipleRates/Rate0', 
+					4:'NiNatom10KTemp300KMultipleRates/Rate5', 
 				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
