@@ -73,6 +73,7 @@ for ipair = 1:size(pairs,1)
 	seg_length(ipair) = sum(size_filtr);
 end
 
+keyboard;
 %---- print attributes
 % open your file for writing
 fid = fopen('output/attributes.txt','wt');
