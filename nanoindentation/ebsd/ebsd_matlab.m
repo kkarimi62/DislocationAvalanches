@@ -106,8 +106,8 @@ for i = 1:size(r_indenters,1)
 	lid(i) = r_indenters(i,1);
 	label(i) = r_indenters(i,2)+1;
 end
-length(ids)
-length(r_indenters)
+%length(ids)
+%length(r_indenters)
 %ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
 %length(ids)
 fid = fopen('output/indenter_grainID.txt','wt');
