@@ -15,8 +15,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	confParser.set('Parameters','seed','%s'%seed)
 	confParser.set('Parameters','split_type','0')
 	#
-	confParser.set('flags','train_test','True')
-	confParser.set('flags','learning_curve','False')
+	confParser.set('flags','train_test','False')
+	confParser.set('flags','learning_curve','True')
 	confParser.set('flags','validation_curve','False')
 	confParser.set('flags','remote_machine','True')
 	#
@@ -49,8 +49,8 @@ if __name__ == '__main__':
 	nruns	 = range(1)
 	jobname  = {
 					1:'learning_rate',
-					2:'model_validation', #'learning_curve',
-				}[1]
+					2:'learning_curve', #'model_validation', #'learning_curve',
+				}[ 2 ]
 	DeleteExistingFolder = True
 	EXEC_DIR = '.'     #--- path for executable file
 	durtn = '23:59:59'

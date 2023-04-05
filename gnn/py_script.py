@@ -15,7 +15,7 @@
 # ```
 # pip install graph_nets matplotlib scipy "tensorflow>=1.15,<2" "dm-sonnet<2" "tensorflow_probability<0.9"
 
-# In[2]:
+# In[1]:
 
 
 install_graph_nets_library = "No"  #param ["Yes", "No"]
@@ -30,7 +30,7 @@ else:
 
 # # load libraries
 
-# In[3]:
+# In[2]:
 
 
 import configparser
@@ -39,7 +39,7 @@ confParser.read('config.ini')
 confParser.sections()
 
 
-# In[4]:
+# In[3]:
 
 
 import sys
@@ -91,7 +91,8 @@ from scipy import stats
 
 SEED =4441666
 np.random.seed(SEED)
-tf.set_random_seed(SEED)
+#tf.set_random_seed(SEED)
+tf.compat.v1.set_random_seed(SEED)
 
 
 # # utility funcs
@@ -244,7 +245,6 @@ def create_loss_ops(target_op, output_op, mask, weight=None):
 def create_corr_ops(target_op, output_op, mask):
     corr_op = tfp.stats.correlation(tf.boolean_mask(target_op, mask), tf.boolean_mask(output_op.nodes, mask))
     return corr_op
-
 
 
 
@@ -452,7 +452,7 @@ class TestData:
         return np.c_[df.drop(columns=[0])]
 
 
-# In[9]:
+# In[7]:
 
 
 get_ipython().system('mkdir png')
@@ -491,7 +491,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ### multiple grains
 
-# In[10]:
+# In[8]:
 
 
 def GetDuplicateGrains():
@@ -566,14 +566,14 @@ TestData.ReplaceNanByMean(forces)
 print('# of indented grains: ',(~np.any(np.isnan(predictors),axis=1)).sum())
 
 
-# In[16]:
+# In[9]:
 
 
 # filtr = test_data_grains.subBoundaryLength > 0
 # test_data_grains[filtr]
 
 
-# In[17]:
+# In[10]:
 
 
 # plt.xscale('log')
@@ -581,7 +581,7 @@ print('# of indented grains: ',(~np.any(np.isnan(predictors),axis=1)).sum())
 # plt.scatter(test_data_grains['diameter'],test_data_grains['area'])
 
 
-# In[18]:
+# In[11]:
 
 
 # filtr = test_data_grains.diameter > 1.0
@@ -593,9 +593,15 @@ print('# of indented grains: ',(~np.any(np.isnan(predictors),axis=1)).sum())
 #           )
 
 
+# In[77]:
+
+
+test_data_grains.Phi.mean(),test_data_grains.Phi.std()
+
+
 # ### missing data
 
-# In[11]:
+# In[12]:
 
 
 class AddMissing:
@@ -838,7 +844,6 @@ def GetSubset(mask,fraction):
     return tmp_test
 
 
-
 # In[15]:
 
 
@@ -892,7 +897,7 @@ print('nodes matrix shape:',np.array(static_graph_tr['nodes']).shape)
 print('edge matrix shape:',np.array(static_graph_tr['edges']).shape)
 
 
-# In[24]:
+# In[17]:
 
 
 # import json
@@ -900,7 +905,7 @@ print('edge matrix shape:',np.array(static_graph_tr['edges']).shape)
 #     json.dump(static_graph_tr,fp)
 
 
-# In[25]:
+# In[18]:
 
 
 #json.load(open('graph.json')).keys()
@@ -911,7 +916,7 @@ print('edge matrix shape:',np.array(static_graph_tr['edges']).shape)
 
 # ### plot h map
 
-# In[26]:
+# In[19]:
 
 
 class interpolate:
@@ -985,7 +990,7 @@ class interpolate:
 #               )
 
 
-# In[27]:
+# In[20]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1014,7 +1019,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ### nodes and edges
 
-# In[28]:
+# In[21]:
 
 
 def get_cmap(n):
@@ -1025,7 +1030,7 @@ def get_cmap(n):
 new_map = get_cmap(test_data_grains.shape[0])
 
 
-# In[29]:
+# In[22]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1085,7 +1090,7 @@ if not eval(confParser['flags']['remote_machine']):
     plt.savefig('png/gnn.png',bbox_inches='tight',pad_inches=0.0,dpi=600)
 
 
-# In[30]:
+# In[23]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1147,14 +1152,14 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ### plot indented grains
 
-# In[31]:
+# In[24]:
 
 
 mask = np.all(np.isnan(predictors),axis=1)
 grainID_notindented = np.c_[test_data_grains[mask]['#grainID']].astype(int)
 
 
-# In[32]:
+# In[25]:
 
 
 class PlotGrains:
@@ -1260,8 +1265,7 @@ if not eval(confParser['flags']['remote_machine']):
     plott.PlotOrientation()
 
 
-
-# In[33]:
+# In[26]:
 
 
 # filtr = test_data_grains.subBoundaryLength == 0
@@ -1269,7 +1273,7 @@ if not eval(confParser['flags']['remote_machine']):
 # test_data_grains[~filtr]
 
 
-# In[34]:
+# In[27]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1293,7 +1297,7 @@ if not eval(confParser['flags']['remote_machine']):
     plott.PlotOrientationSingle()
 
 
-# In[35]:
+# In[28]:
 
 
 
@@ -1317,7 +1321,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # # Train
 
-# In[36]:
+# In[29]:
 
 
 from sklearn.base import BaseEstimator
@@ -1512,7 +1516,7 @@ class GnnRegressor(BaseEstimator):
 
 # ## train-test
 
-# In[37]:
+# In[30]:
 
 
 if eval(confParser['flags']['train_test']):
@@ -1555,7 +1559,7 @@ if eval(confParser['flags']['train_test']):
 
 # ## Learning curve
 
-# In[38]:
+# In[31]:
 
 
 def learning_curve(train_sizes,cv):
@@ -1600,8 +1604,7 @@ def learning_curve(train_sizes,cv):
     return mse, mse_training
 
 
-
-# In[39]:
+# In[32]:
 
 
 if eval(confParser['flags']['learning_curve']):
@@ -1652,7 +1655,7 @@ if eval(confParser['flags']['learning_curve']):
     )               
 
 
-# In[40]:
+# In[33]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1698,7 +1701,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ## learning rate
 
-# In[70]:
+# In[34]:
 
 
 if eval(confParser['flags']['train_test']):
@@ -1731,7 +1734,7 @@ if eval(confParser['flags']['train_test']):
                            header='epoch,training\ttest')
 
 
-# In[11]:
+# In[35]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1763,7 +1766,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ## validation curve
 
-# In[43]:
+# In[36]:
 
 
 def GetStat(mse_test):
@@ -1790,7 +1793,7 @@ if eval(confParser['flags']['validation_curve']):
                header='mse_test\tmse_train\tmse_test_err\tmse_train_err')
 
 
-# In[44]:
+# In[37]:
 
 
 # if not eval(confParser['flags']['remote_machine']):
@@ -1825,7 +1828,7 @@ if eval(confParser['flags']['validation_curve']):
 #                ax=ax)
 
 
-# In[45]:
+# In[38]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -1892,7 +1895,7 @@ if not eval(confParser['flags']['remote_machine']):
                ax=ax)
 
 
-# In[46]:
+# In[39]:
 
 
 # ss=[]
@@ -1906,14 +1909,14 @@ if not eval(confParser['flags']['remote_machine']):
 #     ss+=confParser0['Parameters']['attributes'].split()
 
 
-# In[47]:
+# In[40]:
 
 
 # ss.sort()
 # ss
 
 
-# In[48]:
+# In[41]:
 
 
 # #--- set parameters
@@ -2093,7 +2096,7 @@ if not eval(confParser['flags']['remote_machine']):
 # print('elapsed times:%ss'%(time.time()-t0))
 
 
-# In[49]:
+# In[42]:
 
 
 # i=1
@@ -2101,7 +2104,7 @@ if not eval(confParser['flags']['remote_machine']):
 # best_output = np.copy(step_output)
 
 
-# In[50]:
+# In[43]:
 
 
 # with sess.as_default():
@@ -2111,7 +2114,7 @@ if not eval(confParser['flags']['remote_machine']):
 # ## predictions
 # ### training set
 
-# In[51]:
+# In[44]:
 
 
 def Plott(indices,test_mask_np,title):
@@ -2196,7 +2199,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ### test set
 
-# In[52]:
+# In[45]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -2230,7 +2233,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # ### scatter plot: mse vs. grain size
 
-# In[53]:
+# In[46]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -2269,20 +2272,19 @@ if not eval(confParser['flags']['remote_machine']):
 
 
 
-
-# In[54]:
+# In[47]:
 
 
 #(utl.Zscore(test_data_grains[train_mask_np]['grainSize'])*utl.Zscore(msee[train_mask_np])).mean()
 
 
-# In[55]:
+# In[48]:
 
 
 #(utl.Zscore(test_data_grains[test_mask_np]['grainSize'])*utl.Zscore(msee[test_mask_np])).mean()
 
 
-# In[56]:
+# In[49]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -2331,7 +2333,7 @@ if not eval(confParser['flags']['remote_machine']):
 
 # # predict hardness
 
-# In[57]:
+# In[50]:
 
 
 class Hardness(PlotGrains):
@@ -2552,10 +2554,9 @@ class Hardness(PlotGrains):
 
 
 
-
 # ## h_act
 
-# In[58]:
+# In[51]:
 
 
 #hardness map
@@ -2599,10 +2600,9 @@ hard.Bitmap(test_data_grains,
            )
 
 
-
 # ## scatter plot: test
 
-# In[59]:
+# In[52]:
 
 
 #--- test data
@@ -2648,10 +2648,9 @@ hard.Bitmap(test_data_grains,
 
 
 
-
 # ## scatter plot: train
 
-# In[60]:
+# In[53]:
 
 
 #--- test data
@@ -2697,8 +2696,7 @@ hard.Bitmap(test_data_grains,
 
 
 
-
-# In[61]:
+# In[54]:
 
 
 np.any([train_mask_np,test_mask_np],axis=0)
@@ -2706,7 +2704,7 @@ np.any([train_mask_np,test_mask_np],axis=0)
 
 # ## full map
 
-# In[62]:
+# In[55]:
 
 
 #--- test data
@@ -2747,14 +2745,13 @@ hard.Bitmap(test_data_grains,
 
 
 
-
 # In[ ]:
 
 
 
 
 
-# In[63]:
+# In[56]:
 
 
 dh
@@ -2762,7 +2759,7 @@ dh
 
 # ## plot scatter data
 
-# In[64]:
+# In[57]:
 
 
 if not eval(confParser['flags']['remote_machine']):
@@ -2796,19 +2793,19 @@ if not eval(confParser['flags']['remote_machine']):
                ax=ax)
 
 
-# In[65]:
+# In[58]:
 
 
 np.mean(utl.Zscore(h_train[:,1])*utl.Zscore(h_train[:,0]))
 
 
-# In[66]:
+# In[59]:
 
 
 np.mean(utl.Zscore(h_test[:,1])*utl.Zscore(h_test[:,0]))
 
 
-# In[67]:
+# In[60]:
 
 
 filterr=h_test[:,0]<6
@@ -2817,7 +2814,7 @@ np.mean(utl.Zscore(h_test[:,1][filterr])*utl.Zscore(h_test[:,0][filterr]))
 
 # ## h_act-h_pred
 
-# In[68]:
+# In[61]:
 
 
 #hardness map
@@ -2871,10 +2868,9 @@ hard.Bitmap(test_data_grains,
 
 
 
-
 # ## h_pred
 
-# In[69]:
+# In[62]:
 
 
 #hardness map
@@ -2916,7 +2912,6 @@ hard.Bitmap(test_data_grains,
             pad=0.2,
             fontsize=16,
            )
-
 
 
 
