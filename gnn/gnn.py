@@ -8,7 +8,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL,seed):
 	confParser.set('Parameters','num_processing_steps_tr','3')
 	confParser.set('Parameters','num_training_iterations','100000')
 	confParser.set('Parameters','learning_rate','1.0e-03')
-	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors') 
+	confParser.set('Parameters','attributes','x    y    area    perimeter    subBoundaryLength  diameter    equivalentPerimeter    shapeFactor    isBoundary  hasHole    isInclusion    numNeighbors phi1 Phi phi2') 
 	confParser.set('Parameters','train_size_learning','1.0')
 	confParser.set('Parameters','stopping_criterion','1')
 	confParser.set('Parameters','n_cross_val','4')
