@@ -4,7 +4,7 @@ if __name__ == '__main__':
 	import numpy as np
 	from itertools import combinations
 	#---
-	lnums = [ 49, 11 ]
+	lnums = [ 52, 11 ]
 	string=open('gnn.py').readlines() #--- python script
 	#---
 #	num_processing_steps_tr=range(1,10)
