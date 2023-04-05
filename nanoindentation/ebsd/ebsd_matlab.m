@@ -76,8 +76,8 @@ end
 %---- print attributes
 % open your file for writing
 fid = fopen('output/attributes.txt','wt');
-fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors\n');
-fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors]));
+fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors phi1 Phi phi2\n');
+fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.orientations.phi1./degree grains.orientations.Phi./degree grains.orientations.phi2./degree]));
 fclose(fid);
 
 % open your file for writing
