@@ -26,16 +26,19 @@ if __name__ == '__main__':
 				'2':'CantorNatom50KTemp300K', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
 				'4':'CantorNatom10KMultipleTemp/Temp1200K'
-				}['3']
+				'5':'NiNatom10KTemp300KMultipleRates/Rate3', 
+				}['5']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
 								'1':'/../testdata/aedata/cantor/rateT900K/rate4',
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
 								'4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
- 							}['3'] #--- source
+								'5':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate3',
+ 							}['5'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
-	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
+	home_directory = os.path.expanduser( '~' )
+	py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
 	durtn = '23:59:59'
 	mem = '32gb'
 	partition = ['INTEL_PHI','INTEL_HASWELL'][0] 

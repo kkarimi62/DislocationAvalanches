@@ -6,7 +6,7 @@ if __name__ == '__main__':
 #	string=open('postprocess.py').readlines() #--- python script
 #	lnums = [ 21, 25, 3, 19 ]
 	string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-	lnums = [ 27,34,4,21 ]
+	lnums = [ 29,37,4,21 ]
 	#---
 
 	Temps  = {
@@ -46,22 +46,22 @@ if __name__ == '__main__':
 #					}
 
 	Rates  = {
-#				0:0.5e-4,
-				3:8e-4,
+				0:0.5e-4,
+#				3:8e-4,
 #				4:8e-3,
 #				5:8e-2,
 			}
 
 	nruns  = {
-#				0:24,
-				3:44,
+				0:24,
+#				3:44,
 #				4:60,
 #				5:144,
 			}
 
 	fixed_kernel_widths  = { 
-#						0:13,#70,
-						3:13,#70,
+						0:13,#70,
+#						3:13,#70,
 #						4:70,#70,
 #						5:30,#40,
 					}
@@ -81,12 +81,12 @@ if __name__ == '__main__':
 #					kernel_width = kernel_widths[keys_k]
 			#---	write to
 					inums = lnums[ 0 ] - 1
-					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
 #					string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
 			#---	read from
 					inums = lnums[ 1 ] - 1
-					string[ inums ] = "\t\'3\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
+					string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
 					inums = lnums[ 2 ] - 1
 					string[ inums ] = "\tkernel_width=%s\n"%(int(kernel_width))

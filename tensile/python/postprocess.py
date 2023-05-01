@@ -25,7 +25,8 @@ if __name__ == '__main__':
 								'3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
  							}['3'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
-	py_library_directory = '$HOME/Project/git/HeaDef/postprocess' 
+	home_directory = os.path.expanduser( '~' )
+	py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
 	durtn = ['00:59:59','23:59:59'][1]
 	mem = ['8gb','128gb'][1]
 	partition = ['parallel','cpu2019','bigmem','single'][2] 
