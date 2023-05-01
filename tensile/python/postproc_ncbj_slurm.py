@@ -25,7 +25,7 @@ if __name__ == '__main__':
 				'1':'tensileCantor_tensile900_rate4_highResolution', 
 				'2':'CantorNatom50KTemp300K', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
-				'4':'CantorNatom10KMultipleTemp/Temp1200K'
+				'4':'CantorNatom10KMultipleTemp/Temp1200K',
 				'5':'NiNatom10KTemp300KMultipleRates/Rate3', 
 				}['5']
 	DeleteExistingFolder = True
