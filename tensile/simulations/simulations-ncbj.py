@@ -24,7 +24,7 @@ if __name__ == '__main__':
         import os
         import numpy as np
 
-        nruns	 = range(1) #24)
+        nruns	 = range(24)
         #
         nThreads = 4
         nNode	 = 1

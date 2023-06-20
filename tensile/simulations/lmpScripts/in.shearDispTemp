@@ -12,9 +12,6 @@ include ${INC}/potential.mod
 #--- fix buffer zone
 include ${INC}/buffer.mod
 
-#--- thermo info
-include ${INC}/thermo.mod
-
 
 
 #--- set variables
