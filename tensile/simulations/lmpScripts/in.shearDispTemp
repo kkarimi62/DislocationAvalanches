@@ -1,12 +1,20 @@
 # ---------- Initialize Simulation --------------------- 
 include ${INC}/initSoftWall.mod
+
 # ---------- Create Atoms ---------------------
 include ${INC}/CreateBox.mod
+
 change_box all triclinic
+
 # ---------- Define Interatomic Potential --------------------- 
 include ${INC}/potential.mod
+
 #--- fix buffer zone
 include ${INC}/buffer.mod
+
+#--- thermo info
+include ${INC}/thermo.mod
+
 
 
 #--- set variables

@@ -19,3 +19,6 @@ variable ntherm  equal	ceil(${Nstep}/${nthermo})
 variable varn	 equal	v_ntherm
 fix extra all print ${varn} "${varStep} ${varTime} ${varEzz} ${varTemp} ${varPe} ${varPxx} ${varPyy} ${varSzz} ${varVol}" screen no title "step time ezz temp pe pxx pyy szz vol" file thermo.txt
 
+thermo 100
+thermo_style custom step temp pe press vol
+thermo_modify norm no

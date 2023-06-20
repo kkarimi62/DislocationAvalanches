@@ -11,6 +11,9 @@ include ${INC}/potential.mod
 #--- fix buffer zone
 include ${INC}/buffer.mod
 
+#--- thermo info
+#include ${INC}/thermo.mod
+
 #--- thermalize two partial dislocations
 
 # -------------------------------------- General Variables --------------------------------------#
@@ -40,6 +43,12 @@ dump        1 all custom ${nevery} ${OUT_PATH}/${DumpFile} id type x y z c_1[1] 
 dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
 
 #dump                      mydump all custom ${nevery} equilibrium.dump id type x y z
+
+
+#--- set discretization time 
+timestep	${dt}
+
+
 run                       ${Nstep}
 
 unfix                     f1
