@@ -3,20 +3,36 @@ def makeOAR( EXEC_DIR, node, core, time ):
         print >> someFile, '#!/bin/bash\n'
         print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
         print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-    #	print >> someFile, 'module load mpich/3.2.1-gnu\n'
-        print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
-        print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
-        #--- intel libs
-        print >> someFile,'#--- intel libs'
-        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mkl@2021.4.0\nspack load intel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\n\n'
-        #--- run python script 
+        print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\n\n',
+        
         for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
+            #---------------------
+            #--- run lmp scripts
+            #---------------------
             if execc[:4] == 'lmp_':
+            #--- intel stuff
                 if execc == 'lmp_intel_cpu_intelmpi':
                     var += ' -sf intel'
-                print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+                    if indx == 0: 
+                        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mkl@2021.4.0\nspack load intel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\n\n'
+                    
+                #--- mpi
+                if execc == 'lmp_g++_openmpi':
+                    if indx == 0: 
+                        print >> someFile, 'spack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
+                        print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
+
+           
+            #--- execute binary
+            print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+            
+            #---------------------
+            #--- run py scripts
+            #---------------------
             elif execc == 'py':
                 print >> someFile, "python3 --version\npython3 %s %s\n"%(script, var)
+                
+            #--- kmc
             elif execc == 'kmc':
                 print >> someFile, "export PathEam=${MEAM_library_DIR}\nexport INC=%s\nexport %s\n"%(SCRPT_DIR,var)
                 print >> someFile, "source %s \n"%('kmc_bash.sh')
@@ -35,7 +51,7 @@ if __name__ == '__main__':
     nNode    = 1
     #
     jobname  = {
-                4:'test2nd',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test-intel',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -116,7 +132,7 @@ if __name__ == '__main__':
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
     #
-    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][0]
+    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][1]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '16gb'
     partition = ['INTEL_PHI','INTEL_CASCADE'][0]
