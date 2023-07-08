@@ -5,9 +5,10 @@ def makeOAR( EXEC_DIR, node, core, time ):
         print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
     #	print >> someFile, 'module load mpich/3.2.1-gnu\n'
         print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
-        print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n'
+        print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
         #--- intel libs
-        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0'
+        print >> someFile,'#--- intel libs'
+        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nintel-oneapi-mkl@2021.4.0\nintel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\nn'
         #--- run python script 
         for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
             if execc[:4] == 'lmp_':
