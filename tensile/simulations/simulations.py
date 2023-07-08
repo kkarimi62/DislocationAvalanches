@@ -41,7 +41,7 @@ if __name__ == '__main__':
     #
     jobname  = {
                 3:'CantorNatom10KTemp300KMultipleRates/test', 
-                4:'test2nd',#'NiNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test3rd',#'NiNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -124,7 +124,7 @@ if __name__ == '__main__':
 #	Variables = list(map(lambda x:Variable[x], indices))
 #        print('EXEC=',EXEC)
     #
-    EXEC_lmp = ['lmp_mpi','lmp_serial','lmp_intel_cpu_intelmpi'][2]
+    EXEC_lmp = ['lmp_mpi','lmp_serial','lmp_intel_cpu_intelmpi'][0]
     durtn = ['95:59:59','01:59:59','167:59:59'][ 1 ]
     mem = '32gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
