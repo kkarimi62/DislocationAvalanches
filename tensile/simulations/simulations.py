@@ -3,12 +3,16 @@ def makeOAR( EXEC_DIR, node, core, time ):
 	print >> someFile, '#!/bin/bash\n'
 	print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
 	print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
-	print >> someFile, 'module load gcc/7.3.0\nmodule load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n'
+	print >> someFile, 'module load gcc/7.3.0\nmodule load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n\n'
+    #--- intel: lmp_intel_cpu_intelmpi
+    print >> someFile, 'module load intel-mpi/2019.3\nmodule load intel/2019.3\nsource /global/software/intel/intel-mpi-2019.3/intel64/bin/mpivars.sh\nn'
 
 	#--- run python script 
 	for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
-		if execc == 'lmp': #_mpi' or EXEC == 'lmp_serial':
-			print >> someFile, "mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH %s -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+		if execc[:4] == 'lmp_': #_mpi' or EXEC == 'lmp_serial':
+            if execc == 'lmp_intel_cpu_intelmpi':
+                var += ' -sf intel'
+			print >> someFile, "time mpirun --oversubscribe -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH %s -var PathEam %s -var INC \'%s\' %s\n"%(nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
 		elif execc == 'py':
 			print >> someFile, "python3 %s %s\n"%(script, var)
 		elif execc == 'kmc':
@@ -28,7 +32,7 @@ if __name__ == '__main__':
 		#
 		jobname  = {
 					3:'CantorNatom10KTemp300KMultipleRates/test', 
-					4:'NiNatom10KTemp300KMultipleRates/Rate0', 
+					4:'test',#'NiNatom10KTemp300KMultipleRates/Rate0', 
 				   }[4]
 		sourcePath = os.getcwd() +\
 					{	
@@ -105,19 +109,21 @@ if __name__ == '__main__':
 			return Variable
 		#--- different scripts in a pipeline
 		indices = {
-					0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
+					0:[5,7], #,6], #--- minimize, thermalize, shear(disp. controlled)
 				  }[0]
 		Pipeline = list(map(lambda x:LmpScript[x],indices))
 	#	Variables = list(map(lambda x:Variable[x], indices))
-		EXEC = list(map(lambda x:np.array(['lmp','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 	#        print('EXEC=',EXEC)
 		#
-		EXEC_lmp = ['lmp_mpi','lmp_serial'][0]
-		durtn = ['95:59:59','23:59:59','167:59:59'][ 0 ]
+		EXEC_lmp = ['lmp_mpi','lmp_serial','lmp_intel_cpu_intelmpi'][2]
+		durtn = ['95:59:59','14:59:59','167:59:59'][ 1 ]
 		mem = '32gb'
 		partition = ['gpu-v100','parallel','cpu2019','single'][2]
 		#--
 		DeleteExistingFolder = True 
+        
+        #---
+		EXEC = list(map(lambda x:np.array([EXEC_lmp,'py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
 		if DeleteExistingFolder:
 			print('rm %s'%jobname)
 			os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
