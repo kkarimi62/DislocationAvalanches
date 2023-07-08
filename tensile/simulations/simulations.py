@@ -4,22 +4,28 @@ def makeOAR( EXEC_DIR, node, core, time ):
     print >> someFile, 'EXEC_DIR=%s\n' %( EXEC_DIR )
     print >> someFile, 'MEAM_library_DIR=%s\n' %( MEAM_library_DIR )
 
-    #--- run python script 
     for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
+        #---------------------
         #--- run lmp scripts
+        #---------------------
         if execc[:4] == 'lmp_':
             argMPI = ''
             #--- intel stuff
             if execc == 'lmp_intel_cpu_intelmpi':
-                print >> someFile, 'module load intel-mpi/2019.3\nmodule load intel/2019.3\nsource /global/software/intel/intel-mpi-2019.3/intel64/bin/mpivars.sh\n\n'
+                if indx == 0: 
+                    print >> someFile, 'module load intel-mpi/2019.3\nmodule load intel/2019.3\nsource /global/software/intel/intel-mpi-2019.3/intel64/bin/mpivars.sh\n\n'
                 var += ' -sf intel'
+            #--- mpi
             if execc == 'lmp_mpi':
                 argMPI += '--oversubscribe'
-                print >> someFile, 'module load gcc/7.3.0\nmodule load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n\n'
+                if indx == 0: 
+                    print >> someFile, 'module load gcc/7.3.0\nmodule load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n\n'
             #--- execute binary
             print >> someFile, "time mpirun %s -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH %s -var PathEam %s -var INC \'%s\' %s\n"%(argMPI, nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             
-        #--- py script
+        #---------------------
+        #--- run py scripts
+        #---------------------
         elif execc == 'py':
             print >> someFile, "python3 %s %s\n"%(script, var)
             
@@ -41,7 +47,7 @@ if __name__ == '__main__':
     #
     jobname  = {
                 3:'CantorNatom10KTemp300KMultipleRates/test', 
-                4:'test3rd',#'NiNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test-mpi',#'NiNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -87,17 +93,17 @@ if __name__ == '__main__':
                     'p0':'partition.py', #--- python file
                     'p1':'WriteDump.py',
                     'p2':'DislocateEdge.py',
-                                        'p3':'kartInput.py',
-                                        'p4':'takeOneOut.py',
-                                        'p5':'bash-to-csh.py',
-                                        1.0:'kmc.sh', #--- bash script
-                                        2.0:'kmcUniqueCRYST.sh', #--- bash script
+                    'p3':'kartInput.py',
+                    'p4':'takeOneOut.py',
+                    'p5':'bash-to-csh.py',
+                    1.0:'kmc.sh', #--- bash script
+                    2.0:'kmcUniqueCRYST.sh', #--- bash script
                 } 
     #
     def SetVariables():
         Variable = {
                 0:' -var natoms 100000 -var cutoff 3.52 -var ParseData 0 -var ntype 3 -var DumpFile dumpInit.xyz -var WriteData data_init.txt',
-                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
+                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 0.01 -var gammadot 1.0e-04 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile Equilibrated_300.dat -var DumpFile dumpSheared.xyz',
                 4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
                 5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 10000 -var ntype 5 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
                 51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
@@ -112,13 +118,13 @@ if __name__ == '__main__':
                 'p3':' data_minimized.txt init_xyz.conf %s 1400.0'%(os.getcwd()+'/lmpScripts'),
                 'p4':' data_minimized.txt data_minimized.txt %s 1'%(os.getcwd()+'/lmpScripts'),
                 'p5':' ',
-                                 1.0:'DataFile=data_minimized.txt',
-                                 2.0:'DataFile=data_minimized.txt',
+                 1.0:'DataFile=data_minimized.txt',
+                 2.0:'DataFile=data_minimized.txt',
                 } 
         return Variable
     #--- different scripts in a pipeline
     indices = {
-                0:[5,7], #,6], #--- minimize, thermalize, shear(disp. controlled)
+                0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
 #	Variables = list(map(lambda x:Variable[x], indices))

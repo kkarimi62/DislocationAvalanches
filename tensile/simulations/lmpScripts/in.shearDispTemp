@@ -26,9 +26,9 @@ variable Nevery  	equal	ceil(${Nstep}/${ndump})
 #-----------------------------
 #--- compute & dump variables
 #-----------------------------
-compute     1 all stress/atom NULL pair
-dump        1 all custom ${Nevery} ${OUT_PATH}/${DumpFile} id type x y z c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
-dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
+#compute     1 all stress/atom NULL pair
+dump        1 all custom ${Nevery} ${OUT_PATH}/${DumpFile} id type x y z #c_1[1] c_1[2] c_1[3] c_1[4] c_1[5] c_1[6]
+dump_modify 1 flush yes format line "%d %d %4.3e %4.3e %4.3e" # %4.3e %4.3e %4.3e %4.3e %4.3e %4.3e"
 
 #--- initial stress
 run	0
