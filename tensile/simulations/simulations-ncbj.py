@@ -6,10 +6,12 @@ def makeOAR( EXEC_DIR, node, core, time ):
     #	print >> someFile, 'module load mpich/3.2.1-gnu\n'
         print >> someFile, 'source /mnt/opt/spack-0.17/share/spack/setup-env.sh\nspack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
         print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n'
+        #--- intel libs
+        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0'
         #--- run python script 
         for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
-            if execc == 'lmp_g++_openmpi': #_mpi' or EXEC == 'lmp_serial':
-                print >> someFile, "srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+            if execc[:4] == 'lmp_':
+                print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             elif execc == 'py':
                 print >> someFile, "python3 --version\npython3 %s %s\n"%(script, var)
             elif execc == 'kmc':
@@ -24,13 +26,13 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns    = range(24)
+    nruns    = range(1) #24)
     #
     nThreads = 4
     nNode    = 1
     #
     jobname  = {
-                4:'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -107,19 +109,17 @@ if __name__ == '__main__':
         return Variable
     #--- different scripts in a pipeline
     indices = {
-                0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
+                0:[5,7], #6], #--- minimize, thermalize, shear(disp. controlled)
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
-#	Variables = list(map(lambda x:Variable[x], indices))
-    EXEC = list(map(lambda x:np.array(['lmp_g++_openmpi','py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))	
-#        print('EXEC=',EXEC)
     #
-    EXEC_lmp = ['lmp_g++_openmpi'][0]
-    durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
+    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][1]
+    durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '16gb'
     partition = ['INTEL_PHI'][0]
-    #--
     DeleteExistingFolder = True
+    #--
+    EXEC = list(map(lambda x:np.array([EXEC_lmp,'py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))
     if DeleteExistingFolder:
         print('rm %s'%jobname)
         os.system( 'rm -rf %s;mkdir -p %s' % (jobname,jobname) ) #--- rm existing
