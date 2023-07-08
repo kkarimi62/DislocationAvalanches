@@ -14,9 +14,9 @@ def makeOAR( EXEC_DIR, node, core, time ):
                 print >> someFile, 'module load intel-mpi/2019.3\nmodule load intel/2019.3\nsource /global/software/intel/intel-mpi-2019.3/intel64/bin/mpivars.sh\n\n'
                 var += ' -sf intel'
             if execc == 'lmp_mpi':
+                argMPI += '--oversubscribe'
                 print >> someFile, 'module load gcc/7.3.0\nmodule load openmpi/4.0.2-gnu730\nmodule load lib/openblas/0.3.13-gnu\n\n'
             #--- execute binary
-            argMPI += '--oversubscribe'
             print >> someFile, "time mpirun %s -np %s $EXEC_DIR/%s < %s -echo screen -var OUT_PATH %s -var PathEam %s -var INC \'%s\' %s\n"%(argMPI, nThreads*nNode,EXEC_lmp, script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             
         #--- py script
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns	 = range(24)
+    nruns	 = range(1) #24)
     #
     nThreads =  4 #8
     nNode	 = 1
