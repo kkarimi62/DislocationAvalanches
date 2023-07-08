@@ -8,10 +8,12 @@ def makeOAR( EXEC_DIR, node, core, time ):
         print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
         #--- intel libs
         print >> someFile,'#--- intel libs'
-        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nintel-oneapi-mkl@2021.4.0\nintel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\nn'
+        print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mkl@2021.4.0\nspack load intel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\n\n'
         #--- run python script 
         for script,var,indx, execc in zip(Pipeline,Variables,range(100),EXEC):
             if execc[:4] == 'lmp_':
+                if execc == 'lmp_intel_cpu_intelmpi':
+                    var += ' -sf intel'
                 print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             elif execc == 'py':
                 print >> someFile, "python3 --version\npython3 %s %s\n"%(script, var)
