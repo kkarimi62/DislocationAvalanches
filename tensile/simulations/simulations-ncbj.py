@@ -23,8 +23,8 @@ def makeOAR( EXEC_DIR, node, core, time ):
                         print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
 
            
-            #--- execute binary
-            print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
+                #--- execute binary
+                print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             
             #---------------------
             #--- run py scripts
@@ -126,17 +126,24 @@ if __name__ == '__main__':
                  2.0:'DataFile=data_minimized.txt',
                 } 
         return Variable
-    #--- different scripts in a pipeline
+    
+    #------------------------------------
+    #--- scripts in a pipeline
+    #------------------------------------
     indices = {
                 0:[5,7], #6], #--- minimize, thermalize, shear(disp. controlled)
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
-    #
+    
+    
+    #--- binary files
     EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][1]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '16gb'
     partition = ['INTEL_PHI','INTEL_CASCADE'][0]
     DeleteExistingFolder = True
+    
+    
     #--
     EXEC = list(map(lambda x:np.array([EXEC_lmp,'py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))
     if DeleteExistingFolder:
