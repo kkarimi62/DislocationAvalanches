@@ -35,7 +35,7 @@ if __name__ == '__main__':
     nNode    = 1
     #
     jobname  = {
-                4:'test',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test2nd',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -116,10 +116,10 @@ if __name__ == '__main__':
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
     #
-    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][1]
+    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][0]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '16gb'
-    partition = ['INTEL_PHI'][0]
+    partition = ['INTEL_PHI','INTEL_CASCADE'][0]
     DeleteExistingFolder = True
     #--
     EXEC = list(map(lambda x:np.array([EXEC_lmp,'py','kmc'])[[ type(x) == type(0), type(x) == type(''), type(x) == type(1.0) ]][0], indices))
