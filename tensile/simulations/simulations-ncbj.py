@@ -24,8 +24,10 @@ def makeOAR( EXEC_DIR, node, core, time ):
 
                 #--- openmp
                 if execc == 'lmp_omp':
+                    var += ' -sf omp'
                     if indx == 0: 
                         print >> someFile, 'spack load openmpi@4.0.5 %gcc@9.3.0\n\n',
+                        print >> someFile, 'OMP_NUM_THREADS=%s'%nThreads
                         
                 #--- execute binary
                 print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
@@ -135,7 +137,7 @@ if __name__ == '__main__':
     #--- scripts in a pipeline
     #------------------------------------
     indices = {
-                0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
+                0:[5], #,7,6], #--- minimize, thermalize, shear(disp. controlled)
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
     
