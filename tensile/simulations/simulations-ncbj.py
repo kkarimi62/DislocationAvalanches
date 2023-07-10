@@ -10,7 +10,7 @@ def makeOAR( EXEC_DIR, node, core, time ):
             #--- run lmp scripts
             #---------------------
             if execc[:4] == 'lmp_':
-            #--- intel stuff
+                #--- intel stuff
                 if execc == 'lmp_intel_cpu_intelmpi':
                     var += ' -sf intel'
                     if indx == 0: 
@@ -22,7 +22,11 @@ def makeOAR( EXEC_DIR, node, core, time ):
                         print >> someFile, 'spack load openmpi@4.0.5 %gcc@9.3.0\nspack load openblas@0.3.18%gcc@9.3.0\nspack load python@3.8.12%gcc@8.3.0\n\n',
                         print >> someFile, 'export LD_LIBRARY_PATH=/mnt/opt/tools/cc7/lapack/3.5.0-x86_64-gcc46/lib:${LD_LIBRARY_PATH}\n\n'
 
-           
+                #--- openmp
+                if execc == 'lmp_omp':
+                    if indx == 0: 
+                        print >> someFile, 'spack load openmpi@4.0.5 %gcc@9.3.0\n\n',
+                        
                 #--- execute binary
                 print >> someFile, "time srun $EXEC_DIR/%s < %s -echo screen -var OUT_PATH \'%s\' -var PathEam %s -var INC \'%s\' %s\n"%(execc,script, OUT_PATH, '${MEAM_library_DIR}', SCRPT_DIR, var)
             
@@ -51,7 +55,7 @@ if __name__ == '__main__':
     nNode    = 1
     #
     jobname  = {
-                4:'test-intel2nd',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test-omp',#'NiCoCrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -137,7 +141,7 @@ if __name__ == '__main__':
     
     
     #--- binary files
-    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi'][1]
+    EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi','lmp_omp'][2]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 1 ]
     mem = '16gb'
     partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][0]
