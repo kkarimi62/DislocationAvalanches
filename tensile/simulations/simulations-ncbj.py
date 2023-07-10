@@ -15,7 +15,6 @@ def makeOAR( EXEC_DIR, node, core, time ):
                     var += ' -sf intel'
                     if indx == 0: 
                         print >> someFile, 'spack load intel-oneapi-compilers@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mpi@2021.4.0 %intel@2021.4.0\nspack load intel-oneapi-mkl@2021.4.0\nspack load intel-oneapi-tbb@2021.4.0\nexport I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so.0\n\n'
-                        print >> someFile, 'export OMP_NUM_THREADS=%s'%nThreads
                     
                 #--- mpi
                 if execc == 'lmp_g++_openmpi':
@@ -138,7 +137,7 @@ if __name__ == '__main__':
     #--- scripts in a pipeline
     #------------------------------------
     indices = {
-                0:[5], #,7,6], #--- minimize, thermalize, shear(disp. controlled)
+                0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
               }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
     
