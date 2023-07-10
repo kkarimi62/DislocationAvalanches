@@ -50,7 +50,7 @@ if __name__ == '__main__':
                 #---
                 #---
                     inums = lnums[ 1 ] - 1
-                    string[ inums ] = "\tpartition = \'%s\' \n"%partition[key_p]
+                    string[ inums ] = "    partition = \'%s\' \n"%partition[key_p]
 
     #                 string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot %s -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz\',\n"%(temp, rate)
     #                 #---
