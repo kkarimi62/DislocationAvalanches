@@ -42,12 +42,12 @@ if __name__ == '__main__':
 
     nruns	 = range(1) #24)
     #
-    nThreads =  16 #4 #8
+    nThreads =  32 #16 #4 #8
     nNode	 = 1
     #
     jobname  = {
                 3:'CantorNatom10KTemp300KMultipleRates/test', 
-                4:'test-mpi2nd', #nicocrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'test-mpi3rd', #nicocrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
