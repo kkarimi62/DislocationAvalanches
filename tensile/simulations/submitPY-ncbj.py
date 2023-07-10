@@ -46,7 +46,7 @@ if __name__ == '__main__':
                 for key_p in partition:
                     inums = lnums[ 0 ] - 1
 #                    string[ inums ] = "\t4:\'%sNatom10KTemp%sKMultipleRates/Rate%s\',\n"%(alloy,temp,keys_r) #--- change job name
-                    string[ inums ] = "\t4:\'test-omp/partition%s\',\n"%(keys_p) #--- change job name
+                    string[ inums ] = "\t4:\'test-omp/partition%s\',\n"%(key_p) #--- change job name
                 #---
                 #---
                     inums = lnums[ 1 ] - 1
