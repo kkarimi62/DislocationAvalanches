@@ -138,8 +138,7 @@ if __name__ == '__main__':
     #------------------------------------
     indices = {
                 0:[5,7,6], #--- minimize, thermalize, shear(disp. controlled)
-                0:[5,6], #--- minimize, thermalize, shear(disp. controlled)
-              }[1]
+              }[0]
     Pipeline = list(map(lambda x:LmpScript[x],indices))
     
     
