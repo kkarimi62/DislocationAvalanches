@@ -18,7 +18,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
 	import os
 #
-	runs	 = range(24)
+	runs	 = range(3) #24)
 	nNode    = 1
 	nThreads = 1
 	jobname  = {
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 				'2':'CantorNatom50KTemp300K', 
 				'3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
 				'4':'CantorNatom10KMultipleTemp/Temp1200K',
-				'5':'nicocrNatom10KTemp300KMultipleRates/Rate0', 
+				'5':'nicocrNatom100KTemp300KMultipleRates/Rate0', 
 				}['5']
 	DeleteExistingFolder = True
 	readPath = os.getcwd() + {
@@ -34,14 +34,14 @@ if __name__ == '__main__':
 								'2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
 								'3':'/../simulations/CantorNatom50KTemp300K',
 								'4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
-								'5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate0',
+								'5':'/../simulations/nicocrNatom100KTemp300KMultipleRates/Rate0',
  							}['5'] #--- source
 	EXEC_DIR = '.'     #--- path for executable file
 	home_directory = os.path.expanduser( '~' )
 	py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
 	durtn = '23:59:59'
 	mem = '32gb'
-	partition = ['INTEL_PHI','INTEL_HASWELL'][0] 
+	partition = ['INTEL_PHI','INTEL_HASWELL'][1] 
 	argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
 	PYFILdic = { 
 		0:'avalancheAnalysis.ipynb',
