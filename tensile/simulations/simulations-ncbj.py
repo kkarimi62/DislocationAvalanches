@@ -57,7 +57,7 @@ if __name__ == '__main__':
     nNode    = 1
     #
     jobname  = {
-                4:'nicocrNatom10KTemp300KMultipleRates/Rate0', 
+                4:'cantorNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
