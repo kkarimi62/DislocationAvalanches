@@ -1,3 +1,4 @@
+from backports import configparser
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     #-- edit configMaker.py !!!
     kernel_width = 70
@@ -13,7 +14,9 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     else:	 
         print('jupyter nbconvert --execute $EXEC_DIR/%s --to html --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.allow_errors=True;ls output.html'%(PYFIL), file=someFile)
     someFile.close()										  
-#
+ 
+    
+    #
 if __name__ == '__main__':
     import os
 #
