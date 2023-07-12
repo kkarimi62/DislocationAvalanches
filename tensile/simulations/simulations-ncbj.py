@@ -51,9 +51,9 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns    = range(3) #24)
+    nruns    = range(24)
     #
-    nThreads = 40 #32 #16 #4
+    nThreads = 16 #40 #32 #16 #4
     nNode    = 1
     #
     jobname  = {
