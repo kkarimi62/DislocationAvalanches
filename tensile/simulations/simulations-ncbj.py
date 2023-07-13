@@ -51,13 +51,13 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns    = range(24)
+    nruns    = range(12) #24)
     #
-    nThreads = 16 #40 #32 #16 #4
+    nThreads = 32 #16 #40 #32 #16 #4
     nNode    = 1
     #
     jobname  = {
-                4:'cantorNatom10KTemp300KMultipleRates/Rate0', 
+                4:'nicocrNatom10KTemp300KMultipleRates/Rate0', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
