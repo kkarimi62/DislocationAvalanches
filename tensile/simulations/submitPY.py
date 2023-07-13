@@ -3,7 +3,7 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 60, 120, 116   ]
+	lnums = [ 60, 116   ]
 #	string=open('simulations.py').readlines() #--- python script
 #	lnums = [ 33, 93, 89   ]
 	string=open('simulations-ncbj.py').readlines() #--- python script
@@ -41,10 +41,10 @@ if __name__ == '__main__':
 				string[ inums ] = "\t4:\'nicocrNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
 #				string[ inums ] = "\t3:\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---
-				inums = lnums[ 1 ] - 1
-				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var  P 0.0 -var seed %%"%temp+"s -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData equilibrated.dat\'%%(np.random.randint(10000,99999)),\n"
+# 				inums = lnums[ 1 ] - 1
+# 				string[ inums ] = "\t7:\' -var buff 0.0 -var T %s -var  P 0.0 -var seed %%"%temp+"s -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpThermalized.xyz -var WriteData equilibrated.dat\'%%(np.random.randint(10000,99999)),\n"
 			#---
-				inums = lnums[ 2 ] - 1
+				inums = lnums[ 1 ] - 1
 				string[ inums ] = "\t6:\' -var buff 0.0 -var T %s -var P 0.0 -var gammaxy 1.0 -var gammadot %s -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz\',\n"%(temp, rate)
 				#---
 
