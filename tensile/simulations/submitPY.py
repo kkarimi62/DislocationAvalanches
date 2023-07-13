@@ -3,7 +3,7 @@ if __name__ == '__main__':
 	import os
 	import numpy as np
 	#---
-	lnums = [ 60, 120, 87   ]
+	lnums = [ 60, 120, 116   ]
 #	string=open('simulations.py').readlines() #--- python script
 #	lnums = [ 33, 93, 89   ]
 	string=open('simulations-ncbj.py').readlines() #--- python script
