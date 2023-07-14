@@ -98,7 +98,7 @@ if __name__ == '__main__':
                     string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
             #
                     inums = lnums[ 3 ] - 1
-                    string[ inums ] = "\truns = range(%s)\n"%(nrun)
+                    string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
