@@ -18,7 +18,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
     import os
 #
-    runs	 = range(24)
+    runs	 = range(12) #24)
     nNode    = 1
     nThreads = 1
     jobname  = {
@@ -39,9 +39,9 @@ if __name__ == '__main__':
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
-    durtn = '23:59:59'
+    durtn = '00:59:59'
     mem = '32gb'
-    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][2]
+    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][1]
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
     PYFILdic = { 
         0:'avalancheAnalysis.ipynb',
