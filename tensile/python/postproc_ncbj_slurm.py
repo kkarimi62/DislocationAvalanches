@@ -26,7 +26,7 @@ if __name__ == '__main__':
                 '2':'CantorNatom50KTemp300K', 
                 '3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
-                '5':'cantorNatom10KTemp300KMultipleRates/Rate0', 
+                '5':'nicocrNatom10KTemp300KMultipleRates/Rate12', 
                 }['5']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
@@ -34,7 +34,7 @@ if __name__ == '__main__':
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
                                 '3':'/../simulations/CantorNatom50KTemp300K',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
-                                '5':'/../simulations/cantorNatom10KTemp300KMultipleRates/Rate0',
+                                '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate12',
                             }['5'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
