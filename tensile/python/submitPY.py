@@ -88,11 +88,11 @@ if __name__ == '__main__':
             #---	write to
                     inums = lnums[ 0 ] - 1
 #					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-                    string[ inums ] = "\t\'5\':\'%sNatom100KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+                    string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
 
             #---	read from
                     inums = lnums[ 1 ] - 1
-                    string[ inums ] = "\t\'5\':\'/../simulations/%sNatom100KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
+                    string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
                     string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
