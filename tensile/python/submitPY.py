@@ -95,7 +95,7 @@ if __name__ == '__main__':
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom100KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
-                    string[ inums ] = "\tkernel_width=%s\n"%(int(kernel_width))
+                    string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
             #
                     inums = lnums[ 3 ] - 1
                     string[ inums ] = "\truns = range(%s)\n"%(nrun)
