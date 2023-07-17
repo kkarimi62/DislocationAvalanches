@@ -20,7 +20,7 @@ if __name__ == '__main__':
 #				7:1600,
             }
 
-    kernel_widths  = dict(zip(range(8),np.logspace(0,7,8,base=2,dtype=int)))
+    kernel_widths  = dict(zip(range(8),np.logspace(2,7,6,base=2,dtype=int)))
 #                        { 
 #                         0:10,
 #                         1:20,
