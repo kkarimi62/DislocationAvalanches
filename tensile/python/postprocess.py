@@ -8,7 +8,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     print('#!/bin/bash\n',file=someFile)
     print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
     print('module load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv2nd ',file=someFile)
-    print('python3 configMaker.py %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
+    print('python3 configMaker.py %s %s %s %s\n'%(argv,outputPath,kernel_width,home_directory),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
     else:	 
