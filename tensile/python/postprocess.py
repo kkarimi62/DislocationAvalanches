@@ -21,13 +21,13 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
     import os
 #
-    runs	 = range(44) 
+    runs	 = range(24) 
     jobname  = {
-                '3':'CantorNatom10KTemp300KMultipleRates/Rate3', 
+                '3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
                 }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
+                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
                             }['3'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
