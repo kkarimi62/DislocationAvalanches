@@ -7,7 +7,8 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     someFile = open( 'oarScript.sh', 'w' )
     print('#!/bin/bash\n',file=someFile)
     print('EXEC_DIR=%s\n source /mnt/opt/spack-0.17/share/spack/setup-env.sh\n\nspack load python@3.8.12%%gcc@8.3.0\n\n'%( EXEC_DIR ),file=someFile)
-    print('python3 configMaker.py %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
+#    print('python3 configMaker.py %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
+    print('python3 configMaker.py %s %s %s %s/optimal_filtr.txt\n'%(argv,outputPath,kernel_width,current_directory),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
 
@@ -18,7 +19,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
     import os
 #
-    runs	 = range(12) #24)
+    runs	 = range(24)
     nNode    = 1
     nThreads = 1
     jobname  = {
@@ -26,7 +27,7 @@ if __name__ == '__main__':
                 '2':'CantorNatom50KTemp300K', 
                 '3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
-                '5':'nicocrNatom10KTemp300KMultipleRates/Rate12', 
+                '5':'NiNatom10KTemp300KMultipleRates/Rate0', 
                 }['5']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
@@ -34,10 +35,11 @@ if __name__ == '__main__':
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
                                 '3':'/../simulations/CantorNatom50KTemp300K',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
-                                '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate12',
+                                '5':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
                             }['5'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
+    current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
     durtn = '00:14:59'
     mem = '8gb'

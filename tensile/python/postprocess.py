@@ -33,9 +33,9 @@ if __name__ == '__main__':
     home_directory = os.path.expanduser( '~' )
     current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
-    durtn = ['00:59:59','23:59:59'][1]
+    durtn = ['00:59:59','23:59:59'][0]
     mem = ['8gb','128gb'][1]
-    partition = ['parallel','cpu2019','bigmem','single'][2] 
+    partition = ['parallel','cpu2019','bigmem','single'][-1] 
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
     PYFILdic = { 
         1:'avalancheAnalysis.ipynb',
