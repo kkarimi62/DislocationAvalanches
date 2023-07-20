@@ -20,7 +20,7 @@ if __name__ == '__main__':
 #				7:1600,
             }
 
-optimal_kernels={0:0,1:1}
+    optimal_kernels={0:0,1:1}
 
 #     kernel_widths  = #dict(zip(range(8),np.logspace(2,7,6,base=2,dtype=int)))
 #                         { 
