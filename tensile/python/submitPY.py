@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
                     inums = lnums[ 2 ] - 1
 #                    string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
-                    string[ inums ] = "\tprint(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\n'%%(argv,outputPath,kernel_width,current_directory),file=someFile)\n"%keys_k
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\n'%%(argv,outputPath,kernel_width,current_directory),file=someFile)\n"%keys_k
             #
                     inums = lnums[ 3 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
