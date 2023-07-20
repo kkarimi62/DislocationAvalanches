@@ -6,7 +6,7 @@ if __name__ == '__main__':
 #	string=open('postprocess.py').readlines() #--- python script
 #	lnums = [ 21, 25, 3, 19 ]
     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-    lnums = [ 30,38,11,21,22 ]
+    lnums = [ 30,38,4,21,22 ]
     #---
 
     Temps  = {
@@ -35,10 +35,10 @@ if __name__ == '__main__':
 #                         8:90,
 #                         9:100,
 #                     }
-#	kernel_widths  = { 
-#						0:3,
-#						1:5,
-#						2:7,
+    kernel_widths  = { 
+						0:3,
+						1:5,
+						2:7,
 #						3:9,
 #						4:11,
 #						5:13,
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 #						7:17,
 #						8:19,
 #						9:21,
-#					}
+					}
 
     Rates  = {
 #                12:0.125e-4,
@@ -86,8 +86,8 @@ if __name__ == '__main__':
                 rate = Rates[keys_r]
                 nrun = nruns[ keys_r ]
 #                kernel_width = fixed_kernel_widths[keys_r]
-                for keys_k in optimal_kernels:
-#                    kernel_width = kernel_widths[keys_k]
+                for keys_k in kernel_widths: #optimal_kernels:
+                    kernel_width = kernel_widths[keys_k]
             #---	write to
                     inums = lnums[ 0 ] - 1
 #					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
@@ -98,13 +98,13 @@ if __name__ == '__main__':
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
-#                    string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
-                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_k
+                    string[ inums ] = "    kernel_width=%s\n"%(int(kernel_width))
+#                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_k
             #
                     inums = lnums[ 3 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
-#                    os.system( 'rm junk%s.py'%count )
+                    os.system( 'rm junk%s.py'%count )
                     count += 1
