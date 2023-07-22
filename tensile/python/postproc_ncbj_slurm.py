@@ -7,7 +7,6 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     someFile = open( 'oarScript.sh', 'w' )
     print('#!/bin/bash\n',file=someFile)
     print('EXEC_DIR=%s\n source /mnt/opt/spack-0.17/share/spack/setup-env.sh\n\nspack load python@3.8.12%%gcc@8.3.0\n\n'%( EXEC_DIR ),file=someFile)
-#    print('python3 configMaker.py %s %s %s\n'%(argv,outputPath,kernel_width),file=someFile)
     print('python3 configMaker.py %s %s %s %s/optimal_filtr.txt\n'%(argv,outputPath,kernel_width,current_directory),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
