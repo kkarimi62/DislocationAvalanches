@@ -100,7 +100,7 @@ if __name__ == '__main__':
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
-                    string[ inums ] = "    lambdc=%s\n"%(int(lambdc))
+                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
 #                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_k
             #
                     inums = lnums[ 3 ] - 1

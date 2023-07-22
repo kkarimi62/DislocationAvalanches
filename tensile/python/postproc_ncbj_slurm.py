@@ -1,7 +1,7 @@
 from backports import configparser
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     kernel_width = 70
-    lambdc=0.0
+    lambdc = 0.0
     #--- set environment variables
 
     someFile = open( 'oarScript.sh', 'w' )
