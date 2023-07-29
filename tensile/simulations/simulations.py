@@ -131,8 +131,8 @@ if __name__ == '__main__':
 #        print('EXEC=',EXEC)
     #
     EXEC_lmp = ['lmp_mpi','lmp_serial','lmp_intel_cpu_intelmpi'][2]
-    durtn = ['95:59:59','01:59:59','167:59:59'][ 1 ]
-    mem = '32gb'
+    durtn = ['95:59:59','01:59:59','167:59:59'][ 2 ]
+    mem = '16gb'
     partition = ['gpu-v100','parallel','cpu2019','single'][2]
     #--
     DeleteExistingFolder = True 
