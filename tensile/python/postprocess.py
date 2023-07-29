@@ -2,6 +2,7 @@ from backports import configparser
 def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     #-- edit configMaker.py !!!
     kernel_width = 70
+    lambdc = 0.0
     #--- set environment variables
 
     someFile = open( 'oarScript.sh', 'w' )
@@ -9,7 +10,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
     print('module load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv2nd ',file=someFile)
     
-    print('python3 configMaker.py %s %s %s %s/optimal_filtr.txt\n'%(argv,outputPath,kernel_width,current_directory),file=someFile)
+    print('python3 configMaker.py %s %s %s %s/optimal_filtr.txt %s\n'%(argv,outputPath,kernel_width,current_directory,lambdc),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
     else:	 
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
     durtn = ['00:59:59','23:59:59'][0]
     mem = ['8gb','128gb'][0]
-    partition = ['parallel','cpu2019','bigmem','single'][-1] 
+    partition = ['parallel','cpu2019','bigmem','single'][2] 
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
     PYFILdic = { 
         1:'avalancheAnalysis.ipynb',
