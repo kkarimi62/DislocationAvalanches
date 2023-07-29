@@ -32,8 +32,6 @@ variable p0 equal 0.0 #${tmp}
 
 velocity                  all       create     $T     ${seed}  mom    yes  rot  yes  dist  gaussian  # Dynamics starts
  
-#thermo                    100
-#thermo_style              custom    step temp etotal pe press vol
 fix                      f1        all        npt temp   $T  $T  ${damp_t}  iso ${p0} $P ${damp_p} drag	1.0 ##fixedpoint 0.0 0.0 0.0
 
 #-----------------------------
