@@ -21,20 +21,20 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
     import os
 #
-    runs	 = range(44) 
+    runs	 = range(24) 
     jobname  = {
-                '3':'CantorNatom10KTemp300KMultipleRates/Rate3', 
+                '3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
                 }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate3',
+                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
                             }['3'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
     current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
     durtn = ['00:59:59','23:59:59'][0]
-    mem = ['8gb','128gb'][1]
+    mem = ['8gb','128gb'][0]
     partition = ['parallel','cpu2019','bigmem','single'][-1] 
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
     PYFILdic = { 
