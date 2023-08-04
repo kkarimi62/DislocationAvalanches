@@ -3,10 +3,10 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-#	string=open('postprocess.py').readlines() #--- python script
-#	lnums = [ 21, 25, 3, 19 ]
-    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-    lnums = [ 29,37,4,21 ]
+	string=open('postprocess.py').readlines() #--- python script
+	lnums = [ 27, 31, 13, 25 ]
+#     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
+#     lnums = [ 29,37,4,21 ]
     #---
 
     Temps  = {
@@ -49,8 +49,8 @@ if __name__ == '__main__':
 # 					}
 
     Rates  = {
-#                12:0.125e-4,
-#				11:0.250e-4,
+                12:0.125e-4,
+				11:0.250e-4,
 				0:0.5e-4,
 #				3:8e-4,
 #				4:8e-3,
@@ -58,8 +58,8 @@ if __name__ == '__main__':
             }
 
     nruns  = {
-#                12:12,
-#				11:12,
+                12:24,
+				11:24,
 				0:24,
 #				3:44,
 #				4:60,
@@ -75,9 +75,9 @@ if __name__ == '__main__':
 #						5:30,#40,
 #                    }
 
-    lambdas = {0:0.0,1:1e-1,2:1.0,3:1.0e1,4:1e2,5:1e3}
+#    lambdas = {0:0.0,1:1e-1,2:1.0,3:1.0e1,4:1e2,5:1e3}
 
-    alloy = 'Ni'
+    alloy = 'Cantor'
 
     #---
     count = 0
@@ -88,20 +88,20 @@ if __name__ == '__main__':
                 rate = Rates[keys_r]
                 nrun = nruns[ keys_r ]
 #                kernel_width = fixed_kernel_widths[keys_r]
-                for keys_k in lambdas: #optimal_kernels:
-                    lambdc = lambdas[keys_k]
+                if 1: #for keys_k in lambdas: #optimal_kernels:
+#                    lambdc = lambdas[keys_k]
             #---	write to
                     inums = lnums[ 0 ] - 1
 #					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-                    string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s/lambda%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
+                    string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
 
             #---	read from
                     inums = lnums[ 1 ] - 1
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
-                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-#                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_k%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_k
+#                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_cantor_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_r
             #
                     inums = lnums[ 3 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
