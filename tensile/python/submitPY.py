@@ -3,8 +3,8 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-	string=open('postprocess.py').readlines() #--- python script
-	lnums = [ 27, 31, 13, 25 ]
+    string=open('postprocess.py').readlines() #--- python script
+    lnums = [ 27, 31, 13, 25 ]
 #     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
 #     lnums = [ 29,37,4,21 ]
     #---
@@ -50,8 +50,8 @@ if __name__ == '__main__':
 
     Rates  = {
                 12:0.125e-4,
-				11:0.250e-4,
-				0:0.5e-4,
+                11:0.250e-4,
+                0:0.5e-4,
 #				3:8e-4,
 #				4:8e-3,
 #				5:8e-2,
@@ -59,8 +59,8 @@ if __name__ == '__main__':
 
     nruns  = {
                 12:24,
-				11:24,
-				0:24,
+                11:24,
+                0:24,
 #				3:44,
 #				4:60,
 #				5:144,
