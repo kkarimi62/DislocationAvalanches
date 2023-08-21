@@ -3,10 +3,10 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-    string=open('postprocess.py').readlines() #--- python script
-    lnums = [ 27, 31, 13, 25 ]
-#     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-#     lnums = [ 29,37,4,21 ]
+#    string=open('postprocess.py').readlines() #--- python script
+#    lnums = [ 27, 31, 13, 25 ]
+     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
+     lnums = [ 29,37,4,21 ]
     #---
 
     Temps  = {
@@ -49,6 +49,7 @@ if __name__ == '__main__':
 # 					}
 
     Rates  = {
+#                 13:0.0625e-4,
                 12:0.125e-4,
                 11:0.250e-4,
                 0:0.5e-4,
@@ -58,6 +59,7 @@ if __name__ == '__main__':
             }
 
     nruns  = {
+#                13:24,
                 12:24,
                 11:24,
                 0:24,
@@ -77,7 +79,7 @@ if __name__ == '__main__':
 
 #    lambdas = {0:0.0,1:1e-1,2:1.0,3:1.0e1,4:1e2,5:1e3}
 
-    alloy = 'Cantor'
+    alloy = 'nicocr'
 
     #---
     count = 0
@@ -93,11 +95,11 @@ if __name__ == '__main__':
             #---	write to
                     inums = lnums[ 0 ] - 1
 #					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-                    string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+                    string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
 
             #---	read from
                     inums = lnums[ 1 ] - 1
-                    string[ inums ] = "\t\'3\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
+                    string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
                     inums = lnums[ 2 ] - 1
 #                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
