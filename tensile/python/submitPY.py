@@ -5,8 +5,8 @@ if __name__ == '__main__':
     #---
 #    string=open('postprocess.py').readlines() #--- python script
 #    lnums = [ 27, 31, 13, 25 ]
-     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
-     lnums = [ 29,37,4,21 ]
+    lnums = [ 29,37,21 ]
+    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
     #---
 
     Temps  = {
@@ -101,11 +101,11 @@ if __name__ == '__main__':
                     inums = lnums[ 1 ] - 1
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
 
-                    inums = lnums[ 2 ] - 1
+#                     inums = lnums[ 2 ] - 1
 #                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_cantor_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_r
+#                     string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_cantor_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_r
             #
-                    inums = lnums[ 3 ] - 1
+                    inums = lnums[ 2 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
