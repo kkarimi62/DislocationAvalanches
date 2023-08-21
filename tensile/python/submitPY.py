@@ -104,7 +104,7 @@ if __name__ == '__main__':
             #
                     inums = lnums[ 3 ] - 1
 #                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%(alloy,keys_r)
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt 0.0\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
 
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
