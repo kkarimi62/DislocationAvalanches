@@ -5,7 +5,7 @@ if __name__ == '__main__':
     #---
 #    string=open('postprocess.py').readlines() #--- python script
 #    lnums = [ 27, 31, 13, 25 ]
-    lnums = [ 29,37,21 ]
+    lnums = [ 29,37,21,10 ]
     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
     #---
 
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 #                 13:0.0625e-4,
                 12:0.125e-4,
                 11:0.250e-4,
-                0:0.5e-4,
+#                0:0.5e-4,
 #				3:8e-4,
 #				4:8e-3,
 #				5:8e-2,
@@ -60,9 +60,9 @@ if __name__ == '__main__':
 
     nruns  = {
 #                13:24,
-                12:24,
-                11:24,
-                0:24,
+                12:12,
+                11:12,
+#                0:24,
 #				3:44,
 #				4:60,
 #				5:144,
@@ -94,20 +94,18 @@ if __name__ == '__main__':
 #                    lambdc = lambdas[keys_k]
             #---	write to
                     inums = lnums[ 0 ] - 1
-#					string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
                     string[ inums ] = "\t\'5\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
-
             #---	read from
                     inums = lnums[ 1 ] - 1
                     string[ inums ] = "\t\'5\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
-
-#                     inums = lnums[ 2 ] - 1
-#                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-#                     string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_cantor_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%keys_r
             #
                     inums = lnums[ 2 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
+                    inums = lnums[ 3 ] - 1
+#                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt\\\n'%%(argv, outputPath, kernel_width, current_directory ), file = someFile)\n"%(alloy,keys_r)
+
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
                     os.system( 'rm junk%s.py'%count )
