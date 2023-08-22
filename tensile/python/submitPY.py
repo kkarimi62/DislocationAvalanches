@@ -49,7 +49,7 @@ if __name__ == '__main__':
 # 					}
 
     Rates  = {
-#                 13:0.0625e-4,
+                13:0.0625e-4,
                 12:0.125e-4,
                 11:0.250e-4,
 #                0:0.5e-4,
@@ -59,7 +59,7 @@ if __name__ == '__main__':
             }
 
     nruns  = {
-#                13:24,
+                13:24,
                 12:12,
                 11:12,
 #                0:24,
@@ -102,9 +102,9 @@ if __name__ == '__main__':
                     inums = lnums[ 2 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
-                    inums = lnums[ 3 ] - 1
+#                    inums = lnums[ 3 ] - 1
 #                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
+#                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
 
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
