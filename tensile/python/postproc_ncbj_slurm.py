@@ -22,25 +22,25 @@ if __name__ == '__main__':
     nNode    = 1
     nThreads = 1
     jobname  = {
-                '1':'tensileCantor_tensile900_rate4_highResolution', 
+                '1':'NiNatom10KTemp300KMultipleRates/Rare0', 
                 '2':'CantorNatom50KTemp300K', 
                 '3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
                 '5':'nicocrNatom10KTemp300KMultipleRates/Rate13', 
-                }['5']
+                }['1']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '1':'/../testdata/aedata/cantor/rateT900K/rate4',
+                                '1':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
                                 '3':'/../simulations/CantorNatom50KTemp300K',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
                                 '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate13',
-                            }['5'] #--- source
+                            }['1'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
     current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
-    durtn = '00:14:59'
+    durtn = '00:59:59'
     mem = '8gb'
     partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][-1]
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
