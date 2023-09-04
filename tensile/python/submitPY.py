@@ -3,10 +3,10 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-#    string=open('postprocess.py').readlines() #--- python script
-#    lnums = [ 27, 31, 13, 25 ]
-    lnums = [ 25,33,21,10 ]
-    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
+    string=open('postprocess.py').readlines() #--- python script
+    lnums = [ 27, 31, 13, 25 ]
+#    lnums = [ 25,33,21,10 ]
+#    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
     #---
 
     Temps  = {
@@ -54,8 +54,8 @@ if __name__ == '__main__':
                 11:0.250e-4,
                 0:0.5e-4,
 				3:8e-4,
-				4:8e-3,
-				5:8e-2,
+# 				4:8e-3,
+# 				5:8e-2,
             }
 
     nruns  = {
@@ -64,8 +64,8 @@ if __name__ == '__main__':
                 11:12,
                 0:24,
 				3:44,
-				4:60,
-				5:144,
+# 				4:60,
+# 				5:144,
             }
 
 #    fixed_kernel_widths  = { 
@@ -94,17 +94,17 @@ if __name__ == '__main__':
 #                    lambdc = lambdas[keys_k]
             #---	write to
                     inums = lnums[ 0 ] - 1
-                    string[ inums ] = "\t\'1\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+                    string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
             #---	read from
                     inums = lnums[ 1 ] - 1
-                    string[ inums ] = "\t\'1\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
+                    string[ inums ] = "\t\'3\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
             #
                     inums = lnums[ 2 ] - 1
                     string[ inums ] = "    runs = range(%s)\n"%(nrun)
             #
-#                    inums = lnums[ 3 ] - 1
-#                    string[ inums ] = "    lambdc=%s\n"%(lambdc)
-#                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
+                    inums = lnums[ 3 ] - 1
+#                     string[ inums ] = "    lambdc=%s\n"%(lambdc)
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
 
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
