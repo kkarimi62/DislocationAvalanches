@@ -7,7 +7,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     someFile = open( 'oarScript.sh', 'w' )
     print('#!/bin/bash\n',file=someFile)
     print('EXEC_DIR=%s\n source /mnt/opt/spack-0.17/share/spack/setup-env.sh\n\nspack load python@3.8.12%%gcc@8.3.0\n\n'%( EXEC_DIR ),file=someFile)
-    print('python3 configMaker.py %s %s %s %s/optimal_filtr_nicocr_rate.txt %s\n'%(argv,outputPath,kernel_width,current_directory,lambdc),file=someFile)
+    print('python3 configMaker.py %s %s %s %s/optimal_filtr_NiCoCr_rate0.txt %s\n'%(argv,outputPath,kernel_width,current_directory,lambdc),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     jobname  = {
                 '1':'junk/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
-                '3':'NiNatom10KTemp300KMultipleRates/Rate0',
+                '3':'NiCoCrNatom10KTemp300KMultipleRates/Rate0',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
                 '5':'nicocrNatom10KTemp300KMultipleRates/Rate13', 
                 }['3']
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     readPath = os.getcwd() + {
                                 '1':'/../simulations/junk/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
-                                '3':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
+                                '3':'/../simulations/NiCoCrNatom10KTemp300KMultipleRates/Rate0',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
                                 '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate13',
                             }['3'] #--- source
