@@ -22,7 +22,7 @@ if __name__ == '__main__':
     nNode    = 1
     nThreads = 1
     jobname  = {
-                '1':'NiNatom10KTemp300KMultipleRates/Rare0', 
+                '1':'NiNatom10KTemp300KMultipleRates/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
                 '3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
