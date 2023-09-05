@@ -24,18 +24,18 @@ if __name__ == '__main__':
     jobname  = {
                 '1':'NiNatom10KTemp300KMultipleRates/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
-                '3':'tensileCantor_tensile900_rate4_kernels/kernel-1',
+                '3':'NiNatom10KTemp300KMultipleRates/Rate0',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
                 '5':'nicocrNatom10KTemp300KMultipleRates/Rate13', 
-                }['1']
+                }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
                                 '1':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
-                                '3':'/../simulations/CantorNatom50KTemp300K',
+                                '3':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
                                 '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate13',
-                            }['1'] #--- source
+                            }['3'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
     current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
