@@ -22,7 +22,7 @@ if __name__ == '__main__':
     nNode    = 1
     nThreads = 1
     jobname  = {
-                '1':'NiNatom10KTemp300KMultipleRates/Rate0', 
+                '1':'junk/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
                 '3':'NiNatom10KTemp300KMultipleRates/Rate0',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
@@ -30,7 +30,7 @@ if __name__ == '__main__':
                 }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '1':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
+                                '1':'/../simulations/junk/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
                                 '3':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate0',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
