@@ -5,7 +5,7 @@ if __name__ == '__main__':
     #---
 #    string=open('postprocess.py').readlines() #--- python script
 #    lnums = [ 27, 31, 25, 13  ]
-    lnums = [ 25,33,21,10 ]
+    lnums = [ 27,35,21,10 ]
     string=open('postproc_ncbj_slurm.py').readlines() #--- python script
     #---
 
