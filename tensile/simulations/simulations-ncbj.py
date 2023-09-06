@@ -51,13 +51,13 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns    = range(24)
+    nruns    = range(44)
     #
     nThreads = 12
     nNode    = 1
     #
     jobname  = {
-                4:'nicocrNatom10KTemp300KMultipleRates/Rate13', 
+                4:'NiCoCrNatom10KTemp300KMultipleRates/Rate3', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     def SetVariables():
         Variable = {
                 0:' -var natoms 100000 -var cutoff 3.52 -var ParseData 0 -var ntype 3 -var DumpFile dumpInit.xyz -var WriteData data_init.txt',
-                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 0.0625e-4 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz',
+                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 8e-4 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz',
                 4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
                 5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 10000 -var ntype 5 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
                 51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
