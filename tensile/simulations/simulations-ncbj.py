@@ -51,13 +51,13 @@ if __name__ == '__main__':
     import os
     import numpy as np
 
-    nruns    = range(60)
+    nruns    = range(144)
     #
     nThreads = 12
     nNode    = 1
     #
     jobname  = {
-                4:'NiCoCrNatom10KTemp300KMultipleRates/Rate4', 
+                4:'NiCoCrNatom10KTemp300KMultipleRates/Rate5', 
                }[4]
     sourcePath = os.getcwd() +\
                 {	
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     def SetVariables():
         Variable = {
                 0:' -var natoms 100000 -var cutoff 3.52 -var ParseData 0 -var ntype 3 -var DumpFile dumpInit.xyz -var WriteData data_init.txt',
-                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 8e-3 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz',
+                6:' -var buff 0.0 -var T 300 -var P 0.0 -var gammaxy 1.0 -var gammadot 8e-2 -var nthermo 10000 -var ndump 1000 -var ParseData 1 -var DataFile equilibrated.dat -var DumpFile dumpSheared.xyz',
                 4:' -var T 600.0 -var t_sw 20.0 -var DataFile Equilibrated_600.dat -var nevery 100 -var ParseData 1 -var WriteData swapped_600.dat', 
                 5:' -var buff 0.0 -var nevery 1000 -var ParseData 0 -var natoms 10000 -var ntype 5 -var cutoff 3.54  -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt -var seed0 %s -var seed1 %s -var seed2 %s -var seed3 %s'%tuple(np.random.randint(1001,9999,size=4)), 
                 51:' -var buff 0.0 -var nevery 1000 -var ParseData 1 -var DataFile data_minimized.txt -var DumpFile dumpMin.xyz -var WriteData data_minimized.txt', 
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi','lmp_omp'][0]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
     mem = '16gb'
-    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][3]
+    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][4]
     DeleteExistingFolder = True
     
     
