@@ -146,7 +146,7 @@ if __name__ == '__main__':
     EXEC_lmp = ['lmp_g++_openmpi','lmp_intel_cpu_intelmpi','lmp_omp'][0]
     durtn = ['95:59:59','00:59:59','167:59:59'][ 2 ]
     mem = '16gb'
-    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][1]
+    partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][2]
     DeleteExistingFolder = True
     
     
