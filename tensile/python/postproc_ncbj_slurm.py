@@ -24,7 +24,7 @@ if __name__ == '__main__':
     jobname  = {
                 '1':'junk/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
-                '3':'NiCoCrNatom10KTemp300KMultipleRates/Rate0',
+                '3':'NiCoCrNatom10KTemp300KMultipleRates/Rate13',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
                 '5':'nicocrNatom10KTemp300KMultipleRates/Rate13', 
                 }['3']
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     readPath = os.getcwd() + {
                                 '1':'/../simulations/junk/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
-                                '3':'/../simulations/NiCoCrNatom10KTemp300KMultipleRates/Rate0',
+                                '3':'/../simulations/NiCoCrNatom10KTemp300KMultipleRates/Rate13',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
                                 '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate13',
                             }['3'] #--- source
