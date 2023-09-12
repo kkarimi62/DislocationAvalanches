@@ -19,17 +19,18 @@ if __name__ == '__main__':
 #				7:1600,
 			}
 	Rates  = {
-				13:0.0625e-4,
-				12:0.125e-4,
-				11:0.250e-4,
-#				0:0.5e-4,
+#				13:0.0625e-4,
+#				12:0.125e-4,
+#				11:0.250e-4,
+				0:0.5e-4,
 #				1:1e-4,
 #				2:4e-4,
-#				3:8e-4,
-#				4:8e-3,
-#				5:8e-2,
+				3:8e-4,
+				4:8e-3,
+				5:8e-2,
 			}
 	#---
+    alloy = 'Ni'
 	count = 0
 	for keys_t in Temps:
 		temp = Temps[keys_t]
@@ -39,7 +40,7 @@ if __name__ == '__main__':
 			#---	densities
 				inums = lnums[ 0 ] - 1
 #				string[ inums ] = "\t3:\'CantorNatom10KTemp%sKMultipleRates/Rate%s\',\n"%(temp,keys_r) #--- change job name
-				string[ inums ] = "\t4:\'nicocrNatom10KTemp300KMultipleRates/Rate%s\',\n"%(keys_r) #--- change job name
+				string[ inums ] = "\t4:\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
 #				string[ inums ] = "\t3:\'CantorNatom10KMultipleTemp/Temp%sK\',\n"%(temp) #--- change job name
 			#---
 # 				inums = lnums[ 1 ] - 1
