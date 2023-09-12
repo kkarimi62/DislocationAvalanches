@@ -48,6 +48,7 @@ if __name__ == '__main__':
         for keys_r in Rates:
             #---
                 rate = Rates[keys_r]
+                nrun = nruns[ keys_r ]
             #---	densities
                 inums = lnums[ 0 ] - 1
                 string[ inums ] = "\t4:\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
