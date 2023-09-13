@@ -40,7 +40,7 @@ if __name__ == '__main__':
     home_directory = os.path.expanduser( '~' )
     current_directory = '%s/Project/git/DislocationAvalanches/tensile/python'%home_directory
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
-    durtn = '00:59:59'
+    durtn = '23:59:59'
     mem = '8gb'
     partition = ['INTEL_PHI','INTEL_CASCADE','INTEL_SKYLAKE','INTEL_IVY','INTEL_HASWELL'][-1]
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
