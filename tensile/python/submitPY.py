@@ -3,10 +3,10 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-#    string=open('postprocess.py').readlines() #--- python script
-#    lnums = [ 27, 31, 25, 13  ]
-    lnums = [ 27,35,21,10 ]
-    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
+    string=open('postprocess.py').readlines() #--- python script
+    lnums = [ 27, 31, 25, 13  ]
+#    lnums = [ 27,35,21,10 ]
+#    string=open('postproc_ncbj_slurm.py').readlines() #--- python script
     #---
 
     Temps  = {
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
 #    lambdas = {0:0.0,1:1e-1,2:1.0,3:1.0e1,4:1e2,5:1e3}
 
-    alloy = 'NiCoCr'
+    alloy = 'Cantor'
 
     #---
     count = 0
