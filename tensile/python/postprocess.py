@@ -24,7 +24,7 @@ if __name__ == '__main__':
 #
     runs	 = range(24) 
     jobname  = {
-                '3':'CantorNatom10KTemp300KMultipleRates/Rate0/kernel5', 
+                '3':'CantorNatom10KTemp300KMultipleRates/Rate0', 
                 }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
