@@ -10,7 +10,7 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
     print('EXEC_DIR=%s\n'%( EXEC_DIR ),file=someFile)
     print('module load python/anaconda3-2018.12\nsource /global/software/anaconda/anaconda3-2018.12/etc/profile.d/conda.sh\nconda activate gnnEnv2nd ',file=someFile)
     
-    print('python3 configMaker.py %s %s %s %s/optimal_filtr_cantor_rate13.txt %s\n'%(argv,outputPath,kernel_width,current_directory,lambdc),file=someFile)
+    print('python3 configMaker.py %s %s %s %s/optimal_filtr_cantor_rate0.txt %s\n'%(argv,outputPath,kernel_width,current_directory,lambdc),file=someFile)
     if convert_to_py:
         print('ipython3 py_script.py\n',file=someFile)
     else:	 
@@ -24,11 +24,11 @@ if __name__ == '__main__':
 #
     runs	 = range(24) 
     jobname  = {
-                '3':'CantorNatom10KTemp300KMultipleRates/Rate13', 
+                '0':'CantorNatom10KTemp300KMultipleRates/Rate0/kernel0', 
                 }['3']
     DeleteExistingFolder = True
     readPath = os.getcwd() + {
-                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate13',
+                                '3':'/../simulations/CantorNatom10KTemp300KMultipleRates/Rate0',
                             }['3'] #--- source
     EXEC_DIR = '.'     #--- path for executable file
     home_directory = os.path.expanduser( '~' )
