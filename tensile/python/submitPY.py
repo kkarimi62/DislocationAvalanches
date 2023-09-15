@@ -53,8 +53,8 @@ if __name__ == '__main__':
 #                 12:0.125e-4,
 #                 11:0.250e-4,
                  0:0.5e-4,
-                3:8e-4,
-                4:8e-3,
+#                3:8e-4,
+#                4:8e-3,
 #                 5:8e-2,
             }
 
@@ -63,8 +63,8 @@ if __name__ == '__main__':
 #                 12:24,
 #                 11:24,
                  0:24,
-                3:44,
-                4:60,
+#                3:44,
+#                4:60,
 #                 5:144,
             }
 
@@ -90,11 +90,11 @@ if __name__ == '__main__':
                 rate = Rates[keys_r]
                 nrun = nruns[ keys_r ]
 #                kernel_width = fixed_kernel_widths[keys_r]
-                if 1: #for keys_k in optimal_kernels:
+                for keys_k in optimal_kernels:
 #                    lambdc = lambdas[keys_k]
             #---	write to
                     inums = lnums[ 0 ] - 1
-                    string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r) #--- change job name
+                    string[ inums ] = "\t\'3\':\'%sNatom10KTemp300KMultipleRates/Rate%s/kernel%s\',\n"%(alloy,keys_r,keys_k) #--- change job name
             #---	read from
                     inums = lnums[ 1 ] - 1
                     string[ inums ] = "\t\'3\':\'/../simulations/%sNatom10KTemp300KMultipleRates/Rate%s\',\n"%(alloy,keys_r)
@@ -104,7 +104,7 @@ if __name__ == '__main__':
             #
                     inums = lnums[ 3 ] - 1
 #                     string[ inums ] = "    lambdc=%s\n"%(lambdc)
-                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r)
+                    string[ inums ] = "    print(\'python3 configMaker.py %%s %%s %%s %%s/optimal_filtr_%s_rate%s_k%s.txt %%s\\\n'%%(argv, outputPath, kernel_width, current_directory,lambdc), file = someFile)\n"%(alloy,keys_r,keys_k)
 
                     sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
                     os.system( 'python3 junk%s.py'%count )
