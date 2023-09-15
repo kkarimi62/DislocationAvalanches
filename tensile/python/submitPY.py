@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
 #    lambdas = {0:0.0,1:1e-1,2:1.0,3:1.0e1,4:1e2,5:1e3}
 
-    alloy = 'Ni'
+    alloy = 'NiCoCr'
 
     #---
     count = 0
