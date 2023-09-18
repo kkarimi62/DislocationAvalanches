@@ -18,13 +18,13 @@ def makeOAR( EXEC_DIR, node, core, tpartitionime, PYFIL, argv):
 if __name__ == '__main__':
     import os
 #
-    runs	 = range(24)
+    runs	 = range(60)
     nNode    = 1
     nThreads = 1
     jobname  = {
                 '1':'junk/Rate0', 
                 '2':'CantorNatom50KTemp300K', 
-                '3':'NiCoCrNatom10KTemp300KMultipleRates/Rate13',
+                '3':'NiNatom10KTemp300KMultipleRates/Rate4',
                 '4':'CantorNatom10KMultipleTemp/Temp1200K',
                 '5':'nicocrNatom10KTemp300KMultipleRates/Rate13', 
                 }['3']
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     readPath = os.getcwd() + {
                                 '1':'/../simulations/junk/Rate0',
                                 '2':'/../testdata/aedata/cantor/temperaturesRateE8/temp300',
-                                '3':'/../simulations/NiCoCrNatom10KTemp300KMultipleRates/Rate13',
+                                '3':'/../simulations/NiNatom10KTemp300KMultipleRates/Rate4',
                                 '4':'/../simulations/CantorNatom10KMultipleTemp/Temp1200K',
                                 '5':'/../simulations/nicocrNatom10KTemp300KMultipleRates/Rate13',
                             }['3'] #--- source
