@@ -3,8 +3,8 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-    alloy = ['Cantor','NiCoCr','Ni'][2]
-    input_file = ['postprocess.py','postproc_ncbj_slurm.py'][1] 
+    alloy = ['Cantor','NiCoCr','Ni'][0]
+    input_file = ['postprocess.py','postproc_ncbj_slurm.py'][0] 
     lnums = [ 27,35,21,10 ]
 
     
@@ -55,8 +55,8 @@ if __name__ == '__main__':
 #                 12:0.125e-4,
 #                 11:0.250e-4,
 #                 0:0.5e-4,
-#               3:8e-4,
-               4:8e-3,
+               3:8e-4,
+#                4:8e-3,
 #                 5:8e-2,
             }
 
@@ -65,8 +65,8 @@ if __name__ == '__main__':
 #                 12:24,
 #                 11:24,
 #                 0:24,
-#               3:44,
-               4:60,
+               3:44,
+#               4:60,
 #                 5:144,
             }
 
