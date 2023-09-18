@@ -3,8 +3,8 @@ if __name__ == '__main__':
     import os
     import numpy as np
     #---
-    alloy = ['Cantor','NiCoCr','Ni'][1]
-    input_file = ['postprocess.py','postproc_ncbj_slurm.py'][0] 
+    alloy = ['Cantor','NiCoCr','Ni'][2]
+    input_file = ['postprocess.py','postproc_ncbj_slurm.py'][1] 
     lnums = [ 27,35,21,10 ]
 
     
