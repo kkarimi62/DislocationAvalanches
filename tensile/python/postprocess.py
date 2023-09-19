@@ -40,7 +40,7 @@ if __name__ == '__main__':
     py_library_directory = '%s/Project/git/HeaDef/postprocess'%home_directory
     durtn = ['00:59:59','23:59:59'][0]
     mem = ['8gb','128gb'][0]
-    partition = ['parallel','cpu2019','bigmem','single'][-1] 
+    partition = ['parallel','cpu2019','bigmem','single'][2] 
     argv = "%s %s"%(py_library_directory,readPath) #--- don't change! 
     PYFILdic = { 
         1:'avalancheAnalysis.ipynb',
