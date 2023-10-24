@@ -31,9 +31,9 @@ ebsd(grains(grains.grainSize<=5)) = [];
 
 % smooth grain boundaries
 grains = smooth(grains,5);
-h = figure;
+h2 = figure;
 plot(grains.boundary,'linewidth',2)
-saveas(h,'grainsBitmap/grainsSmooth','png');
+saveas(h2,'grainsBitmap/grainsSmooth','png');
 
 
 
@@ -44,10 +44,10 @@ ipfKey = axisAngleColorKey(ebsd);
 ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
 
 % plot the data
-h = figure;
+h3 = figure;
 plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
 plot(grains.boundary,'linewidth',2)
-saveas(h,'grainsBitmap/misorientationAngle','png');
+saveas(h3,'grainsBitmap/misorientationAngle','png');
 
 % denoise orientation data
 F = halfQuadraticFilter;
@@ -55,11 +55,11 @@ F = halfQuadraticFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
 
 % plot the denoised data
-h = figure;
+h4 = figure;
 ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
 plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
 plot(grains.boundary,'linewidth',2)
-saveas(h,'grainsBitmap/misorientationAngleSmooth','png');
+saveas(h4,'grainsBitmap/misorientationAngleSmooth','png');
 
 
 
@@ -77,7 +77,7 @@ kappa(2,3)
 newMtexFigure('nrows',3,'ncols',3);
 
 % cycle through all components of the tensor
-h = figure;
+h5 = figure;
 for i = 1:3
   for j = 1:3
 
@@ -91,7 +91,7 @@ end
 % unify the color rage  - you may also use setColoRange equal
 setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
-saveas(h,'grainsBitmap/gnd','png');
+saveas(h5,'grainsBitmap/gnd','png');
 
 
 
