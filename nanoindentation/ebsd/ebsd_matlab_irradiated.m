@@ -97,5 +97,64 @@ drawNow(gcm,'figSize','large')
 saveas(h,'grainsBitmap/curvatureTensor','png');
 
 
+% Fitting Dislocations to the incomplete dislocation density tensor
+dS = dislocationSystem.fcc(ebsd.CS)
+a = norm(ebsd.CS.aAxis);
+[norm(dS(1).b), norm(dS(end).b), sqrt(2)/2 * a]
+
+nu = 0.3;
+
+% energy of the edge dislocations
+dS(dS.isEdge).u = 1;
+
+% energy of the screw dislocations
+dS(dS.isScrew).u = 1 - 0.3;
+
+% Question to verybody: what is the best way to set the enegry? I found
+% different formulae
+%
+% E = 1 - poisson ratio
+% E = c * G * |b|^2,  - G - Schubmodul / Shear Modulus Energy per (unit length)^2
+dS(1).tensor
+
+dSRot = ebsd.orientations * dS
+
+dSRot = dislocationSystem
+
+[rho,factor] = fitDislocationSystems(kappa,dSRot);
+
+% the restored dislocation density tensors
+alpha = sum(dSRot.tensor .* rho,2);
+
+% we have to set the unit manualy since it is not stored in rho
+alpha.opt.unit = '1/um';
+
+% the restored dislocation density tensor for pixel 2
+alpha(2)
+
+% the dislocation density dervied from the curvature in pixel 2
+kappa(2).dislocationDensity
+
+kappa = alpha.curvature
+
+newMtexFigure('nrows',3,'ncols',3);
+
+% cycle through all components of the tensor
+h = figure;
+for i = 1:3
+  for j = 1:3
+
+    nextAxis(i,j)
+    plot(ebsd,kappa{i,j},'micronBar','off')
+    hold on; plot(grains.boundary,'linewidth',2); hold off
+
+  end
+end
+
+setColorRange([-0.005,0.005])
+drawNow(gcm,'figSize','large');
+saveas(h,'grainsBitmap/curvatureTensorComplete','png');
+
+
 
 
