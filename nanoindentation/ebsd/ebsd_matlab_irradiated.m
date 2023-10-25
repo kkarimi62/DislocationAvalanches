@@ -98,9 +98,9 @@ saveas(h,'grainsBitmap/curvatureTensor','png');
 
 
 % Fitting Dislocations to the incomplete dislocation density tensor
-dS = dislocationSystem.fcc(ebsd.CS)
+dS = dislocationSystem.bcc(ebsd.CS)
 a = norm(ebsd.CS.aAxis);
-[norm(dS(1).b), norm(dS(end).b), sqrt(2)/2 * a]
+[norm(dS(1).b), norm(dS(end).b), sqrt(3)/2 * a]
 
 nu = 0.3;
 
