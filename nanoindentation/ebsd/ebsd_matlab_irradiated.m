@@ -36,6 +36,7 @@ plot(grains.boundary,'linewidth',2);
 saveas(h,'grainsBitmap/grainsSmooth','png');
 hold off
 
+% Data cleaning
 % a key the colorizes according to misorientation angle and axis
 ipfKey = axisAngleColorKey(ebsd);
 
@@ -63,7 +64,37 @@ plot(grains.boundary,'linewidth',2)
 saveas(h,'grainsBitmap/misorientationAngleSmooth','png');
 hold off
 
+%The incomplete curvature tensor
+ebsd = ebsd('indexed').gridify;
 
+% compute the curvature tensor
+kappa = ebsd.curvature
+
+% one can index the curvature tensors in the same way as the EBSD data.
+% E.g. the curvature in pixel (2,3) is
+kappa(2,3)
+
+
+% The components of the curvature tensor
+kappa12 = kappa{1,2};
+size(kappa12)
+newMtexFigure('nrows',3,'ncols',3);
+
+% cycle through all components of the tensor
+h = figure;
+for i = 1:3
+  for j = 1:3
+
+    nextAxis(i,j)
+    plot(ebsd,kappa{i,j},'micronBar','off');
+    hold on;plot(grains.boundary,'linewidth',2);hold off
+  end
+end
+
+% unify the color rage  - you may also use setColoRange equal
+setColorRange([-0.005,0.005])
+drawNow(gcm,'figSize','large')
+saveas(h,'grainsBitmap/curvatureTensor','png');
 
 
 
