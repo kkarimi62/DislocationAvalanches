@@ -16,10 +16,10 @@ ipfKey = ipfHSVKey(ebsd);
 ipfKey.inversePoleFigureDirection = yvector;
 
 % and plot the orientation data
-%{h = figure;
+h = figure;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
 saveas(h,'grainsBitmap/grains','png');
-}%
+
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
 
@@ -36,7 +36,7 @@ plot(grains.boundary,'linewidth',2)
 saveas(h2,'grainsBitmap/grainsSmooth','png');
 
 
-%{
+
 % a key the colorizes according to misorientation angle and axis
 ipfKey = axisAngleColorKey(ebsd);
 
@@ -92,7 +92,7 @@ end
 setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 saveas(h5,'grainsBitmap/gnd','png');
-%}
+
 
 
 
