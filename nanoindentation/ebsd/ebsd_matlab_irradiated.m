@@ -31,9 +31,10 @@ ebsd(grains(grains.grainSize<=5)) = [];
 
 % smooth grain boundaries
 grains = smooth(grains,5);
-plot(grains.boundary,'linewidth',2)
+hold on
+plot(grains.boundary,'linewidth',2);
 saveas(h,'grainsBitmap/grainsSmooth','png');
-
+hold off
 
 
 
