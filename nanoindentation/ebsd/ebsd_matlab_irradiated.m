@@ -50,6 +50,20 @@ saveas(h,'grainsBitmap/misorientationAngle','png');
 hold off
 
 
+% denoise orientation data
+F = halfQuadraticFilter;
+
+ebsd = smooth(ebsd('indexed'),F,'fill',grains);
+
+% plot the denoised data
+ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
+plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
+hold on
+plot(grains.boundary,'linewidth',2)
+saveas(h,'grainsBitmap/misorientationAngleSmooth','png');
+hold off
+
+
 
 
 
