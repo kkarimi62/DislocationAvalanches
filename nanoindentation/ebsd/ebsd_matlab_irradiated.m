@@ -16,9 +16,9 @@ ipfKey = ipfHSVKey(ebsd);
 ipfKey.inversePoleFigureDirection = yvector;
 
 % and plot the orientation data
-h = figure(1);
+figure(1);
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
-saveas(h,'grainsBitmap/grains','png');
+saveas(gca,'grainsBitmap/grains','png');
 
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
@@ -31,9 +31,9 @@ ebsd(grains(grains.grainSize<=5)) = [];
 
 % smooth grain boundaries
 grains = smooth(grains,5);
-h = figure(2);
+figure(2);
 plot(grains.boundary,'linewidth',2)
-saveas(h,'grainsBitmap/grainsSmooth','png');
+saveas(gca,'grainsBitmap/grainsSmooth','png');
 
 
 
