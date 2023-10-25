@@ -36,6 +36,19 @@ plot(grains.boundary,'linewidth',2);
 saveas(h,'grainsBitmap/grainsSmooth','png');
 hold off
 
+% a key the colorizes according to misorientation angle and axis
+ipfKey = axisAngleColorKey(ebsd);
+
+% set the grain mean orientations as reference orinetations
+ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
+
+% plot the data
+plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
+hold on
+plot(grains.boundary,'linewidth',2)
+saveas(h,'grainsBitmap/misorientationAngle','png');
+hold off
+
 
 
 
