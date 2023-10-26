@@ -1,9 +1,11 @@
 %startup_mtex;
 
-% set path & file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% set path & file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mpath='/home/kamran.karimi1/Project/git/DislocationAvalanches/irradiation/ebsd/input';
-fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
-%fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
+%fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
+fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
 
 % set up the plotting convention
 plotx2north
@@ -29,14 +31,18 @@ ebsd(grains(grains.grainSize<=5)) = [];
 % redo grain reconstruction
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree);
 
-% smooth grain boundaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% smooth grain boundaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 grains = smooth(grains,5);
 hold on
 plot(grains.boundary,'linewidth',2);
 saveas(h,'grainsBitmap/grainsSmooth','png');
 hold off
 
-% Data cleaning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Data cleaning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % a key the colorizes according to misorientation angle and axis
 ipfKey = axisAngleColorKey(ebsd);
 
@@ -51,7 +57,9 @@ saveas(h,'grainsBitmap/misorientationAngle','png');
 hold off
 
 
-% denoise orientation data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% denoise orientation data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 F = halfQuadraticFilter;
 
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
@@ -64,7 +72,9 @@ plot(grains.boundary,'linewidth',2)
 saveas(h,'grainsBitmap/misorientationAngleSmooth','png');
 hold off
 
-%The incomplete curvature tensor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% The incomplete curvature tensor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ebsd = ebsd('indexed').gridify;
 
 % compute the curvature tensor
@@ -97,10 +107,13 @@ drawNow(gcm,'figSize','large')
 saveas(h,'grainsBitmap/curvatureTensor','png');
 
 
-% Fitting Dislocations to the incomplete dislocation density tensor
-dS = dislocationSystem.bcc(ebsd.CS)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Fitting Dislocations to the incomplete 
+%%% dislocation density tensor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dS = dislocationSystem.fcc(ebsd.CS)
 a = norm(ebsd.CS.aAxis);
-[norm(dS(1).b), norm(dS(end).b), sqrt(3)/2 * a]
+[norm(dS(1).b), norm(dS(end).b), sqrt(2)/2 * a]
 
 nu = 0.3;
 
