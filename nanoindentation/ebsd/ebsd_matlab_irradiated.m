@@ -106,6 +106,15 @@ setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 saveas(h,'grainsBitmap/curvatureTensor','png');
 
+% write on disk
+%ebsd = ebsd.gridify;
+A = kappa{i,j};
+fid = fopen('output/kappa33.txt','wt');
+for ii = 1:size(A,1)
+    fprintf(fid,'%d\t',A(ii,:));
+    fprintf(fid,'\n');
+end
+fclose(fid)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Fitting Dislocations to the incomplete 
