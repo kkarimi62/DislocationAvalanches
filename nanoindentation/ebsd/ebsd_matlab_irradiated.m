@@ -98,6 +98,18 @@ for i = 1:3
     nextAxis(i,j)
     plot(ebsd,kappa{i,j},'micronBar','off');
     hold on;plot(grains.boundary,'linewidth',2);hold off
+    
+    % write on disk
+    %ebsd = ebsd.gridify;
+    A = kappa{i,j};
+    str_f = sprintf('output/kappa%d%d.txt',i,j)
+    fid = fopen(str_f,'wt');
+    for ii = 1:size(A,1)
+        fprintf(fid,'%d\t',A(ii,:));
+        fprintf(fid,'\n');
+    end
+    fclose(fid)
+    %
   end
 end
 
@@ -106,15 +118,6 @@ setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 saveas(h,'grainsBitmap/curvatureTensor','png');
 
-% write on disk
-%ebsd = ebsd.gridify;
-A = kappa{i,j};
-fid = fopen('output/kappa33.txt','wt');
-for ii = 1:size(A,1)
-    fprintf(fid,'%d\t',A(ii,:));
-    fprintf(fid,'\n');
-end
-fclose(fid)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Fitting Dislocations to the incomplete 
