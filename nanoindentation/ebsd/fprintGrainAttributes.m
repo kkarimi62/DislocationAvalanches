@@ -60,22 +60,6 @@ fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micr
 fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree transpose(seg_length)] ));
 fclose(fid);
 
-% indenters and corresponding grains
-ids=[];lid=[];label=[];
-for i = 1:size(r_indenters,1)
-	ids(i) = grains(r_indenters(i,3),r_indenters(i,4)).id;
-	lid(i) = r_indenters(i,1);
-	label(i) = r_indenters(i,2)+1;
-end
-%length(ids)
-%length(r_indenters)
-%ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
-%length(ids)
-fid = fopen('output/indenter_grainID.txt','wt');
-fprintf(fid,'#loadID label grainID\n');
-fprintf(fid,'%d %d %d\n', ([ lid; label; ids; ]));
-fclose(fid);
-
 % pixel-based ebsd id
 ebsd = ebsd.gridify;
 A = ebsd.grainId;
