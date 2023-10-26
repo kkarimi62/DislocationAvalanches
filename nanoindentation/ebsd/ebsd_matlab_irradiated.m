@@ -56,6 +56,8 @@ plot(grains.boundary,'linewidth',2)
 saveas(h,'grainsBitmap/misorientationAngle','png');
 hold off
 
+% include another m file and print grain attributes
+run('./fprintGrainAttributes.m')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% denoise orientation data
