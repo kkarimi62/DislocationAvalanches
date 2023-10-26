@@ -1,3 +1,20 @@
+%startup_mtex;
+
+% set path & file name
+%fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
+fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
+
+
+% load file
+ebsd = EBSD.load(fileName,'convertSpatial2EulerReferenceFrame','setting 2')
+ebsd = ebsd('indexed'); %only indexed grain
+[grains,ebsd.grainId] = calcGrains(ebsd);
+
+%grains = calcGrains(ebsd('indexed'),'theshold',10*degree);
+
+% perform grain segmentation (only the very big grains)
+big_grains = grains(grains.grainSize>1);
+
 % misorientation
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
@@ -15,7 +32,6 @@ for ipair = 1:size(pairs,1)
 	seg_length(ipair) = sum(size_filtr);
 end
 
-
 %keyboard;
 %---- print attributes
 % open your file for writing
@@ -24,7 +40,7 @@ fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPe
 fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.meanOrientation.phi1./degree grains.meanOrientation.Phi./degree grains.meanOrientation.phi2./degree]));
 fclose(fid);
 
-% EulerAngles
+% open your file for writing
 fid = fopen('output/EulerAngles.txt','wt');
 fprintf(fid,'#phi1 Phi phi2\n');
 fprintf(fid,'%e %e %e\n', transpose([ebsd.orientations.phi1./degree, ebsd.orientations.Phi./degree, ebsd.orientations.phi2./degree ]));
@@ -43,6 +59,22 @@ fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micr
 fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree transpose(seg_length)] ));
 fclose(fid);
 
+% indenters and corresponding grains
+ids=[];lid=[];label=[];
+for i = 1:size(r_indenters,1)
+	ids(i) = grains(r_indenters(i,3),r_indenters(i,4)).id;
+	lid(i) = r_indenters(i,1);
+	label(i) = r_indenters(i,2)+1;
+end
+%length(ids)
+%length(r_indenters)
+%ids = grains(r_indenters(:,1),r_indenters(:,2)).id;
+%length(ids)
+fid = fopen('output/indenter_grainID.txt','wt');
+fprintf(fid,'#loadID label grainID\n');
+fprintf(fid,'%d %d %d\n', ([ lid; label; ids; ]));
+fclose(fid);
+
 % pixel-based ebsd id
 ebsd = ebsd.gridify;
 A = ebsd.grainId;
@@ -52,3 +84,4 @@ for ii = 1:size(A,1)
     fprintf(fid,'\n');
 end
 fclose(fid)
+
