@@ -12,6 +12,7 @@ plotx2north
 
 % import the EBSD data
 ebsd = EBSD.load(fileName,'convertSpatial2EulerReferenceFrame','setting 2')
+%ebsd = ebsd('indexed'); %%% only indexed grain
 
 % define the color key
 ipfKey = ipfHSVKey(ebsd);
@@ -22,8 +23,9 @@ h = figure(1);
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
 saveas(h,'grainsBitmap/grains','png');
 
-% reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
+% reconstruct grains 
+%[grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree); %kk
 
 % remove small grains
 ebsd(grains(grains.grainSize<=5)) = [];
