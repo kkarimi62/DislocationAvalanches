@@ -9,14 +9,26 @@ fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
 % load file
 ebsd = EBSD.load(fileName,'convertSpatial2EulerReferenceFrame','setting 2')
 ebsd = ebsd('indexed'); %only indexed grain
-[grains,ebsd.grainId] = calcGrains(ebsd);
 
-%grains = calcGrains(ebsd('indexed'),'theshold',10*degree);
 
-% perform grain segmentation (only the very big grains)
-big_grains = grains(grains.grainSize>1);
+% reconstruct the grain structure
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',10*degree);
+%[grains,ebsd.grainId] = calcGrains(ebsd);
+
+
+% remove some very small grains
+grain_size_limit = 10;
+ebsd(grains(grains.grainSize<grain_size_limit)) = [];
+
+% redo grain segementation
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',10*degree);
+
+% smooth grain boundaries
+grains = smooth(grains,5);
+
 
 % misorientation
+%keyboard;
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
@@ -33,12 +45,11 @@ for ipair = 1:size(pairs,1)
 	seg_length(ipair) = sum(size_filtr);
 end
 
-%keyboard;
 %---- print attributes
 % open your file for writing
 fid = fopen('output/attributes.txt','wt');
-fprintf(fid,'#grainID x y area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors phi1 Phi phi2\n');
-fprintf(fid,'%d %e %e %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.meanOrientation.phi1./degree grains.meanOrientation.Phi./degree grains.meanOrientation.phi2./degree]));
+fprintf(fid,'#grainID x y grainSize area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors phi1 Phi phi2\n');
+fprintf(fid,'%d %e %e %d %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.grainSize grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.meanOrientation.phi1./degree grains.meanOrientation.Phi./degree grains.meanOrientation.phi2./degree]));
 fclose(fid);
 
 % open your file for writing
