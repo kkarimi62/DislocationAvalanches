@@ -25,11 +25,13 @@ saveas(h,'grainsBitmap/grains','png');
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
 
-% remove small grains
-ebsd(grains(grains.grainSize<=5)) = [];
+% remove some very small grains
+grain_size_limit = 10;
+ebsd(grains(grains.grainSize<grain_size_limit)) = [];
 
-% redo grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree);
+% redo grain segementation
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',10*degree);
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% smooth grain boundaries
@@ -120,6 +122,38 @@ setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 saveas(h,'grainsBitmap/curvatureTensor','png');
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% The incomplete dislocation density tensor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+alpha = kappa.dislocationDensity
+
+% cycle through all components of the tensor
+h = figure;
+for i = 1:3
+  for j = 1:3
+
+    nextAxis(i,j)
+    plot(ebsd,alpha{i,j},'micronBar','off');
+    hold on;plot(grains.boundary,'linewidth',2);hold off
+    
+    % write on disk
+    %ebsd = ebsd.gridify;
+    A = alpha{i,j};
+    str_f = sprintf('output/alpha%d%d.txt',i,j)
+    fid = fopen(str_f,'wt');
+    for ii = 1:size(A,1)
+        fprintf(fid,'%d\t',A(ii,:));
+        fprintf(fid,'\n');
+    end
+    fclose(fid)
+    %
+  end
+end
+
+% unify the color rage  - you may also use setColoRange equal
+setColorRange([-0.005,0.005])
+drawNow(gcm,'figSize','large')
+saveas(h,'grainsBitmap/incompleteDislocationDensityTensor','png');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Fitting Dislocations to the incomplete 
