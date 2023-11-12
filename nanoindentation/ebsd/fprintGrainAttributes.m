@@ -28,7 +28,7 @@ grains = smooth(grains,5);
 
 
 % misorientation
-keyboard;
+%keyboard;
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
@@ -80,4 +80,11 @@ for ii = 1:size(A,1)
     fprintf(fid,'\n');
 end
 fclose(fid)
+
+% save boundary segments
+fid = fopen('output/boundaryPixels.txt','wt');
+fprintf(fid,'#grainID1 grainID2 x y\n');
+fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
+fclose(fid);
+
 
