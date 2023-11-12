@@ -28,7 +28,7 @@ grains = smooth(grains,5);
 
 
 % misorientation
-%keyboard;
+keyboard;
 pairs = grains.neighbors;
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation;
 
