@@ -74,10 +74,20 @@ fclose(fid);
 % pixel-based ebsd id
 ebsd = ebsd.gridify;
 A = ebsd.grainId;
+B = ebsd.x;
+C = ebsd.y;
 fid = fopen('output/id_matrix.txt','wt');
+fid1 = fopen('output/x_matrix.txt','wt');
+fid2 = fopen('output/y_matrix.txt','wt');
 for ii = 1:size(A,1)
     fprintf(fid,'%d\t',A(ii,:));
     fprintf(fid,'\n');
+    
+    fprintf(fid1,'%d\t',B(ii,:));
+    fprintf(fid1,'\n');
+    
+    fprintf(fid2,'%d\t',C(ii,:));
+    fprintf(fid2,'\n');
 end
 fclose(fid)
 
@@ -87,4 +97,9 @@ fprintf(fid,'#grainID1 grainID2 x y\n');
 fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
 fclose(fid);
 
+% save pixels' xy
+fid = fopen('output/boundaryPixels.txt','wt');
+fprintf(fid,'#grainID1 grainID2 x y\n');
+fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
+fclose(fid);
 
