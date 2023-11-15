@@ -96,7 +96,6 @@ fclose(fid2)
 % save boundary segments
 fid = fopen('output/boundaryPixels.txt','wt');
 fprintf(fid,'#grainID1 grainID2 x y\n');
-%fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
-fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.x grains.boundary.y]));
+fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
 fclose(fid);
 
