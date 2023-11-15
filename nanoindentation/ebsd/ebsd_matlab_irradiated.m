@@ -4,8 +4,8 @@
 %%% set path & file name
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mpath='/home/kamran.karimi1/Project/git/DislocationAvalanches/irradiation/ebsd/input';
-%fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
-fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
+fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
+%fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
 
 % set up the plotting convention
 plotx2north
