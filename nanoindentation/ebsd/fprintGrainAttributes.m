@@ -1,9 +1,10 @@
 %startup_mtex;
 
 % set path & file name
-mpath='/home/kamran.karimi1/Project/git/DislocationAvalanches/irradiation/ebsd/input';
+mpath     ='/home/kamran.karimi1/Project/git/DislocationAvalanches/irradiation/ebsd/input';
 %fileName = [mpath filesep 'EBSD_304And316L/316L virgin.ang'];
-fileName = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
+fileName  = [mpath filesep 'EBSD_304And316L/316L_01 dpa He 60 keV.ang'];
+fout      = 'output/after_irradiation';
 
 
 % load file
@@ -47,7 +48,8 @@ end
 
 %---- print attributes
 % open your file for writing
-fid = fopen('output/attributes.txt','wt');
+fileName  = [fout filesep 'attributes.txt'];
+fid = fopen(fileName,'wt');
 fprintf(fid,'#grainID x y grainSize area perimeter subBoundaryLength diameter equivalentPerimeter shapeFactor isBoundary hasHole isInclusion numNeighbors phi1 Phi phi2\n');
 fprintf(fid,'%d %e %e %d %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.grainSize grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.meanOrientation.phi1./degree grains.meanOrientation.Phi./degree grains.meanOrientation.phi2./degree]));
 fclose(fid);
