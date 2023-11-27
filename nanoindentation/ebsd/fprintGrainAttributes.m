@@ -93,9 +93,11 @@ fclose(fid)
 fclose(fid1)
 fclose(fid2)
 
-% save boundary segments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% save boundary segments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fid = fopen('output/boundaryPixels.txt','wt');
-fprintf(fid,'#grainID1 grainID2 x y\n');
-fprintf(fid,'%d %d %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint ]));
+fprintf(fid,'#grainID1 grainID2 x y phi1 Phi phi2 angle\n');
+fprintf(fid,'%d %d %e %e %e %e %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint grains.boundary.misrotation.phi1./degree grains.boundary.misrotation.Phi./degree grains.boundary.misrotation.phi2./degree grains.boundary.misrotation.angle./degree  ]));
 fclose(fid);
 
