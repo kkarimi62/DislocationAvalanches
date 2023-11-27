@@ -46,7 +46,9 @@ for ipair = 1:size(pairs,1)
 	seg_length(ipair) = sum(size_filtr);
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %---- print attributes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % open your file for writing
 fileName  = [fout filesep 'attributes.txt'];
 fid = fopen(fileName,'wt');
@@ -54,33 +56,46 @@ fprintf(fid,'#grainID x y grainSize area perimeter subBoundaryLength diameter eq
 fprintf(fid,'%d %e %e %d %e %e %e %e %e %e %d %d %d %d %e %e %e\n', transpose([grains.id grains.centroid grains.grainSize grains.area grains.perimeter grains.subBoundaryLength grains.diameter grains.equivalentPerimeter grains.shapeFactor grains.isBoundary grains.hasHole grains.isInclusion grains.numNeighbors grains.meanOrientation.phi1./degree grains.meanOrientation.Phi./degree grains.meanOrientation.phi2./degree]));
 fclose(fid);
 
-% open your file for writing
-fid = fopen('output/EulerAngles.txt','wt');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% open your file for writing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fileName  = [fout filesep 'EulerAngles.txt'];
+fid = fopen(fileName,'wt');
 fprintf(fid,'#phi1 Phi phi2\n');
 fprintf(fid,'%e %e %e\n', transpose([ebsd.orientations.phi1./degree, ebsd.orientations.Phi./degree, ebsd.orientations.phi2./degree ]));
 fclose(fid);
 
-% misorientation
-fid = fopen('output/misOrientationAngle.txt','wt');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% misorientation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fileName  = [fout filesep 'misOrientationAngle.txt'];
+fid = fopen(fileName,'wt');
 fprintf(fid,'#grain_i_ID grain_j_ID phi1 Phi phi2 angle\n');
 fprintf(fid,'%d %d %e %e %e %e\n', transpose([ pairs mori.phi1./degree mori.Phi./degree mori.phi2./degree mori.angle./degree] ));
 fclose(fid);
 
-
-% edge attributes
-fid = fopen('output/pairwise_attributes.txt','wt');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% edge attributes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+fileName  = [fout filesep 'pairwise_attributes.txt'];
+fid = fopen(fileName,'wt');
 fprintf(fid,'#grain_i_ID grain_j_ID misOrientationAngle(deg) boundaryLength(micron)\n');
 fprintf(fid,'%d %d %e %e\n', transpose([ pairs mori.angle./degree transpose(seg_length)] ));
 fclose(fid);
 
-% pixel-based ebsd id
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% pixel-based ebsd id
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ebsd = ebsd.gridify;
 A = ebsd.grainId;
 B = ebsd.x;
 C = ebsd.y;
-fid = fopen('output/id_matrix.txt','wt');
-fid1 = fopen('output/x_matrix.txt','wt');
-fid2 = fopen('output/y_matrix.txt','wt');
+fileName  = [fout filesep 'id_matrix.txt'];
+fid = fopen(fileName,'wt');
+fileName  = [fout filesep 'x_matrix.txt'];
+fid1 = fopen(fileName,'wt');
+fileName  = [fout filesep 'y_matrix.txt'];
+fid2 = fopen(fileName,'wt');
 for ii = 1:size(A,1)
     fprintf(fid,'%d\t',A(ii,:));
     fprintf(fid,'\n');
@@ -98,7 +113,8 @@ fclose(fid2)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% save boundary segments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fid = fopen('output/boundaryPixels.txt','wt');
+fileName  = [fout filesep 'boundaryPixels.txt'];
+fid = fopen(fileName,'wt');
 fprintf(fid,'#grainID1 grainID2 x y phi1 Phi phi2 angle\n');
 fprintf(fid,'%d %d %e %e %e %e %e %e\n', transpose([grains.boundary.grainId grains.boundary.midPoint grains.boundary.misrotation.phi1./degree grains.boundary.misrotation.Phi./degree grains.boundary.misrotation.phi2./degree grains.boundary.misrotation.angle./degree  ]));
 fclose(fid);
