@@ -26,7 +26,7 @@ if __name__ == '__main__':
                 #---	densities
                 inums = lnums[ 1 ] - 1
                 path  = os.getcwd()+'/../nanoindentation/ebsd/output/%s_irradiation'%str_irradiate
-                string[ inums ] = "\tconfParser.set(\'test data files\',\'ebsd_path\',\'%s\')\n"%(path)
+                string[ inums ] = "    confParser.set(\'test data files\',\'ebsd_path\',\'%s\')\n"%(path)
                 #---
                 inums = lnums[ 2 ] - 1
                 string[ inums ] = "    confParser.set(\'test data files\',\'test_data_file_path\',\'%s/attributes.txt\')\n"%(path)
