@@ -27,22 +27,21 @@ if __name__ == '__main__':
                 inums = lnums[ 1 ] - 1
                 path  = os.getcwd()+'/../nanoindentation/ebsd/output/%s_irradiation'%str_irradiate
                 string[ inums ] = "\tconfParser.set(\'test data files\',\'ebsd_path\',\'%s\')\n"%(path)
-    confParser.set('','',)
                 #---
                 inums = lnums[ 2 ] - 1
-                string[ inums ] = "\tconfParser.set(\'test data files\',\'test_data_file_path\',\'%s/attributes.txt\')\n"%(path)
+                string[ inums ] = "    confParser.set(\'test data files\',\'test_data_file_path\',\'%s/attributes.txt\')\n"%(path)
                 #---
                 inums = lnums[ 3 ] - 1
-                string[ inums ] = "\tconfParser.set(\'test data files\',\'test_data_file_path2nd\',\'%s/pairwise_attributes.txt\')\n"%(path)
+                string[ inums ] = "    confParser.set(\'test data files\',\'test_data_file_path2nd\',\'%s/pairwise_attributes.txt\')\n"%(path)
                 #---
                 inums = lnums[ 4 ] - 1
-                string[ inums ] = "\tconfParser.set(\'Dislocation Density\',\'alpha\',\'%s\')\n"%(alpha)
+                string[ inums ] = "    confParser.set(\'Dislocation Density\',\'alpha\',\'%s\')\n"%(alpha)
                 #---
                 inums = lnums[ 5 ] - 1
-                string[ inums ] = "\tconfParser.set(\'Dislocation Density\',\'qlo\',\'%s\')\n"%(qlo)
+                string[ inums ] = "    confParser.set(\'Dislocation Density\',\'qlo\',\'%s\')\n"%(qlo)
                 #---
                 inums = lnums[ 6 ] - 1
-                string[ inums ] = "\tconfParser.set(\'Dislocation Density\',\'qhi\',\'%s\')\n"%(qhi)
+                string[ inums ] = "    confParser.set(\'Dislocation Density\',\'qhi\',\'%s\')\n"%(qhi)
 
 
                 sfile=open('junk%s.py'%count,'w');sfile.writelines(string);sfile.close()
