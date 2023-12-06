@@ -87,9 +87,10 @@ if __name__ == '__main__':
         seed = 128 #np.random.randint(100,1000)
         makeOAR( writPath, 1, 1, durtn, PYFIL,seed) # --- make oar script
         os.system( 'chmod +x oarScript.sh; cp oarScript.sh config*.ini %s; cp %s/%s %s' % ( writPath, EXEC_DIR, PYFIL, writPath ) ) # --- create folder & mv oar scrip & cp executable
+        jobname0 = jobname.split('/')[0] #--- remove slash
         os.system( 'sbatch --partition=%s --mem=%s --time=%s --job-name %s.%s --output %s.%s.out --error %s.%s.err \
                             --chdir %s -c %s -n %s %s/oarScript.sh'\
-                           % ( partition, mem, durtn, jobname, counter, jobname, counter, jobname, counter \
+                           % ( partition, mem, durtn, jobname0, counter, jobname0, counter, jobname0, counter \
                                , writPath, 1, 1, writPath ) ) # --- runs oarScript.sh!
 
 
