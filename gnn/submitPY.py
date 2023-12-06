@@ -7,9 +7,9 @@ if __name__ == '__main__':
     lnums = [ 57, 27, 28, 29, 31, 32, 33 ]
     string=open('gnn.py').readlines() #--- python script
     #---
-    Alpha = dict(zip(range(100),'alpha11 alpha12 alpha13 alpha21 alpha22 alpha23 alpha31 alpha32 alpha33'.split()))
-    Qlo   = dict(zip(range(100),[0,25,50,75]))
-    Qhi   = dict(zip(range(100),[25,50,75,100]))
+    Alpha = dict(zip(range(100),'alpha12 alpha13 alpha21 alpha23 alpha33'.split()))
+    Qlo   = dict(zip(range(100),[0.0,0.25,0.50,0.75]))
+    Qhi   = dict(zip(range(100),[0.25,0.50,0.75,1.0]))
     irradiate = dict(zip(range(100),['before','after']))
     #---
     count = 0
