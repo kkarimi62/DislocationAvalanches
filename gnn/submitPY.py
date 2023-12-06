@@ -8,8 +8,8 @@ if __name__ == '__main__':
     string=open('gnn.py').readlines() #--- python script
     #---
     Alpha = dict(zip(range(100),'alpha12 alpha13 alpha21 alpha23 alpha33'.split()))
-    Qlo   = dict(zip(range(100),[0.0,0.25,0.50,0.75]))
-    Qhi   = dict(zip(range(100),[0.25,0.50,0.75,1.0]))
+    Qlo   = dict(zip(range(100),[0.0,0.50]))
+    Qhi   = dict(zip(range(100),[0.50,1.0]))
     irradiate = dict(zip(range(100),['before','after']))
     #---
     count = 0
